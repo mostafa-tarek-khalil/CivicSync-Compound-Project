@@ -16,9 +16,6 @@
   font-family: Inter, Arial, sans-serif;
 }
 
-/* Full-width row inside the bar. It carries the entrance animation (see the
-   motion layer at the bottom of this file) and keeps the brand on the left and
-   the action cluster on the right. */
 .topbar-inner {
   display: flex;
   align-items: center;
@@ -26,15 +23,6 @@
   gap: 12px;
   width: 100%;
 }
-
-/* ---------- Brand ----------
-   The project lockup, shown at EVERY width. Same mark as the sidebar's, so the
-   app is identified the same way everywhere and no second logo is invented.
-   The two copies — rail and bar — are intentional.
-
-   It is deliberately inert: no hover state, no pointer cursor, no navigation.
-   It is a <div>, so it is not focusable and screen readers do not announce it as
-   a control. */
 
 .topbar-brand {
   display: flex;
@@ -102,15 +90,11 @@
 
 .notification-wrapper,
 .profile-wrapper {
-  /* Positioned, but deliberately NOT stacked: these are plain anchors for the
-     absolutely positioned dropdowns. Leaving them at `z-index: auto` means the
-     dropdowns are still compared against the shell, not trapped in a local
-     context of their own. */
+
   position: relative;
   flex-shrink: 0;
 }
 
-/* Icon Buttons */
 .icon-button {
   width: 42px;
   height: 42px;
@@ -157,7 +141,6 @@
   border: 2px solid #ffffff;
 }
 
-/* Profile Trigger Button */
 .profile-button {
   min-height: 48px;
   padding: 6px 10px;
@@ -214,7 +197,6 @@
   transform: rotate(180deg);
 }
 
-/* Dropdown Base */
 .dropdown {
   position: absolute;
   top: calc(100% + 10px);
@@ -225,12 +207,9 @@
   box-shadow: 0 12px 35px rgba(15, 23, 42, 0.14);
   overflow: hidden;
 
-  /* Above every page surface, below the toolkit dialogs (2000+) and toasts,
-     which should still cover the menus. */
   z-index: 1200;
 }
 
-/* Notification Dropdown */
 .notification-dropdown {
   width: 360px;
 }
@@ -362,7 +341,6 @@
   }
 }
 
-/* Profile Dropdown Styling */
 .profile-dropdown {
   width: 240px;
   padding: 8px;
@@ -434,7 +412,6 @@
   }
 }
 
-/* Responsive Media Queries */
 @media (max-width: 768px) {
   .topbar {
     height: 68px;
@@ -462,7 +439,6 @@
     width: min(350px, calc(100vw - 32px));
   }
 
-  /* Keep the brand compact so the action cluster is not squeezed. */
   .topbar-brand-sub {
     display: none;
   }
@@ -490,14 +466,12 @@
 }
 
 @media (max-width: 400px) {
-  /* At the narrowest widths the lockup collapses to the mark alone — the name
-     would otherwise push the notification and profile buttons off-screen. */
+
   .topbar-brand-text {
     display: none;
   }
 }
 
-/* Dark Mode Support */
 :host-context(html.dark-mode) {
   .topbar {
     background: #111827;
@@ -592,21 +566,8 @@
   .profile-dropdown-divider {
     background: #293548;
   }
-}/* =========================================================
-   MOTION LAYER
-   Keyframes are global (styles.css).
-   ========================================================= */
+}
 
-/* The bar settles down from above once, then stays put — a shell chrome
-   that re-animated on every navigation would be distracting.
-
-   It animates its INNER row, not `.topbar` itself. An animated element gets a
-   stacking context, and `.topbar` was then a hard ceiling for the dropdowns
-   inside it: `z-index` is not absolute, it is resolved inside the nearest
-   such context, so a page element with a higher z-index still painted over the
-   open notification / profile menus. Keeping the bar free of any stacking
-   context lets the dropdowns escape to the shell's own layer (see
-   authenticated-layout.css). */
 .topbar-inner {
   animation: cs-topbar-drop 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
@@ -636,7 +597,6 @@
   transform: translateY(0) scale(0.94);
 }
 
-/* Dropdowns (notifications / profile) unfold with a slight lift. */
 .dropdown-menu,
 .notification-dropdown,
 .profile-dropdown {
@@ -644,7 +604,6 @@
   transform-origin: top right;
 }
 
-/* The unread badge pops in — it is the "look here" signal. */
 .badge,
 .unread-count,
 .notification-badge {

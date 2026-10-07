@@ -1,19 +1,9 @@
 @import '../shared/tech-theme.css';
 
-
-/* =========================
-   PAGE
-========================= */
-
 .negotiation-page {
   min-height: 100vh;
   background-color: var(--page-bg);
 }
-
-
-/* =========================
-   HEADER
-========================= */
 
 .page-header {
   display: flex;
@@ -66,11 +56,6 @@
 
   color: var(--text-muted);
 }
-
-
-/* =========================
-   CARD
-========================= */
 
 .negotiation-card {
   background: var(--surface);
@@ -127,11 +112,6 @@
 
   color: var(--text-muted);
 }
-
-
-/* =========================
-   CONVERSATION
-========================= */
 
 .conversation {
   padding: 22px;
@@ -209,8 +189,6 @@
   margin-right: 6px;
 }
 
-/* The resident's price is money they are asking about — green reads as
-   "a figure to consider" without implying it is already agreed. */
 .resident-message .message-price {
   color: var(--green);
 }
@@ -233,11 +211,6 @@
 .resident-message .message-text {
   color: var(--text-muted);
 }
-
-
-/* =========================
-   SEND SECTION
-========================= */
 
 .send-section {
   padding: 18px;
@@ -335,11 +308,6 @@
   cursor: not-allowed;
 }
 
-
-/* =========================
-   LOADING / EMPTY / ALERT
-========================= */
-
 .loading-box {
   min-height: 280px;
 
@@ -411,11 +379,6 @@
   color: var(--red);
 }
 
-
-/* =========================
-   MOTION PREFERENCES
-========================= */
-
 @media (prefers-reduced-motion: reduce) {
 
   .page-header,
@@ -426,11 +389,6 @@
   }
 
 }
-
-
-/* =========================
-   RESPONSIVE
-========================= */
 
 @media (max-width: 767px) {
 

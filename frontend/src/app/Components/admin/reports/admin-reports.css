@@ -1,8 +1,4 @@
-/* =========================================================
-   Reports & analytics layout.
-   Builds on admin-shared.css; this file only adds the
-   report-specific grid, stat cards and print rules.
-   ========================================================= */
+
 
 .report-header {
   flex-wrap: wrap;
@@ -15,7 +11,6 @@
   gap: 10px;
 }
 
-/* ---- Buttons ------------------------------------------------------------ */
 .btn-primary,
 .btn-ghost {
   display: inline-flex;
@@ -62,7 +57,6 @@
   font-size: 18px;
 }
 
-/* ---- Stat cards --------------------------------------------------------- */
 .stat-row {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
@@ -123,7 +117,6 @@
   color: var(--text-primary, #17253d);
 }
 
-/* ---- Chart grid --------------------------------------------------------- */
 .grid-2 {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
@@ -170,7 +163,6 @@
   color: var(--text-secondary, #64748b);
 }
 
-/* ---- Revenue boxes ------------------------------------------------------ */
 .revenue-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
@@ -209,7 +201,6 @@
   background: rgba(220, 38, 38, 0.12);
 }
 
-/* ---- States ------------------------------------------------------------- */
 .state-box {
   display: flex;
   flex-direction: column;
@@ -248,7 +239,6 @@
   color: #b91c1c;
 }
 
-/* ---- Dark mode ---------------------------------------------------------- */
 :host-context(html.dark-mode) .card,
 :host-context(html.dark-mode) .stat-card {
   background: #151f2d;
@@ -266,7 +256,6 @@
   color: #e8eef6;
 }
 
-/* ---- Print: a clean PDF via the browser dialog ------------------------- */
 @media print {
 
   .header-actions,
@@ -285,11 +274,7 @@
   .grid-2 {
     grid-template-columns: 1fr 1fr;
   }
-}/* =========================================================
-   MOTION LAYER
-   Keyframes are global (styles.css); this only wires them onto the
-   classes this page uses.
-   ========================================================= */
+}
 
 .section-header,
 .report-header {
@@ -300,7 +285,6 @@
   animation: cs-fade-up 0.45s cubic-bezier(0.22, 1, 0.36, 1) 0.08s both;
 }
 
-/* Report tiles and chart panels arrive in sequence and tilt in 3D. */
 .tiles,
 .stats-grid,
 .report-grid {
@@ -340,8 +324,6 @@
   box-shadow: 0 22px 44px rgba(20, 43, 70, 0.16);
 }
 
-/* Chart panels get a gentler lift — a strong tilt on a wide surface
-   would distort the bars. */
 .report-card,
 .panel {
   animation: cs-fade-up 0.55s cubic-bezier(0.22, 1, 0.36, 1) 0.22s both;
@@ -373,7 +355,6 @@
   transform: translateY(0) scale(0.98);
 }
 
-/* Data table rows cascade in. */
 .admin-table tbody tr,
 .table-wrapper tbody tr {
   animation: cs-slide-in-left 0.42s cubic-bezier(0.22, 1, 0.36, 1) both;

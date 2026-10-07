@@ -38,18 +38,10 @@
   font-size: 14px;
 }
 
-/* =========================
-   PAGE
-========================= */
-
 .page-body {
   min-height: 100vh;
   background: var(--page-bg);
 }
-
-/* =========================
-   PAGE HEADER
-========================= */
 
 .page-header {
   display: flex;
@@ -105,10 +97,6 @@
   margin-bottom: 0;
 }
 
-/* =========================
-   PANELS
-========================= */
-
 .panel {
   background: var(--surface);
 
@@ -139,10 +127,6 @@
 
   margin-bottom: 16px;
 }
-
-/* =========================
-   CATEGORY
-========================= */
 
 .cat-grid {
   display: grid;
@@ -205,10 +189,6 @@
   color: var(--primary-dark);
 }
 
-/* =========================
-   FORM
-========================= */
-
 label.field-label {
   font-size: 13.5px;
 
@@ -264,10 +244,6 @@ textarea.form-control {
 
   margin-top: 5px;
 }
-
-/* =========================
-   PRIORITY
-========================= */
 
 .priority-row {
   border: 1.5px solid var(--border);
@@ -360,10 +336,6 @@ textarea.form-control {
   margin-top: 4px;
 }
 
-/* =========================
-   UPLOAD
-========================= */
-
 .upload-box {
   border: 1.5px dashed var(--border);
 
@@ -403,10 +375,6 @@ textarea.form-control {
 
   font-weight: 500;
 }
-
-/* =========================
-   PREVIEW
-========================= */
 
 .preview-wrap {
   position: relative;
@@ -456,10 +424,6 @@ textarea.form-control {
   background: var(--danger);
 }
 
-/* =========================
-   SUBMIT BUTTON
-========================= */
-
 .btn-submit {
   border: 1.5px solid var(--primary);
 
@@ -494,10 +458,6 @@ textarea.form-control {
   cursor: not-allowed;
 }
 
-/* =========================
-   ERROR
-========================= */
-
 .error-text {
   color: var(--danger);
 
@@ -509,10 +469,6 @@ textarea.form-control {
 
   padding: 8px 10px;
 }
-
-/* =========================
-   RESPONSIVE
-========================= */
 
 @media (max-width: 991px) {
 
@@ -541,10 +497,6 @@ textarea.form-control {
   }
 
 }
-
-/* =========================
-   DARK MODE
-========================= */
 
 :host-context(.dark-mode) {
 
@@ -595,11 +547,7 @@ textarea.form-control {
 
 :host-context(.dark-mode) .preview-remove {
   background: rgba(0, 0, 0, 0.65);
-}/* =========================================================
-   MOTION LAYER
-   Keyframes are global (styles.css); this only wires them onto the
-   classes this page uses.
-   ========================================================= */
+}
 
 .page-header {
   animation: cs-fade-up 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
@@ -618,12 +566,10 @@ textarea.form-control {
   transform: translateX(-3px) scale(0.95);
 }
 
-/* The form panel rises into view. */
 .panel {
   animation: cs-fade-up 0.55s cubic-bezier(0.22, 1, 0.36, 1) 0.1s both;
 }
 
-/* Category picker — a grid of cards that pop in and lift on hover. */
 .cat-grid {
   perspective: 1000px;
 }
@@ -651,7 +597,6 @@ textarea.form-control {
   transform: translateY(-2px) scale(0.98);
 }
 
-/* Priority selector cards. */
 .priority-row {
   animation: cs-fade-up 0.45s cubic-bezier(0.22, 1, 0.36, 1) 0.3s both;
   transition: transform 0.25s ease, border-color 0.2s ease;

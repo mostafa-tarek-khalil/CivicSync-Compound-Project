@@ -1,19 +1,9 @@
 @import '../shared/tech-theme.css';
 
-
-/* =========================
-   PAGE
-========================= */
-
 .reviews-page {
   min-height: 100vh;
   background-color: var(--page-bg);
 }
-
-
-/* =========================
-   HEADER
-========================= */
 
 .page-header {
   display: flex;
@@ -91,11 +81,6 @@
 
   color: var(--text-muted);
 }
-
-
-/* =========================
-   REVIEWS CARD
-========================= */
 
 .reviews-card {
   background: var(--surface);
@@ -258,11 +243,6 @@
   color: var(--text-muted);
 }
 
-
-/* =========================
-   LOADING / ERROR / EMPTY
-========================= */
-
 .loading-box,
 .error-box,
 .empty-state {
@@ -384,11 +364,6 @@
   color: var(--text-muted);
 }
 
-
-/* =========================
-   MOTION PREFERENCES
-========================= */
-
 @media (prefers-reduced-motion: reduce) {
 
   .page-header,
@@ -401,11 +376,6 @@
   }
 
 }
-
-
-/* =========================
-   RESPONSIVE
-========================= */
 
 @media (max-width: 767px) {
 
@@ -433,7 +403,6 @@
   }
 
 }
-
 
 @media (max-width: 480px) {
 

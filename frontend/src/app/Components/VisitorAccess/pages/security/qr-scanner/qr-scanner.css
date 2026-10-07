@@ -10,11 +10,6 @@
   color: #14213d;
 }
 
-
-/* =========================
-   HEADER
-========================= */
-
 .page-header {
   margin-bottom: 25px;
 }
@@ -81,11 +76,6 @@
   font-size: 13px;
 }
 
-
-/* =========================
-   MAIN CARD
-========================= */
-
 .scanner-card {
   max-width: 850px;
   margin: 0 auto;
@@ -125,11 +115,6 @@
   font-size: 20px;
   font-weight: 800;
 }
-
-
-/* =========================
-   STATE BADGE
-========================= */
 
 .state-badge {
   display: flex;
@@ -191,11 +176,6 @@
   background: #b23a48;
 }
 
-
-/* =========================
-   SCANNER FRAME
-========================= */
-
 .scanner-frame {
   position: relative;
 
@@ -232,11 +212,6 @@
 
   background-size: 35px 35px;
 }
-
-
-/* =========================
-   CORNERS
-========================= */
 
 .corner {
   position: absolute;
@@ -277,11 +252,6 @@
 
   border-width: 0 3px 3px 0;
 }
-
-
-/* =========================
-   FAKE QR
-========================= */
 
 .fake-qr {
   position: relative;
@@ -343,11 +313,6 @@
     );
 }
 
-
-/* =========================
-   SCANNING
-========================= */
-
 .scan-line {
   position: absolute;
 
@@ -383,11 +348,6 @@
   }
 }
 
-
-/* =========================
-   RESULT ICON
-========================= */
-
 .result-icon {
   position: relative;
   z-index: 5;
@@ -418,11 +378,6 @@
   color: #e98894;
 }
 
-
-/* =========================
-   FRAME MESSAGE
-========================= */
-
 .frame-message {
   position: absolute;
 
@@ -447,11 +402,6 @@
 
   backdrop-filter: blur(8px);
 }
-
-
-/* =========================
-   RESULT CARD
-========================= */
 
 .result-card {
   margin-top: 18px;
@@ -556,11 +506,6 @@
   font-size: 15px;
 }
 
-
-/* =========================
-   ACTIONS
-========================= */
-
 .scanner-actions {
   margin-top: 20px;
 
@@ -629,11 +574,6 @@
   cursor: pointer;
 }
 
-
-/* =========================
-   SECURITY NOTE
-========================= */
-
 .security-note {
   max-width: 850px;
 
@@ -666,11 +606,6 @@
   font-size: 10px;
   line-height: 1.5;
 }
-
-
-/* =========================
-   DARK MODE
-========================= */
 
 :host-context(html.dark-mode) .scanner-page {
   background: #0e1624;
@@ -729,11 +664,6 @@
   background: #172436;
   color: #aebdd1;
 }
-
-
-/* =========================
-   RESPONSIVE
-========================= */
 
 @media (max-width: 700px) {
 
@@ -799,11 +729,6 @@
     justify-content: center;
   }
 }
-
-/* =========================
-   MANUAL PASS-CODE ENTRY
-   (input + button on the same row, styled to match the app)
-========================= */
 
 .manual-entry {
   margin-top: 22px;
@@ -911,11 +836,7 @@
 
 :host-context(html.dark-mode) .manual-entry input::placeholder {
   color: #66778d;
-}/* =========================================================
-   MOTION LAYER
-   Keyframes are global (styles.css); this only wires them onto the
-   classes this page uses.
-   ========================================================= */
+}
 
 .page-header,
 .page-title {
@@ -932,7 +853,6 @@
     box-shadow 0.36s ease;
 }
 
-/* The scan frame breathes so the operator knows it is live. */
 .scan-frame,
 .scanner-frame,
 .viewfinder {
@@ -952,7 +872,6 @@
   }
 }
 
-/* The scanning line sweeps top to bottom while a read is in progress. */
 .scan-line {
   animation: cs-scan-sweep 2s ease-in-out infinite;
 }

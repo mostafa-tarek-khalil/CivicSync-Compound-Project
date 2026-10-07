@@ -23,7 +23,6 @@
   animation: cs-shake-in 0.5s cubic-bezier(0.36, 0.07, 0.19, 0.97) 0.06s both;
 }
 
-/* A short shake draws attention to the failure without being alarming. */
 @keyframes cs-shake-in {
   0% {
     opacity: 0;

@@ -1,24 +1,5 @@
-/**
- * Shared layer for every Technician page.
- *
- * Colour lives in `tech-theme.css`: each technician stylesheet imports it and
- * then references the same semantic tokens the resident portal uses, so a
- * single `:host-context(.dark-mode)` variable block themes the whole section —
- * exactly the way the resident screens already work.
- *
- * What is left here is only what is genuinely shared and non-colour: the motion
- * layer (the pages reuse the same class names, so animating them once covers
- * them all) and the work-order print button. Animation keyframes are global
- * (`cs-fade-up`, `cs-pop-in`, ... in src/styles.css).
- */
 
-/* =========================================================
-   MOTION LAYER FOR THE TECHNICIAN PORTAL
-   The pages share these class names, so animating them once here
-   covers the whole technician section. Keyframes are global.
-   ========================================================= */
 
-/* Page headings ride in first. */
 .page-title {
   animation: cs-fade-up 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
@@ -27,13 +8,10 @@
   animation: cs-fade-up 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.06s both;
 }
 
-/* Section headers inside cards. */
 .section-header {
   animation: cs-fade-up 0.45s cubic-bezier(0.22, 1, 0.36, 1) 0.1s both;
 }
 
-/* Cards get a real 3D tilt on hover. The page supplies the perspective
-   via `perspective` on the card itself so the rotation reads as depth. */
 .stat-card,
 .dashboard-card,
 .request-card,
@@ -61,7 +39,6 @@
   box-shadow: 0 20px 42px rgba(20, 43, 70, 0.16);
 }
 
-/* Wide cards tilt more gently — a strong rotation on a big surface looks odd. */
 .dashboard-card:hover,
 .details-card:hover,
 .reviews-card:hover,
@@ -71,13 +48,11 @@
   box-shadow: 0 18px 38px rgba(20, 43, 70, 0.13);
 }
 
-/* Stagger the summary cards across the top of a page. */
 .stat-card:nth-child(1) { animation-delay: 0.06s; }
 .stat-card:nth-child(2) { animation-delay: 0.12s; }
 .stat-card:nth-child(3) { animation-delay: 0.18s; }
 .stat-card:nth-child(4) { animation-delay: 0.24s; }
 
-/* List rows slide in, and cascade down the list. */
 .ticket-row,
 .review-row,
 .request-card,
@@ -109,7 +84,6 @@
 .job-card:nth-child(5),
 .offer-card:nth-child(5) { animation-delay: 0.38s; }
 
-/* Icons scale up with their card. */
 .stat-icon,
 .ticket-icon,
 .category-icon,
@@ -125,7 +99,6 @@
   transform: scale(1.12) rotate(-5deg);
 }
 
-/* Empty / loading / error panels fade in rather than pop. */
 .loading-box,
 .error-box,
 .empty-state,
@@ -133,7 +106,6 @@
   animation: cs-fade-in 0.4s ease both;
 }
 
-/* Buttons lift slightly and sink on press. */
 .retry-btn,
 .cancel-btn,
 .details-btn,
@@ -158,7 +130,6 @@
   transform: translateY(0) scale(0.98);
 }
 
-/* Links that navigate get a small forward nudge. */
 .view-link {
   transition: color 0.2s ease, transform 0.22s ease;
 }
@@ -200,11 +171,6 @@
     transform: none;
   }
 }
-
-/* =========================================================
-   WORK ORDER PRINT BUTTON
-   Added with the print feature: prints this job's details card only.
-   ========================================================= */
 
 .print-job-btn {
   display: inline-flex;

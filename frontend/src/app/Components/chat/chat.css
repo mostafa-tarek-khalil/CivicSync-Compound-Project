@@ -31,10 +31,6 @@
   --shadow-lg: 0 18px 50px rgba(20, 43, 70, 0.16);
 }
 
-/* =========================================================
-   DARK MODE
-========================================================= */
-
 :host-context(html.dark-mode) {
   --primary: #6f9fd3;
   --primary-dark: #8ab4e3;
@@ -66,10 +62,6 @@
   --shadow-lg: 0 18px 50px rgba(0, 0, 0, 0.40);
 }
 
-/* =========================================================
-   PAGE
-========================================================= */
-
 .chat-page {
   min-height: 100vh;
   height: 100vh;
@@ -86,10 +78,6 @@
     background 0.2s ease,
     color 0.2s ease;
 }
-
-/* =========================================================
-   CONVERSATIONS SIDEBAR
-========================================================= */
 
 .conversations-panel {
   width: 360px;
@@ -110,10 +98,6 @@
   position: relative;
   z-index: 10;
 }
-
-/* =========================================================
-   SIDEBAR HEADER
-========================================================= */
 
 .sidebar-header {
   padding: 20px;
@@ -167,10 +151,6 @@
   background: var(--primary-dark);
   transform: translateY(-1px);
 }
-
-/* =========================================================
-   NEW CHAT
-========================================================= */
 
 .new-chat-panel {
   padding: 18px;
@@ -365,10 +345,6 @@
   font-size: 11px;
 }
 
-/* =========================================================
-   SEARCH
-========================================================= */
-
 .search-container {
   position: relative;
 
@@ -434,10 +410,6 @@
   color: var(--text-primary);
 }
 
-/* =========================================================
-   CONVERSATION LOADING
-========================================================= */
-
 .conversation-loading {
   padding: 16px;
 
@@ -453,10 +425,6 @@
 
   background: var(--surface-soft);
 }
-
-/* =========================================================
-   EMPTY
-========================================================= */
 
 .empty-conversations {
   flex: 1;
@@ -493,10 +461,6 @@
   font-size: 13px;
 }
 
-/* =========================================================
-   EMPTY NEW CHAT BUTTON
-========================================================= */
-
 .empty-new-chat-button {
   border: none;
   border-radius: 9px;
@@ -515,10 +479,6 @@
 .empty-new-chat-button:hover {
   background: var(--primary-dark);
 }
-
-/* =========================================================
-   CONVERSATION LIST
-========================================================= */
 
 .conversation-list {
   flex: 1;
@@ -558,10 +518,6 @@
 .conversation-item.menu-open {
   z-index: 50;
 }
-
-/* =========================================================
-   AVATARS
-========================================================= */
 
 .conversation-avatar,
 .chat-header-avatar,
@@ -604,10 +560,6 @@
 
   font-size: 14px;
 }
-
-/* =========================================================
-   CONVERSATION CONTENT
-========================================================= */
 
 .conversation-content {
   min-width: 0;
@@ -684,10 +636,6 @@
   font-size: 10px;
   font-weight: 700;
 }
-
-/* =========================================================
-   CONVERSATION MENU
-========================================================= */
 
 .conversation-menu-button {
   flex-shrink: 0;
@@ -782,10 +730,6 @@
   font-size: 10px;
 }
 
-/* =========================================================
-   CHAT PANEL
-========================================================= */
-
 .chat-panel {
   position: relative;
   z-index: 1;
@@ -802,10 +746,6 @@
 
   box-shadow: var(--shadow-md);
 }
-
-/* =========================================================
-   EMPTY CHAT
-========================================================= */
 
 .chat-empty-state {
   height: 100%;
@@ -842,20 +782,12 @@
   font-size: 14px;
 }
 
-/* =========================================================
-   ACTIVE CHAT
-========================================================= */
-
 .active-chat {
   height: 100%;
 
   display: flex;
   flex-direction: column;
 }
-
-/* =========================================================
-   CHAT HEADER
-========================================================= */
 
 .chat-header {
   min-height: 76px;
@@ -902,10 +834,6 @@
 
   font-size: 11px;
 }
-
-/* =========================================================
-   HEADER ACTIONS
-========================================================= */
 
 .chat-header-actions {
   display: flex;
@@ -973,10 +901,6 @@
 
   cursor: pointer;
 }
-
-/* =========================================================
-   GROUP MEMBERS
-========================================================= */
 
 .group-members-panel {
   position: absolute;
@@ -1080,10 +1004,6 @@
   font-size: 10px;
 }
 
-/* =========================================================
-   MESSAGES CONTAINER
-========================================================= */
-
 .messages-container {
   position: relative;
 
@@ -1110,10 +1030,6 @@
 .messages-end {
   height: 1px;
 }
-
-/* =========================================================
-   MESSAGE EMPTY
-========================================================= */
 
 .messages-empty {
   height: 100%;
@@ -1150,10 +1066,6 @@
   font-size: 12px;
 }
 
-/* =========================================================
-   MESSAGE LOADING
-========================================================= */
-
 .messages-loading {
   display: flex;
   flex-direction: column;
@@ -1176,10 +1088,6 @@
   align-self: flex-end;
 }
 
-/* =========================================================
-   MESSAGE ROW
-========================================================= */
-
 .message-row {
   position: relative;
 
@@ -1201,10 +1109,6 @@
 .message-row.menu-open {
   z-index: 50;
 }
-
-/* =========================================================
-   MESSAGE BUBBLE
-========================================================= */
 
 .message-bubble {
   position: relative;
@@ -1249,10 +1153,6 @@
   border-color: var(--border);
 }
 
-/* =========================================================
-   MESSAGE SENDER
-========================================================= */
-
 .message-sender {
   display: flex;
   align-items: center;
@@ -1273,10 +1173,6 @@
 
   font-size: 9px;
 }
-
-/* =========================================================
-   MESSAGE TEXT
-========================================================= */
 
 .message-text {
   word-break: break-word;
@@ -1303,10 +1199,6 @@
   color: var(--text-muted);
 }
 
-/* =========================================================
-   MESSAGE FOOTER
-========================================================= */
-
 .message-footer {
   display: flex;
   justify-content: flex-end;
@@ -1323,10 +1215,6 @@
 .my-message:not(.message-deleted-state) .message-footer span {
   color: rgba(255, 255, 255, 0.70);
 }
-
-/* =========================================================
-   MESSAGE MENU BUTTON
-========================================================= */
 
 .message-menu-button {
   position: absolute;
@@ -1364,10 +1252,6 @@
   background: var(--surface-hover);
   color: var(--text-primary);
 }
-
-/* =========================================================
-   MESSAGE MENU
-========================================================= */
 
 .message-menu {
   position: absolute;
@@ -1453,10 +1337,6 @@
   background: var(--danger-soft);
 }
 
-/* =========================================================
-   ERROR
-========================================================= */
-
 .chat-error {
   display: flex;
   align-items: center;
@@ -1490,10 +1370,6 @@
 
   cursor: pointer;
 }
-
-/* =========================================================
-   MESSAGE INPUT
-========================================================= */
 
 .message-input-container {
   display: flex;
@@ -1569,10 +1445,6 @@
 
   cursor: not-allowed;
 }
-
-/* =========================================================
-   DELETE MODAL
-========================================================= */
 
 .delete-modal-backdrop {
   position: fixed;
@@ -1692,10 +1564,6 @@
   background: var(--danger-dark);
 }
 
-/* =========================================================
-   SCROLLBARS
-========================================================= */
-
 .conversation-list::-webkit-scrollbar,
 .messages-container::-webkit-scrollbar,
 .group-members-panel::-webkit-scrollbar {
@@ -1721,10 +1589,6 @@
 .group-members-panel::-webkit-scrollbar-thumb:hover {
   background: var(--text-light);
 }
-
-/* =========================================================
-   RESPONSIVE
-========================================================= */
 
 @media (max-width: 900px) {
 
@@ -1850,10 +1714,6 @@
   }
 }
 
-/* =========================================================
-   REDUCED MOTION
-========================================================= */
-
 @media (prefers-reduced-motion: reduce) {
 
   .chat-page,
@@ -1864,10 +1724,7 @@
   .theme-toggle-button {
     transition: none;
   }
-}/* =========================================================
-   LOCKED MAINTENANCE CONVERSATION
-   Replaces the composer once a job is resolved / closed.
-   ========================================================= */
+}
 
 .chat-locked-banner {
   display: flex;
@@ -1912,13 +1769,8 @@ html.dark-mode .chat-locked-banner strong {
 
 html.dark-mode .chat-locked-banner p {
   color: #94a3b8;
-}/* =========================================================
-   MOTION LAYER
-   Keyframes are global (styles.css); this only wires them onto the
-   classes this page uses.
-   ========================================================= */
+}
 
-/* The two chat columns assemble from their sides. */
 .conversations-panel {
   animation: cs-slide-in-left 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
@@ -1945,7 +1797,6 @@ html.dark-mode .chat-locked-banner p {
   animation: cs-fade-up 0.35s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
-/* Conversation rows cascade into the list. */
 .conversation-item {
   animation: cs-slide-in-left 0.42s cubic-bezier(0.22, 1, 0.36, 1) both;
   transition: background-color 0.2s ease, transform 0.22s ease;
@@ -1978,7 +1829,6 @@ html.dark-mode .chat-locked-banner p {
   animation: cs-pop-in 0.4s cubic-bezier(0.22, 1, 0.36, 1) 0.2s both;
 }
 
-/* Message bubbles rise into the thread, playing the conversation back. */
 .message-row,
 .bubble-row {
   animation: cs-chat-bubble 0.42s cubic-bezier(0.22, 1, 0.36, 1) both;

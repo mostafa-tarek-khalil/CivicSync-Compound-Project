@@ -572,9 +572,6 @@ form {
     flex-wrap: wrap;
   }
 }
-/* =========================================================
-   DARK MODE
-========================================================= */
 
 :host-context(html.dark-mode) .register-page {
   background: #0d1420;
@@ -660,11 +657,6 @@ form {
 :host-context(html.dark-mode) .showcase-footer {
   color: #7f8ea3;
 }
-/* =========================================================
-   MOTION LAYER
-   Keyframes are global (styles.css); this only wires them onto the
-   classes this page uses.
-   ========================================================= */
 
 .background-shape {
   animation: cs-regp-drift 16s ease-in-out infinite;
@@ -689,7 +681,6 @@ form {
   }
 }
 
-/* Split layout: showcase enters left, form card enters right. */
 .register-showcase {
   animation: cs-slide-in-left 0.65s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
@@ -707,7 +698,6 @@ form {
   animation: cs-pop-in 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.2s both;
 }
 
-/* Progress steps light up one after another. */
 .step {
   animation: cs-slide-in-left 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
 }

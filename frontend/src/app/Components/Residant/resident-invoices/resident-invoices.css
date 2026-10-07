@@ -25,7 +25,6 @@
   --shadow-sm: 0 2px 8px rgba(20, 43, 70, 0.06);
 }
 
-/* HEADER */
 .page-header {
   display: flex;
   justify-content: space-between;
@@ -92,7 +91,6 @@
   }
 }
 
-/* SUMMARY */
 .summary-card {
   background: var(--surface);
   border: 1px solid var(--border);
@@ -130,7 +128,6 @@
   color: var(--text-light);
 }
 
-/* PANEL */
 .panel {
   background: var(--surface);
   border: 1px solid var(--border);
@@ -167,7 +164,6 @@
   color: var(--text-light);
 }
 
-/* TABLE */
 .dashboard-table {
   width: 100%;
   border-collapse: collapse;
@@ -229,7 +225,6 @@
   color: var(--text-light);
 }
 
-/* BADGES */
 .status-badge {
   display: inline-block;
   font-size: 10px;
@@ -259,7 +254,6 @@
   background: var(--border-soft);
 }
 
-/* EMPTY */
 .table-empty {
   display: flex;
   flex-direction: column;
@@ -288,7 +282,6 @@
   color: var(--text-light);
 }
 
-/* RESPONSIVE */
 @media (max-width: 768px) {
   .page-header {
     flex-direction: column;
@@ -304,10 +297,7 @@
     padding: 11px 13px;
     font-size: 12px;
   }
-}/* =========================================================
-   INVOICE PAYMENT ACTIONS
-   Resident-side "Pay" claim + the awaiting-approval state.
-   ========================================================= */
+}
 
 .pay-btn {
   display: inline-flex;
@@ -360,12 +350,6 @@ html.dark-mode .status-submitted {
   color: #fbbf24;
 }
 
-/* =========================================================
-   DARK MODE
-   The page defines its own light palette via :host variables,
-   so we flip those here (plus the few hard-coded light colors)
-   to match the app theme.
-   ========================================================= */
 :host-context(html.dark-mode) {
   --primary: #6f9fd3;
   --primary-soft: rgba(111, 159, 211, 0.14);
@@ -391,7 +375,6 @@ html.dark-mode .status-submitted {
   --shadow-sm: 0 2px 10px rgba(0, 0, 0, 0.35);
 }
 
-/* Table header + row separators use hard-coded light colors */
 :host-context(html.dark-mode) .dashboard-table th {
   background: #131f31;
   color: #94a3b8;
@@ -413,12 +396,8 @@ html.dark-mode .status-submitted {
 
 :host-context(html.dark-mode) .table-empty i {
   color: #3a4a5f;
-}/* =========================================================
-   INVOICE TYPE + RECEIPT ACTION + RECEIPT MODAL
-   Added with the maintenance-invoice surfacing and the printable receipt.
-   ========================================================= */
+}
 
-/* Distinguishes a maintenance bill from a regular compound charge. */
 .type-badge {
   display: inline-block;
   padding: 3px 9px;
@@ -467,8 +446,6 @@ html.dark-mode .status-submitted {
   font-size: 16px;
 }
 
-/* ---- Receipt modal ---- */
-
 .modal-backdrop {
   position: fixed;
   inset: 0;
@@ -516,8 +493,6 @@ html.dark-mode .status-submitted {
   padding: 1.25rem;
 }
 
-/* ---- Dark mode ---- */
-
 :host-context(html.dark-mode) .modal-card {
   background: #151f2d;
 }
@@ -558,11 +533,7 @@ html.dark-mode .status-submitted {
   .modal-body {
     padding: 0.75rem;
   }
-}/* =========================================================
-   MOTION LAYER
-   Keyframes are global (styles.css); this only wires them onto the
-   classes this page uses.
-   ========================================================= */
+}
 
 .page-header {
   animation: cs-fade-up 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
@@ -577,7 +548,6 @@ html.dark-mode .status-submitted {
   transform: rotate(90deg);
 }
 
-/* Summary tiles tilt in 3D. The parent row gives them perspective. */
 .summary-card {
   transform-style: preserve-3d;
   animation: cs-pop-in 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
@@ -611,7 +581,6 @@ html.dark-mode .status-submitted {
   animation: cs-fade-up 0.45s cubic-bezier(0.22, 1, 0.36, 1) 0.26s both;
 }
 
-/* Invoice rows slide in, staggered down the table. */
 .dashboard-table tbody tr {
   animation: cs-slide-in-left 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
   transition: background-color 0.2s ease;

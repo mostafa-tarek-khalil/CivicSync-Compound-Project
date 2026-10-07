@@ -76,8 +76,7 @@
         }
       </div>
 
-      <!-- Prints the invoice receipt for this job. The receipt renders in its
-           own section below; the global print rules emit only that. -->
+
       @if (ticket && invoice) {
       <button type="button" class="print-job-btn no-print" (click)="printInvoice()">
         <i class="fa-solid fa-print"></i>
@@ -143,8 +142,7 @@
           </div>
 
 
-          <!-- Resident contact + exact location, so the technician knows
-               who to meet and which door to knock on. -->
+
           <div class="section">
 
             <h5>
@@ -467,10 +465,7 @@
     </div>
 
 
-    <!-- ===================== INVOICE RECEIPT =====================
-         The same shared receipt component the admin and resident use, so the
-         printed document is identical across all three roles. Shown only once
-         an admin has raised the invoice for this (closed) ticket. -->
+
     @if (invoice) {
     <div class="row g-4 mt-1 no-print-wrap">
       <div class="col-12">

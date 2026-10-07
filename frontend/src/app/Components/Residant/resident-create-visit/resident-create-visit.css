@@ -19,7 +19,6 @@
   background: #f7f8fc;
 }
 
-/* HEADER */
 .page-header {
   margin-bottom: 24px;
 }
@@ -47,7 +46,6 @@
   color: var(--text-secondary);
 }
 
-/* ALERTS */
 .alert {
   display: flex;
   align-items: center;
@@ -70,7 +68,6 @@
   border: 1px solid #f5d3d3;
 }
 
-/* LAYOUT */
 .layout {
   display: grid;
   grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
@@ -106,7 +103,6 @@
   color: var(--text-primary);
 }
 
-/* FORM */
 .form-body {
   padding: 20px;
   display: flex;
@@ -195,7 +191,6 @@
   font-size: 18px;
 }
 
-/* LIST */
 .list-empty {
   display: flex;
   flex-direction: column;
@@ -313,7 +308,6 @@
   color: var(--text-light);
 }
 
-/* RESPONSIVE */
 @media (max-width: 992px) {
   .layout {
     grid-template-columns: 1fr;
@@ -330,9 +324,6 @@
   }
 }
 
-/* =========================================================
-   DARK MODE
-   ========================================================= */
 :host-context(html.dark-mode) {
   --primary: #6f9fd3;
   --surface: #172235;
@@ -395,11 +386,7 @@
 :host-context(html.dark-mode) .status-badge[data-status='CANCELLED'] {
   background: rgba(248, 113, 113, 0.16);
   color: #f87171;
-}/* =========================================================
-   MOTION LAYER
-   Keyframes are global (styles.css); this only wires them onto the
-   classes this page uses.
-   ========================================================= */
+}
 
 .page-header {
   animation: cs-fade-up 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
@@ -409,7 +396,6 @@
   animation: cs-fade-up 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
-/* Form panel and the visit list are two halves of the layout. */
 .layout {
   perspective: 1400px;
 }
@@ -477,7 +463,6 @@
   transform: translateY(0) scale(0.98);
 }
 
-/* Registered visits cascade in one after another. */
 .visit-row {
   animation: cs-slide-in-left 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
   transition: background-color 0.2s ease, padding-left 0.2s ease;

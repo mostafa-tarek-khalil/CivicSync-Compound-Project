@@ -1,52 +1,27 @@
-/**
- * SHARED DESIGN TOKENS FOR EVERY TECHNICIAN PAGE
- *
- * The resident portal is built on a small set of semantic CSS variables
- * (`--primary`, `--surface`, `--text-muted`, ...) declared on `:host`, with a
- * `:host-context(.dark-mode)` block that only swaps the variables. That is what
- * lets every resident screen look identical and switch theme for free.
- *
- * The technician pages were written earlier with hard-coded hex colours
- * (#f8f9ff, #ffffff, #142b46, #64748b, #dce4f0 ...). This file declares the
- * exact same token set the resident pages use, so each technician stylesheet
- * can drop its hard-coded values and reference the variables instead — the two
- * portals then render with one consistent palette, one shadow scale and one
- * dark-mode story.
- *
- * Imported once per technician page, before the page's own stylesheet:
- *
- *   styleUrls: ['./my-page.css', '../shared/tech-shared.css']
- *
- * where my-page.css starts with `@import '../shared/tech-theme.css';`
- */
+
 
 :host {
   display: block;
 
-  /* Brand */
   --primary: #315b8f;
   --primary-dark: #1d3f68;
   --primary-soft: rgba(49, 91, 143, 0.10);
 
-  /* Surfaces */
   --page-bg: #f8f9ff;
   --surface: #ffffff;
   --surface-soft: #f4f7fc;
   --surface-hover: #f1f5f9;
 
-  /* Text */
   --text-main: #142b46;
   --text-primary: #17253d;
   --text-secondary: #64748b;
   --text-muted: #718096;
   --text-light: #8290a5;
 
-  /* Lines + icons */
   --border: #dce4f0;
   --border-soft: #e5e7eb;
   --icon: #8796aa;
 
-  /* Status */
   --green: #16a34a;
   --green-soft: rgba(22, 163, 74, 0.10);
 
@@ -61,8 +36,6 @@
 
   --gray-soft: rgba(100, 116, 139, 0.10);
 
-  /* Category accents — one hue per maintenance category so the icon tiles
-     read at a glance instead of every category looking the same blue. */
   --cat-plumbing: #2563eb;
   --cat-plumbing-soft: rgba(37, 99, 235, 0.10);
 
@@ -78,16 +51,9 @@
   --cat-general: #64748b;
   --cat-general-soft: rgba(100, 116, 139, 0.10);
 
-  /* Elevation */
   --shadow-sm: 0 2px 8px rgba(20, 43, 70, 0.06);
   --shadow-md: 0 8px 24px rgba(20, 43, 70, 0.10);
 }
-
-/* =========================================================
-   DARK MODE
-   Only the variables change — every rule below (and every
-   technician page) keeps referencing the same names.
-========================================================= */
 
 :host-context(.dark-mode) {
   --primary: #6f9fd3;
@@ -123,7 +89,6 @@
 
   --gray-soft: rgba(148, 163, 184, 0.10);
 
-  /* Category accents, lifted for contrast on the dark page. */
   --cat-plumbing: #60a5fa;
   --cat-plumbing-soft: rgba(96, 165, 250, 0.14);
 

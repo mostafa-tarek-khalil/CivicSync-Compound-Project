@@ -9,11 +9,6 @@ import {
   IInvoiceDetail
 } from './invoice.model';
 
-/**
- * These lock down the shared invoice contract used by the receipt component.
- * The Admin, Resident and Technician screens all render through
- * `describeInvoice`, so a regression here would be visible on every role.
- */
 describe('invoice.model', () => {
   const baseInvoice: IInvoiceDetail = {
     _id: '65f1a2b3c4d5e6f701020304',

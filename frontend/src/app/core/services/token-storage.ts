@@ -1,11 +1,4 @@
-/**
- * The ONLY module that touches the raw credential keys in localStorage.
- *
- * `AuthService` reads and writes through this module, and the HTTP
- * interceptor reads the token through it too. That keeps "how the JWT is
- * stored" in one place instead of being re-implemented (and drifting) across
- * components, guards and sockets.
- */
+
 
 const TOKEN_KEY = 'token';
 const USER_KEY = 'user';
@@ -42,10 +35,7 @@ export function clearToken(): void {
   localStorage.removeItem(TOKEN_KEY);
 }
 
-/**
- * The cached user snapshot. Only `AuthService` should write this; everything
- * else reads the user from `AuthService` itself.
- */
+
 export function readCachedUser<T>(): T | null {
   if (!canUseStorage()) {
     return null;

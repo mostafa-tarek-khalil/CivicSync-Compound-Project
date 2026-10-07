@@ -28,11 +28,6 @@
     sans-serif;
 }
 
-
-/* =========================
-   LEFT SIDE
-========================= */
-
 .info-side {
   min-height: 100vh;
   padding: 55px 60px 35px;
@@ -124,11 +119,6 @@
   line-height: 1.7;
 }
 
-
-/* =========================
-   STEPS
-========================= */
-
 .steps {
   margin-top: 70px;
 
@@ -199,11 +189,6 @@
   line-height: 1.5;
 }
 
-
-/* =========================
-   FOOTER
-========================= */
-
 .side-footer {
   display: flex;
   flex-direction: column;
@@ -213,11 +198,6 @@
 
   font-size: 11px;
 }
-
-
-/* =========================
-   RIGHT SIDE
-========================= */
 
 .form-side {
   min-height: 100vh;
@@ -237,11 +217,6 @@
 .form-step {
   width: 100%;
 }
-
-
-/* =========================
-   HEADINGS
-========================= */
 
 .step-label {
   margin-bottom: 15px;
@@ -270,11 +245,6 @@
 
   font-size: 14px;
 }
-
-
-/* =========================
-   FORM
-========================= */
 
 .form-group {
   margin-bottom: 22px;
@@ -318,11 +288,6 @@
   width: 100%;
   height: 100%;
 }
-
-
-/* =========================
-   INPUTS
-========================= */
 
 .input-wrapper input,
 .input-wrapper select,
@@ -375,11 +340,6 @@
     0 0 0 3px rgba(27, 42, 74, 0.07);
 }
 
-
-/* =========================
-   SELECT
-========================= */
-
 .input-wrapper select {
   appearance: auto;
   cursor: pointer;
@@ -390,11 +350,6 @@
   opacity: 0.65;
 }
 
-
-/* =========================
-   TEXTAREA
-========================= */
-
 .textarea-wrapper {
   display: block;
 }
@@ -404,11 +359,6 @@
   transform: none;
 }
 
-
-/* =========================
-   DATE + TIME
-========================= */
-
 .two-columns {
   display: grid;
 
@@ -416,11 +366,6 @@
 
   gap: 15px;
 }
-
-
-/* =========================
-   BUTTONS
-========================= */
 
 .button-row {
   display: flex;
@@ -495,11 +440,6 @@
   background: var(--input-bg);
 }
 
-
-/* =========================
-   DARK MODE
-========================= */
-
 :host-context(html.dark-mode) .request-page {
   --navy: #e2e8f0;
   --navy-light: #f8fafc;
@@ -564,11 +504,6 @@
   background: #e2e8f0;
 }
 
-
-/* =========================
-   RESPONSIVE
-========================= */
-
 @media (max-width: 900px) {
 
   .request-page {
@@ -598,7 +533,6 @@
     padding: 50px 30px;
   }
 }
-
 
 @media (max-width: 600px) {
 
@@ -631,13 +565,6 @@
   }
 }
 
-/* =========================================================
-   MOTION LAYER
-   Keyframes are global (styles.css); this only wires them onto the
-   classes this page uses.
-   ========================================================= */
-
-/* Left brand panel and right form panel each ride in from their side. */
 .info-side {
   animation: cs-slide-in-left 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
@@ -662,7 +589,6 @@
   animation: cs-fade-up 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.3s both;
 }
 
-/* The numbered steps light up one after another. */
 .step {
   animation: cs-slide-in-left 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
@@ -686,7 +612,6 @@
   animation: cs-fade-in 0.5s ease 0.6s both;
 }
 
-/* Form contents stagger in behind the panel. */
 .form-step {
   animation: cs-fade-up 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.18s both;
 }
@@ -726,7 +651,6 @@ select:focus {
   box-shadow: 0 0 0 3px rgba(49, 91, 143, 0.14);
 }
 
-/* The icon inside a field nudges as you focus it. */
 .input-icon,
 .textarea-icon {
   transition: transform 0.24s cubic-bezier(0.22, 1, 0.36, 1),

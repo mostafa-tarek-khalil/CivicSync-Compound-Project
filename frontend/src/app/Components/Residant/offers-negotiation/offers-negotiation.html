@@ -1,4 +1,4 @@
-    <!-- HEADER -->
+
 
     <div class="page-header">
 
@@ -43,7 +43,7 @@
     </div>
 
 
-    <!-- LOADING -->
+
 
     @if (isLoading) {
 
@@ -63,7 +63,7 @@
     }
 
 
-    <!-- ERROR -->
+
 
     @if (!isLoading && errorMessage) {
 
@@ -97,7 +97,7 @@
 
     @if (!isLoading && !errorMessage) {
 
-      <!-- ACCEPT ERROR -->
+
 
       @if (acceptErrorMessage) {
 
@@ -119,7 +119,7 @@
 
       }
 
-      <!-- SUMMARY -->
+
 
       <div class="offers-summary">
 
@@ -152,7 +152,7 @@
       </div>
 
 
-      <!-- OFFERS -->
+
 
       @if (offers.length > 0) {
 
@@ -166,7 +166,7 @@
             <section class="offer-card">
 
 
-              <!-- TOP -->
+
 
               <div class="offer-top">
 
@@ -229,7 +229,7 @@
               </div>
 
 
-              <!-- DETAILS -->
+
 
               <div class="offer-details">
 
@@ -274,7 +274,7 @@
               </div>
 
 
-              <!-- MESSAGE -->
+
 
               @if (offer.note) {
 
@@ -293,7 +293,7 @@
               }
 
 
-              <!-- ACTIONS -->
+
 
               <div class="offer-actions">
 
@@ -381,7 +381,7 @@
       }
 
 
-      <!-- EMPTY -->
+
 
       @if (offers.length === 0) {
 
@@ -411,7 +411,7 @@
     }
 
 
-    <!-- NEGOTIATION PANEL -->
+
 
     @if (selectedOffer) {
 
@@ -425,7 +425,7 @@
           (click)="$event.stopPropagation()">
 
 
-          <!-- HEADER -->
+
 
           <div class="negotiation-header">
 
@@ -456,7 +456,7 @@
           </div>
 
 
-          <!-- ORIGINAL OFFER -->
+
 
           <div class="original-offer">
 
@@ -479,7 +479,7 @@
           </div>
 
 
-          <!-- CONVERSATION -->
+
 
           <div class="conversation">
 
@@ -586,7 +586,7 @@
           </div>
 
 
-          <!-- FORM -->
+
 
           @if (selectedOffer.status === 'PENDING') {
 

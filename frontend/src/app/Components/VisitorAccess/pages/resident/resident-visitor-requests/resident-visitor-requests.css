@@ -9,7 +9,6 @@
   background: #f7f8fc;
 }
 
-/* HEADER */
 .page-header {
   display: flex;
   justify-content: space-between;
@@ -68,7 +67,6 @@
   color: #202238;
 }
 
-/* ALERTS */
 .alert {
   display: flex;
   align-items: center;
@@ -91,7 +89,6 @@
   border: 1px solid #f5d3d3;
 }
 
-/* REQUEST LIST */
 .request-list {
   display: flex;
   flex-direction: column;
@@ -213,7 +210,6 @@
   color: #9a9db3;
 }
 
-/* ACTIONS */
 .request-actions {
   display: flex;
   gap: 10px;
@@ -267,7 +263,6 @@
   cursor: not-allowed;
 }
 
-/* EMPTY */
 .empty-state {
   display: flex;
   flex-direction: column;
@@ -296,9 +291,6 @@
   margin: 0;
   font-size: 13px;
 }
-/* =========================================================
-   DARK MODE
-========================================================= */
 
 :host-context(html.dark-mode) .requests-page {
   background: #0d1420;
@@ -355,11 +347,6 @@
   background: #131f31;
   border-color: #29394c;
 }
-/* =========================================================
-   MOTION LAYER
-   Keyframes are global (styles.css); this only wires them onto the
-   classes this page uses.
-   ========================================================= */
 
 .page-header {
   animation: cs-fade-up 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
@@ -377,7 +364,6 @@
   animation: cs-fade-up 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
-/* Request cards tilt in 3D and cascade down the list. */
 .request-list {
   perspective: 1200px;
 }
@@ -417,7 +403,6 @@
   transform: scale(1.06);
 }
 
-/* Action buttons lift and sink. */
 .approve-btn,
 .reject-btn,
 .qr-btn {

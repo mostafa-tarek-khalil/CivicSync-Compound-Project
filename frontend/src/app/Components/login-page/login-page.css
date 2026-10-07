@@ -626,9 +626,6 @@ form {
     flex-wrap: wrap;
   }
 }
-/* =========================================================
-   DARK MODE
-========================================================= */
 
 :host-context(html.dark-mode) .login-page {
   background: #0d1420;
@@ -715,9 +712,6 @@ form {
 :host-context(html.dark-mode) .showcase-footer {
   color: #7f8ea3;
 }
-/* =========================================================
-   FORGOT-PASSWORD SUCCESS CARD (shared by forgot/reset pages)
-========================================================= */
 
 .login-heading.center {
   text-align: center;
@@ -788,13 +782,8 @@ form {
 
 :host-context(html.dark-mode) .reset-hint .material-symbols-outlined {
   color: #8eb2e8;
-}/* =========================================================
-   MOTION LAYER
-   Keyframes are global (styles.css); this only wires them onto the
-   classes this page uses.
-   ========================================================= */
+}
 
-/* The decorative background shapes drift for a sense of depth. */
 .background-shape {
   animation: cs-login-drift 16s ease-in-out infinite;
 }
@@ -818,8 +807,6 @@ form {
   }
 }
 
-/* The showcase panel and the form card enter from opposite sides so the
-   split layout assembles itself. */
 .login-showcase {
   animation: cs-slide-in-left 0.65s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
@@ -846,7 +833,6 @@ form {
   animation: cs-fade-up 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.14s both;
 }
 
-/* Feature list items light up in sequence. */
 .feature {
   animation: cs-slide-in-left 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
 }

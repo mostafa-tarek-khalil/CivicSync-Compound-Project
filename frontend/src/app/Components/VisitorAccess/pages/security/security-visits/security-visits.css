@@ -9,11 +9,6 @@
   background: #f7f8fc;
 }
 
-
-/* =========================
-   HEADER
-========================= */
-
 .page-header {
   display: flex;
   justify-content: space-between;
@@ -85,11 +80,6 @@
   color: #34364d;
 }
 
-
-/* =========================
-   STATS
-========================= */
-
 .stats-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -140,11 +130,6 @@
   letter-spacing: 1px;
   color: #9497aa;
 }
-
-
-/* =========================
-   CONTROLS
-========================= */
 
 .controls-card {
   display: flex;
@@ -218,11 +203,6 @@
   color: #ffffff;
 }
 
-
-/* =========================
-   SECTION
-========================= */
-
 .section-heading {
   display: flex;
   justify-content: space-between;
@@ -240,11 +220,6 @@
   font-size: 11px;
   color: #9295a8;
 }
-
-
-/* =========================
-   VISITOR CARD
-========================= */
 
 .visitor-list {
   display: flex;
@@ -410,11 +385,6 @@
   font-size: 15px;
 }
 
-
-/* =========================
-   EMPTY
-========================= */
-
 .empty-state {
   padding: 55px 20px;
   text-align: center;
@@ -440,11 +410,6 @@
   font-size: 11px;
 }
 
-
-/* =========================
-   BACK
-========================= */
-
 .back-btn {
   display: flex;
   align-items: center;
@@ -467,9 +432,6 @@
 .back-btn span {
   font-size: 17px;
 }
-/* =========================
-   DARK MODE
-========================= */
 
 :host-context(html.dark-mode) .visits-page {
   background: #0f172a;
@@ -489,9 +451,6 @@
   color: #8eb2e8;
 }
 
-
-/* HEADER DATE */
-
 :host-context(html.dark-mode) .header-date {
   background: #172235;
   border-color: #29394c;
@@ -509,11 +468,6 @@
 :host-context(html.dark-mode) .header-date strong {
   color: #f1f5f9;
 }
-
-
-/* =========================
-   STATS
-========================= */
 
 :host-context(html.dark-mode) .stat-card {
   background: #1a2940;
@@ -537,11 +491,6 @@
 :host-context(html.dark-mode) .stat-label {
   color: #aebdcd;
 }
-
-
-/* =========================
-   CONTROLS
-========================= */
 
 :host-context(html.dark-mode) .controls-card {
   background: #172235;
@@ -579,11 +528,6 @@
   color: #ffffff;
 }
 
-
-/* =========================
-   SECTION
-========================= */
-
 :host-context(html.dark-mode) .section-heading h2 {
   color: #f1f5f9;
 }
@@ -591,11 +535,6 @@
 :host-context(html.dark-mode) .visitor-count {
   color: #7f8ea3;
 }
-
-
-/* =========================
-   VISITOR CARDS
-========================= */
 
 :host-context(html.dark-mode) .visitor-card {
   background: #172235;
@@ -637,11 +576,6 @@
   color: #7f8ea3;
 }
 
-
-/* =========================
-   STATUS
-========================= */
-
 :host-context(html.dark-mode) .status-badge.approved {
   background: #223149;
   color: #8eb2e8;
@@ -662,11 +596,6 @@
   color: #9aa8ba;
 }
 
-
-/* =========================
-   DETAILS BUTTON
-========================= */
-
 :host-context(html.dark-mode) .details-btn {
   background: transparent;
   border-color: #40506a;
@@ -678,11 +607,6 @@
   border-color: #244766;
   color: #ffffff;
 }
-
-
-/* =========================
-   EMPTY STATE
-========================= */
 
 :host-context(html.dark-mode) .empty-state {
   background: #172235;
@@ -701,11 +625,6 @@
   color: #94a3b8;
 }
 
-
-/* =========================
-   BACK BUTTON
-========================= */
-
 :host-context(html.dark-mode) .back-btn {
   color: #94a3b8;
 }
@@ -713,11 +632,6 @@
 :host-context(html.dark-mode) .back-btn:hover {
   color: #8eb2e8;
 }
-
-
-/* =========================
-   RESPONSIVE
-========================= */
 
 @media (max-width: 1000px) {
 
@@ -783,9 +697,7 @@
     gap: 6px;
   }
 
-}/* =========================
-   TODAY / ALL SCOPE CONTROLS
-========================= */
+}
 
 .scope-controls {
   display: flex;
@@ -862,11 +774,7 @@
   background: #16233a;
   border-color: #2a3a4e;
   color: #e8eef6;
-}/* =========================================================
-   MOTION LAYER
-   Keyframes are global (styles.css); this only wires them onto the
-   classes this page uses.
-   ========================================================= */
+}
 
 .page-header {
   animation: cs-fade-up 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
@@ -876,7 +784,6 @@
   animation: cs-fade-in 0.45s ease 0.06s both;
 }
 
-/* Rows slide in, staggered. */
 .table-wrapper tbody tr,
 .visits-table tbody tr {
   animation: cs-slide-in-left 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
@@ -912,7 +819,6 @@
   background-color: #f8fafe;
 }
 
-/* Filter chips / tabs and any card panels fade up. */
 .filters,
 .toolbar,
 .filter-bar {
@@ -925,7 +831,6 @@
   animation: cs-fade-up 0.55s cubic-bezier(0.22, 1, 0.36, 1) 0.14s both;
 }
 
-/* Any buttons that navigate or act. */
 button,
 .btn,
 .view-btn,

@@ -17,13 +17,13 @@ export interface AdminDashboardOverview {
   maintenance: { open: number };
   invoices: {
     overdue: number;
-    /** Sum of every non-cancelled invoice ever issued. */
+
     totalBilled: number;
-    /** Sum of invoices confirmed as PAID. */
+
     totalCollected: number;
-    /** Still owed: PENDING + OVERDUE + PAYMENT_SUBMITTED. */
+
     totalOutstanding: number;
-    /** Count of resident payment claims waiting on an admin decision. */
+
     awaitingApproval: number;
   };
   visits: { total: number };
@@ -81,7 +81,6 @@ export interface AdminMaintenanceTicket {
   assignedTo?: { _id: string; name: string } | string | null;
 }
 
-/** Full ticket payload behind the admin "View" modal. */
 export interface AdminTicketDetails {
   ticket: {
     _id: string;
@@ -157,7 +156,6 @@ export interface AdminVisit {
   unitId?: { _id: string; unitNumber: number } | string | null;
 }
 
-/** One bucket of a `$group`-style aggregate: { _id, count, totalAmount? }. */
 export interface AnalyticsBucket {
   _id: string | null;
   count: number;
@@ -198,7 +196,6 @@ export interface AdminReports {
   };
 }
 
-/** E-mail + role directory rows used by the printable report. */
 export interface ReportUserRow {
   _id: string;
   name: string;
@@ -267,7 +264,6 @@ export class AdminService {
     );
   }
 
-  /** Update an account's editable identity fields (name, phone, email). */
   updateUser(
     userId: string,
     data: { name?: string; phone?: string; email?: string }
@@ -277,8 +273,6 @@ export class AdminService {
       data
     );
   }
-
-  // ---------- Compound ----------
 
   getBuildings(): Observable<ApiResponse<AdminBuilding[]>> {
     return this.http.get<ApiResponse<AdminBuilding[]>>(
@@ -353,8 +347,6 @@ export class AdminService {
     );
   }
 
-  // ---------- Billing ----------
-
   getInvoices(params?: {
     status?: string;
     residentId?: string;
@@ -365,17 +357,12 @@ export class AdminService {
     );
   }
 
-  /**
-   * A single invoice with its resident, unit and originating ticket populated.
-   * Backs the receipt screen and the print action.
-   */
   getInvoice(invoiceId: string): Observable<ApiResponse<IInvoiceDetail>> {
     return this.http.get<ApiResponse<IInvoiceDetail>>(
       `${this.apiUrl}/invoices/${invoiceId}`
     );
   }
 
-  /** Create an invoice for a resident / unit (optionally tied to a ticket). */
   createInvoice(data: {
     residentId: string;
     amount: number;
@@ -400,8 +387,6 @@ export class AdminService {
     );
   }
 
-  // ---------- Maintenance ----------
-
   getMaintenanceTickets(params?: {
     status?: string;
     category?: string;
@@ -412,7 +397,6 @@ export class AdminService {
     );
   }
 
-  /** Full ticket (with review, invoice and location) for the details modal. */
   getMaintenanceTicket(
     ticketId: string
   ): Observable<ApiResponse<AdminTicketDetails>> {
@@ -420,8 +404,6 @@ export class AdminService {
       `${this.apiUrl}/maintenance/${ticketId}`
     );
   }
-
-  // ---------- Visitors ----------
 
   getVisits(params?: {
     status?: string;
@@ -433,15 +415,12 @@ export class AdminService {
     );
   }
 
-  // ---------- Reports & analytics ----------
-
   getReports(): Observable<ApiResponse<AdminReports>> {
     return this.http.get<ApiResponse<AdminReports>>(
       `${this.apiUrl}/reports`
     );
   }
 
-  /** Everything the downloadable compound report is built from. */
   getFullReport(): Observable<ApiResponse<FullCompoundReport>> {
     return this.http.get<ApiResponse<FullCompoundReport>>(
       `${this.apiUrl}/reports/full`

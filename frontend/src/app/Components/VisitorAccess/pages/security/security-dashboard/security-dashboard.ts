@@ -20,12 +20,7 @@ interface ActivityItem {
   statusClass: string;
 }
 
-/**
- * A dashboard summary tile.
- *
- * `target` names the security list filter the card opens, so the click handler
- * stays a single lookup instead of a per-card branch.
- */
+
 interface StatCard {
   title: string;
   value: number;
@@ -138,12 +133,7 @@ export class SecurityDashboard implements OnInit {
     this.router.navigate(['/security/visitors/scanner']);
   }
 
-  /**
-   * Open the visit list pre-filtered by a dashboard card.
-   *
-   * The list reads the `filter` query param and applies it on load, so the card
-   * click lands the operator on exactly the rows they clicked.
-   */
+  
   openStatCard(card: StatCard): void {
     this.router.navigate(['/security/visitors/list'], {
       queryParams: { filter: card.target }

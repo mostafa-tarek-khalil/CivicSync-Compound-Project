@@ -20,10 +20,6 @@ export class ChatService {
     private http: HttpClient
   ) {}
 
-  // =========================================================
-  // USERS
-  // =========================================================
-
   searchUsers(
     phone: string
   ): Observable<any> {
@@ -54,10 +50,6 @@ export class ChatService {
     );
   }
 
-  // =========================================================
-  // GROUPS
-  // =========================================================
-
   getCompoundGroup(): Observable<any> {
 
     return this.http.get(
@@ -74,10 +66,6 @@ export class ChatService {
     );
   }
 
-  // =========================================================
-  // CONVERSATIONS
-  // =========================================================
-
   getMyConversations(): Observable<any> {
 
     return this.http.get(
@@ -93,10 +81,6 @@ export class ChatService {
       `${this.apiUrl}/conversations/${conversationId}`
     );
   }
-
-  // =========================================================
-  // MESSAGES
-  // =========================================================
 
   getMessages(
     conversationId: string
@@ -130,10 +114,6 @@ export class ChatService {
     );
   }
 
-  // =========================================================
-  // DELETE
-  // =========================================================
-
   deleteMessageForMe(
     messageId: string
   ): Observable<any> {
@@ -160,10 +140,6 @@ export class ChatService {
       `${this.apiUrl}/conversations/${conversationId}/me`
     );
   }
-
-  // =========================================================
-  // VISITOR CHAT
-  // =========================================================
 
   createVisitorConversation(
     visitId: string,

@@ -7,13 +7,6 @@ import { DialogComponent } from './shared/components/dialog/dialog';
 
 import { AuthService } from './core/services/auth.service';
 
-/**
- * Application root.
- *
- * The chrome (topbar + sidebar) now belongs to AuthenticatedLayoutComponent,
- * so the root only hosts the router outlet plus the global toast and dialog
- * stacks.
- */
 @Component({
   selector: 'app-root',
   standalone: true,

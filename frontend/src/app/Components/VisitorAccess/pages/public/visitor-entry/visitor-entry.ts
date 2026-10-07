@@ -16,7 +16,6 @@ export class VisitorEntry {
     private visitorFlow: VisitorFlow
   ) { }
 
-  /** True when this browser already has an in-progress visit saved. */
   get hasSavedVisit(): boolean {
     return this.visitorFlow.hasVisit();
   }

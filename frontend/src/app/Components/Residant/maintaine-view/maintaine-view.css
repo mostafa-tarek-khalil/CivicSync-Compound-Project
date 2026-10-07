@@ -29,11 +29,6 @@
   --shadow-md: 0 8px 24px rgba(20, 43, 70, 0.10);
 }
 
-
-/* =========================================================
-   DARK MODE
-========================================================= */
-
 :host-context(.dark-mode) {
 
   --primary: #6f9fd3;
@@ -64,11 +59,6 @@
   --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.28);
 }
 
-
-/* =========================================================
-   PAGE
-========================================================= */
-
 .page-body {
   min-height: 100vh;
 
@@ -87,11 +77,6 @@
     color 0.2s ease;
 }
 
-
-/* =========================================================
-   HEADER
-========================================================= */
-
 .desk-subtitle {
   font-size: 10px;
   font-weight: 700;
@@ -108,11 +93,6 @@
 .page-body p {
   color: var(--text-muted);
 }
-
-
-/* =========================================================
-   CREATE BUTTON
-========================================================= */
 
 .btn-dark-brand {
   background: var(--primary);
@@ -138,11 +118,6 @@
 
   box-shadow: var(--shadow-sm);
 }
-
-
-/* =========================================================
-   KPI CARDS
-========================================================= */
 
 .kpi-panel {
   height: 100%;
@@ -214,11 +189,6 @@
   font-size: 15px;
 }
 
-
-/* =========================================================
-   TABLE CARD
-========================================================= */
-
 .table-card {
   background: var(--surface) !important;
 
@@ -228,11 +198,6 @@
 
   box-shadow: var(--shadow-sm);
 }
-
-
-/* =========================================================
-   STATUS TABS
-========================================================= */
 
 .status-tab-group {
   background: var(--surface-soft);
@@ -287,11 +252,6 @@
   color: #ffffff;
 }
 
-
-/* =========================================================
-   SEARCH
-========================================================= */
-
 .search-input-box {
   position: relative;
   min-width: 260px;
@@ -341,11 +301,6 @@
     0 0 0 3px var(--primary-soft);
 }
 
-
-/* =========================================================
-   TABLE
-========================================================= */
-
 .custom-req-table {
   color: var(--text-primary);
 }
@@ -378,11 +333,6 @@
   background: var(--surface-soft);
 }
 
-
-/* =========================================================
-   REQUEST ID
-========================================================= */
-
 .code-id {
   font-size: 12px;
 
@@ -393,21 +343,11 @@
   color: var(--primary);
 }
 
-
-/* =========================================================
-   TITLE
-========================================================= */
-
 .title-lead {
   font-size: 14px;
 
   color: var(--text-main) !important;
 }
-
-
-/* =========================================================
-   CATEGORY
-========================================================= */
 
 .cat-pill {
   display: inline-block;
@@ -430,11 +370,6 @@
   border-color: rgba(111, 159, 211, 0.22);
 }
 
-
-/* =========================================================
-   DATE
-========================================================= */
-
 .custom-req-table .fw-semibold,
 .custom-req-table .text-dark {
   color: var(--text-primary) !important;
@@ -443,11 +378,6 @@
 .custom-req-table .text-muted {
   color: var(--text-muted) !important;
 }
-
-
-/* =========================================================
-   VIEW DETAILS
-========================================================= */
 
 .btn-view-details {
   background: var(--surface);
@@ -477,19 +407,9 @@
   transform: translateY(-1px);
 }
 
-
-/* =========================================================
-   EMPTY STATE
-========================================================= */
-
 .custom-req-table td.text-center {
   color: var(--text-muted) !important;
 }
-
-
-/* =========================================================
-   RESPONSIVE
-========================================================= */
 
 @media (max-width: 768px) {
 
@@ -519,11 +439,7 @@
   .btn-dark-brand {
     font-size: 12px;
   }
-}/* =========================================================
-   MOTION LAYER
-   Keyframes are global (styles.css); this only wires them onto the
-   classes this page uses.
-   ========================================================= */
+}
 
 .main-heading {
   animation: cs-fade-up 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
@@ -547,7 +463,6 @@
   transform: translateY(0) scale(0.98);
 }
 
-/* The KPI tiles are the star here — real 3D tilt on hover. */
 .kpi-panel {
   height: 100%;
   transform-style: preserve-3d;
@@ -563,7 +478,6 @@
   box-shadow: 0 22px 44px rgba(20, 43, 70, 0.16);
 }
 
-/* The KPI grid supplies the perspective the tilt needs. */
 .kpi-panel:hover .kpi-btn-box {
   transform: translateZ(24px);
 }
@@ -610,7 +524,6 @@
   box-shadow: 0 0 0 3px rgba(49, 91, 143, 0.12);
 }
 
-/* Ticket rows slide in, staggered down the table. */
 .ticket-row {
   animation: cs-slide-in-left 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
   transition: background-color 0.2s ease, padding-left 0.2s ease;

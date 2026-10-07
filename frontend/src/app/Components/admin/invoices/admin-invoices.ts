@@ -8,10 +8,6 @@ import { RealtimeRefresh } from '../../../core/utils/realtime-refresh';
 import { ModalService } from '../../../core/services/modal.service';
 import { ChatSocket } from '../../../core/services/chat-socket';
 
-/**
- * Admin billing management: monitor issued invoices, their statuses and the
- * overdue backlog. Completes the invoice lifecycle on the admin side.
- */
 @Component({
   selector: 'app-admin-invoices',
   standalone: true,
@@ -30,7 +26,6 @@ export class AdminInvoices implements OnInit, OnDestroy {
 
   readonly statuses = ['', 'PENDING', 'PAYMENT_SUBMITTED', 'PAID', 'OVERDUE', 'CANCELLED'];
 
-  // ---------- Create invoice ----------
   invoiceModalOpen = false;
   savingInvoice = false;
   residents: AdminUser[] = [];
@@ -97,14 +92,9 @@ export class AdminInvoices implements OnInit, OnDestroy {
     this.load();
   }
 
-  /** Opens the printable receipt screen for one invoice. */
   openInvoice(invoice: AdminInvoice): void {
     this.router.navigate(['/admin/invoices', invoice._id]);
   }
-
-  // ==================================================================
-  // CREATE INVOICE
-  // ==================================================================
 
   openCreateInvoice(): void {
     this.invoiceForm = {
@@ -179,14 +169,6 @@ export class AdminInvoices implements OnInit, OnDestroy {
     return resident ? resident.name : '—';
   }
 
-  // ==================================================================
-  // STATUS ACTIONS
-  // ==================================================================
-
-  /**
-   * Confirms a payment as PAID. Available for anything not already settled —
-   * including a resident's PAYMENT_SUBMITTED claim, which is the main case.
-   */
   approvePaid(invoice: AdminInvoice): void {
     const fromClaim = invoice.status === 'PAYMENT_SUBMITTED';
 
@@ -225,7 +207,6 @@ export class AdminInvoices implements OnInit, OnDestroy {
       });
   }
 
-  /** Unpaid = anything the resident still owes or has claimed to have paid. */
   isUnpaid(invoice: AdminInvoice): boolean {
     return (
       invoice.status === 'PENDING' ||
@@ -263,7 +244,6 @@ export class AdminInvoices implements OnInit, OnDestroy {
       .reduce((sum, invoice) => sum + (invoice.amount || 0), 0);
   }
 
-  /** Only what has genuinely been confirmed as collected. */
   get totalCollected(): number {
     return this.invoices
       .filter(invoice => invoice.status === 'PAID')
@@ -276,7 +256,6 @@ export class AdminInvoices implements OnInit, OnDestroy {
       .reduce((sum, invoice) => sum + (invoice.amount || 0), 0);
   }
 
-  /** Claims waiting on the admin right now — drives the alert banner. */
   get awaitingApprovalCount(): number {
     return this.countBy('PAYMENT_SUBMITTED');
   }

@@ -1,18 +1,9 @@
 <header class="topbar">
 
-  <!-- The bar's entrance animation is applied to this inner row rather than to
-       `.topbar` itself: an animated element is a stacking context, which would
-       trap the notification / profile dropdowns underneath the page content. -->
+
   <div class="topbar-inner">
 
-  <!-- BRAND
-       A plain lockup, not a link: the mark identifies the app, it does not
-       navigate. Clicking it must do nothing, so it is a <div> rather than an
-       <a>/<button> — that also keeps it out of the tab order and off the
-       accessibility tree as an interactive element.
 
-       Deliberately shown at EVERY width, including next to the sidebar brand on
-       desktop. The two copies are intentional. -->
   <div class="topbar-brand">
 
     <span class="topbar-brand-mark">
@@ -27,10 +18,10 @@
   </div>
 
 
-  <!-- RIGHT SIDE -->
+
   <div class="topbar-right">
 
-    <!-- NOTIFICATIONS -->
+
     <div class="notification-wrapper">
 
       <button
@@ -52,7 +43,7 @@
       </button>
 
 
-      <!-- NOTIFICATION DROPDOWN -->
+
       <div
         class="dropdown notification-dropdown"
         *ngIf="notificationsOpen">
@@ -72,7 +63,7 @@
         </div>
 
 
-        <!-- NOTIFICATIONS LIST -->
+
         <div class="notifications-list">
           <div
             class="notification-item"
@@ -101,7 +92,7 @@
 
           </div>
 
-          <!-- EMPTY -->
+
           <div
             class="empty-notifications"
             *ngIf="notifications.length === 0">
@@ -113,7 +104,7 @@
         </div>
 
 
-        <!-- VIEW ALL -->
+
         <div class="notification-footer">
           <button
             type="button"
@@ -130,7 +121,7 @@
     </div>
 
 
-    <!-- THEME -->
+
     <button
       class="icon-button theme-button"
       type="button"
@@ -143,7 +134,7 @@
     </button>
 
 
-    <!-- PROFILE -->
+
     <div class="profile-wrapper">
 
       <button
@@ -169,7 +160,7 @@
       </button>
 
 
-      <!-- PROFILE DROPDOWN -->
+
       <div
         class="dropdown profile-dropdown"
         *ngIf="profileOpen">

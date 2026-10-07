@@ -3,7 +3,6 @@
   width: 100%;
 }
 
-/* ------------------------------------------------------------ Empty state */
 .chart-empty {
   display: flex;
   flex-direction: column;
@@ -24,7 +23,6 @@
   font-size: 13px;
 }
 
-/* ----------------------------------------------------------------- Donut */
 .donut-wrap {
   display: flex;
   align-items: center;
@@ -95,7 +93,6 @@
   font-size: 12px;
 }
 
-/* ------------------------------------------------------------------ Bars */
 .bars-wrap {
   display: flex;
   align-items: flex-end;
@@ -148,7 +145,6 @@
   max-width: 100%;
 }
 
-/* ------------------------------------------------------------------ Line */
 .line-wrap {
   display: flex;
   flex-direction: column;
@@ -186,7 +182,6 @@
   white-space: nowrap;
 }
 
-/* ------------------------------------------------------------------ Dark */
 :host-context(html.dark-mode) .donut-track {
   stroke: #29394c;
 }
@@ -198,11 +193,7 @@
 
 :host-context(html.dark-mode) .bar-track {
   background: #1e2f47;
-}/* =========================================================
-   MOTION LAYER
-   Keyframes are global (styles.css); this only wires them onto the
-   classes this chart uses.
-   ========================================================= */
+}
 
 .chart-empty {
   animation: cs-pop-in 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
@@ -212,9 +203,6 @@
   animation: cs-fade-in 0.45s ease 0.08s both;
 }
 
-/* --- Donut ---
-   The ring draws itself on load and the legend lists its slices in order,
-   so the proportions are read as they appear rather than all at once. */
 .donut-wrap {
   animation: cs-pop-in 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
   perspective: 1200px;
@@ -225,7 +213,6 @@
   animation: cs-donut-turn 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
-/* The chart is pre-rotated -90deg, so the reveal rotates around that. */
 @keyframes cs-donut-turn {
   from {
     opacity: 0;
@@ -246,7 +233,6 @@
   stroke-width: 5;
 }
 
-/* --- Legend --- */
 .legend li {
   animation: cs-slide-in-left 0.42s cubic-bezier(0.22, 1, 0.36, 1) both;
   transition: transform 0.22s ease;
@@ -271,8 +257,6 @@
   transform: scale(1.35);
 }
 
-/* --- Bars ---
-   Each bar grows out of the axis, staggered left to right. */
 .bars-wrap {
   animation: cs-fade-in 0.35s ease both;
   perspective: 1000px;
@@ -320,8 +304,6 @@
   transform: scale(1.12);
 }
 
-/* --- Line ---
-   The path draws itself left to right via a dash offset. */
 .line-wrap {
   animation: cs-fade-in 0.4s ease both;
 }
@@ -357,7 +339,6 @@
     animation: none;
   }
 
-  /* The drawn path must be fully visible when motion is off. */
   .line-path {
     stroke-dasharray: none;
     stroke-dashoffset: 0;

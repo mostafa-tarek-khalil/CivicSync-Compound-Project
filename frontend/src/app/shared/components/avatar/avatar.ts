@@ -3,14 +3,6 @@ import { Component, Input } from '@angular/core';
 
 import { resolveUploadUrl } from '../../../../environments/environment';
 
-/**
- * One avatar for the whole app.
- *
- * Renders the uploaded profile picture when there is one and falls back to the
- * user's initials otherwise, so Topbar, Profile and Chat never disagree about
- * what a given user looks like. `profileImage` may be a bare `/uploads/...`
- * path from the API or an absolute URL; both are handled.
- */
 @Component({
   selector: 'app-avatar',
   standalone: true,
@@ -59,7 +51,6 @@ export class AvatarComponent {
 
   @Input() size: 'sm' | 'md' | 'lg' | 'xl' = 'md';
 
-  /** Set to true when the stored URL 404s, so we fall back to initials. */
   private imageFailed = false;
 
   get imageUrl(): string {

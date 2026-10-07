@@ -1,8 +1,4 @@
-/* =========================================================
-   Shared admin section styling.
-   Every admin screen imports this so the console stays visually
-   consistent instead of each page inventing its own look.
-   ========================================================= */
+
 
 :host {
   display: block;
@@ -36,13 +32,6 @@
   background: #f8f9ff;
   min-height: 100vh;
 }
-
-
-/* =========================
-   MOTION
-   Keyframes live in the global stylesheet; this section only wires
-   them onto the shared admin surfaces so every admin screen animates.
-========================= */
 
 .section-header {
   display: flex;
@@ -86,7 +75,6 @@
   animation: cs-pop-in 0.45s cubic-bezier(0.22, 1, 0.36, 1) 0.1s both;
 }
 
-/* FILTERS */
 .filters {
   display: flex;
   flex-wrap: wrap;
@@ -139,7 +127,6 @@
   transform: translateY(0) scale(0.98);
 }
 
-/* PANEL + TABLE */
 .panel {
   background: var(--surface);
   border: 1px solid var(--border);
@@ -186,7 +173,6 @@
   transition: background-color 0.2s ease;
 }
 
-/* Rows cascade down the table instead of all landing at once. */
 .admin-table tbody tr:nth-child(1) { animation-delay: 0.2s; }
 .admin-table tbody tr:nth-child(2) { animation-delay: 0.25s; }
 .admin-table tbody tr:nth-child(3) { animation-delay: 0.3s; }
@@ -213,7 +199,6 @@
   overflow-x: auto;
 }
 
-/* BADGES */
 .status-badge {
   display: inline-block;
   font-size: 10px;
@@ -243,7 +228,6 @@
   background: var(--orange-soft);
 }
 
-/* A resident's payment claim is actionable — flag the tile so it stands out. */
 .tile-alert {
   border-color: var(--orange);
   background: var(--orange-soft);
@@ -268,7 +252,6 @@
   background: var(--border-soft);
 }
 
-/* ACTIONS */
 .row-actions {
   display: flex;
   gap: 7px;
@@ -313,7 +296,6 @@
   color: var(--red);
 }
 
-/* STATE */
 .loading,
 .table-empty {
   display: flex;
@@ -360,14 +342,12 @@
   color: var(--text-light);
 }
 
-/* SUMMARY TILES (used by overview-style sections) */
 .tiles {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
   gap: 14px;
   margin-bottom: 22px;
 
-  /* Gives the tilted tiles real depth instead of a flat skew. */
   perspective: 1000px;
 }
 
@@ -378,7 +358,6 @@
   padding: 17px 19px;
   box-shadow: var(--shadow-sm);
 
-  /* Real 3D tilt — the parent grid supplies the perspective below. */
   transform-style: preserve-3d;
   animation: cs-pop-in 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
   transition: transform 0.38s cubic-bezier(0.22, 1, 0.36, 1),
@@ -414,7 +393,6 @@
   color: var(--text-light);
 }
 
-/* Reduced motion — switch off the decorative layer for admin screens. */
 @media (prefers-reduced-motion: reduce) {
   .section-header,
   .header-count,
@@ -438,7 +416,6 @@
   }
 }
 
-/* RESPONSIVE */
 @media (max-width: 768px) {
   .admin-section {
     padding: 20px 15px 40px;
@@ -459,7 +436,6 @@
     font-size: 12px;
   }
 }
-/* ---------- Additional admin section pieces ---------- */
 
 .panel.mb {
   margin-bottom: 20px;
@@ -543,9 +519,6 @@
   color: #15803d;
   border: 1px solid rgba(22, 163, 74, 0.18);
 }
-/* =========================================================
-   MODALS (buildings / units / invoices / user edit)
-========================================================= */
 
 .modal-backdrop {
   position: fixed;
@@ -739,8 +712,6 @@
   }
 }
 
-/* ---------------- Admin dark mode ---------------- */
-
 :host-context(html.dark-mode) .admin-section {
   background: #0d1420;
   color: #e8eef6;
@@ -852,10 +823,7 @@
 
 :host-context(html.dark-mode) .table-empty span {
   color: #cbd5e1;
-}/* =========================================================
-   TICKET DETAILS MODAL
-   Wider dialog used by the admin "View" action.
-   ========================================================= */
+}
 
 .modal-wide {
   max-width: 720px;
@@ -1014,7 +982,6 @@
   font-size: 15px;
 }
 
-/* Dark mode --------------------------------------------------------------- */
 html.dark-mode .detail-block {
   background: #151f2d;
   border-color: #29394c;

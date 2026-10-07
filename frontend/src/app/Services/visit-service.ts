@@ -32,10 +32,7 @@ export interface VisitRecord {
   qrScannedAt?: string | null;
   approvedAt?: string | null;
   createdAt?: string;
-  /**
-   * Only present on the visitor-facing status endpoint, and only while the
-   * visit is chat-eligible. Required to open the visitor conversation.
-   */
+
   visitorChatToken?: string | null;
   visitorChatTokenExpiresAt?: string | null;
 }
@@ -44,7 +41,6 @@ export interface ResidentVisitorRequest extends VisitRecord {
   residentId?: { _id: string; name: string } | string | null;
 }
 
-/** Lightweight summary returned by the visitor lookup endpoint. */
 export interface VisitorRequestSummary {
   _id: string;
   visitorName: string;
@@ -83,10 +79,6 @@ export class VisitService {
     return this.http.post<{ success: boolean; data: { visitId: string; status: string } }>(`${this.apiUrl}/visitor-requests`, data);
   }
 
-  /**
-   * (Re)sends the visitor OTP. The backend returns the new expiry so the UI can
-   * count down against the real deadline instead of guessing the TTL.
-   */
   sendVisitorOtp(visitId: string): Observable<{
     success: boolean;
     data: { visitId: string; expiresAt: string; expiresInSeconds?: number };
@@ -167,13 +159,6 @@ export class VisitService {
     return this.http.patch<{ success: boolean; data: VisitRecord }>(`${this.apiUrl}/${visitId}/check-out`, {});
   }
 
-  // ---------- Resident flow ----------
-
-  /**
-   * A resident inviting a visitor directly. The backend derives the building
-   * and unit from the resident's own profile, so only the visitor details and
-   * the visit slot are sent.
-   */
   createVisit(data: {
     visitorName: string;
     visitorEmail: string;
@@ -185,7 +170,6 @@ export class VisitService {
     return this.http.post<{ success: boolean; data: VisitRecord }>(`${this.apiUrl}`, data);
   }
 
-  /** All visits the signed-in resident created (invites they issued). */
   getMyVisits(): Observable<{ success: boolean; data: VisitRecord[] }> {
     return this.http.get<{ success: boolean; data: VisitRecord[] }>(`${this.apiUrl}`);
   }

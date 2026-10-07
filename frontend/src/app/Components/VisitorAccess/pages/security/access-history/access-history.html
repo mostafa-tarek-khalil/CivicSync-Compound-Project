@@ -98,8 +98,6 @@
 
         <tbody>
 
-          <!-- Rows are hidden until the request settles so the table body is
-               never populated behind the loading placeholder. -->
           <tr *ngFor="let record of (!loading && !errorMessage) ? filteredRecords : []">
             <td>
               <strong>{{ record.visitor }}</strong>

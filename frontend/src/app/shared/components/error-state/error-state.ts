@@ -6,13 +6,7 @@ import {
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-/**
- * Shared error state.
- *
- * Rendered when an API call fails. Always offers a retry so a failed request
- * can never leave the user staring at an empty screen — and never causes the
- * page to fall back to local dummy data.
- */
+
 @Component({
   selector: 'app-error-state',
   standalone: true,

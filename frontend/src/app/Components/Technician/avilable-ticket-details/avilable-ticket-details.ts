@@ -26,28 +26,23 @@ export class TechnicianTicketDetailsComponent implements OnInit, OnDestroy {
 
   ticket: IMaintenanceTicket | null = null;
 
-  /** Offer the technician already sent for this ticket (available mode). */
+  
   existingOffer: IOffer | null = null;
 
-  /**
-   * Invoice raised for this job, when an admin has billed the closed ticket.
-   * Present in both modes so the technician can review and print the SAME
-   * receipt the admin and resident see, without touching billing endpoints they
-   * are not authorised for.
-   */
+  
   invoice: IInvoiceDetail | null = null;
 
-  /** 'available' = طلب متاح (Create Offer / Skip) | 'assigned' = شغل معين (Start / Resolve) */
+  
   mode: 'available' | 'assigned' = 'available';
 
   loading = false;
   errorMessage = '';
   isProcessing = false;
 
-  /** Last requested ticket id - used by the Try Again button. */
+  
   private currentTicketId = '';
 
-  /** Whether a ticket id is present in the URL for this screen. */
+  
   get hasTicketId(): boolean {
     return !!this.currentTicketId;
   }
@@ -95,19 +90,13 @@ export class TechnicianTicketDetailsComponent implements OnInit, OnDestroy {
 
     request.subscribe({
       next: (res) => {
-        // The two endpoints disagree on the shape: available nests the ticket
-        // under `ticket`, assigned spreads it at the top level. Reading
-        // `res.ticket` directly therefore worked for one screen and left the
-        // other blank even on a 200.
+
         this.ticket = normalizeTicketDetails(res);
         this.existingOffer = res.existingOffer ?? null;
         this.invoice = res.invoice ?? null;
         this.loading = false;
 
-        // A 2xx with no ticket means the endpoint answered in an unexpected
-        // shape. Treat it as a load failure so the user gets a retryable error
-        // instead of the "No Request Loaded" dead end, which reads as if the
-        // job had been taken away from them.
+
         if (!this.ticket) {
           this.errorMessage = 'Unable to load this job. Please try again.';
         }
@@ -124,29 +113,12 @@ export class TechnicianTicketDetailsComponent implements OnInit, OnDestroy {
     });
   }
 
-  /**
-   * Prints the invoice receipt for this job.
-   *
-   * This is the SAME `InvoiceReceipt` component the admin and resident use, fed
-   * by the invoice the assigned-ticket endpoint returns for this ticket. The
-   * global print rules hide everything except `.invoice-print-area`, so the
-   * printed sheet is the invoice alone — not the dashboard, sidebar or buttons.
-   *
-   * The technician never calls a billing endpoint: the invoice arrives with the
-   * ticket they are already authorised to see.
-   */
+  
   printInvoice(): void {
     printElement('.invoice-print-area');
   }
 
-  /**
-   * Reload the ticket after a failed request.
-   *
-   * Also serves the "no request loaded" state: if a ticket id was in the URL
-   * the reload re-fetches it, and if there was none the user is sent back to
-   * the list for their current mode rather than being stranded on an empty
-   * screen.
-   */
+  
   retry(): void {
     if (this.currentTicketId) {
       this.loadTicket(this.currentTicketId);
@@ -156,7 +128,7 @@ export class TechnicianTicketDetailsComponent implements OnInit, OnDestroy {
     this.goBack();
   }
 
-  /** طلب متاح: تجاهل الطلب وإرجاعه للطلبات المتاحة */
+  
   skipTicket(): void {
     if (!this.ticket || this.isProcessing) return;
 
@@ -187,7 +159,7 @@ export class TechnicianTicketDetailsComponent implements OnInit, OnDestroy {
       });
   }
 
-  /** شغل معين: بدء التنفيذ */
+  
   startTicket(): void {
     if (!this.ticket || this.isProcessing) return;
 
@@ -218,7 +190,7 @@ export class TechnicianTicketDetailsComponent implements OnInit, OnDestroy {
       });
   }
 
-  /** شغل معين: تسليم وإنهاء الشغل */
+  
   resolveTicket(): void {
     if (!this.ticket || this.isProcessing) return;
 
@@ -257,17 +229,12 @@ export class TechnicianTicketDetailsComponent implements OnInit, OnDestroy {
     ]);
   }
 
-  /** Absolute URL for the ticket photo (stored as a relative /uploads path). */
+  
   get attachmentUrl(): string {
     return resolveUploadUrl(this.ticket?.attachmentUrl);
   }
 
-  /**
-   * Recipient details of the job.
-   *
-   * `residentId` is populated on the technician endpoints, but the guard keeps
-   * the panel renderable even if it comes back as a bare id.
-   */
+  
   private get resident(): { name?: string; phone?: string; email?: string } | null {
     const residentId = this.ticket?.residentId;
 
@@ -290,7 +257,7 @@ export class TechnicianTicketDetailsComponent implements OnInit, OnDestroy {
     return this.resident?.email || '';
   }
 
-  /** e.g. `Building A · Unit 12 (Floor 3)` — falls back gracefully. */
+  
   get locationLabel(): string {
     const location = this.ticket?.location;
 
@@ -353,10 +320,7 @@ export class TechnicianTicketDetailsComponent implements OnInit, OnDestroy {
     return 'fa-wrench';
   }
 
-  /**
-   * Accent for a category's icon tile. Drives the `cat-*` class so each
-   * category gets its own hue instead of every tile being brand blue.
-   */
+  
   getCategoryColor(category: string): string {
     if (category === 'PLUMBING') {
       return 'cat-plumbing';

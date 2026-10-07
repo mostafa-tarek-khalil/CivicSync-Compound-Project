@@ -12,15 +12,10 @@ import { IInvoiceDetail } from '../../../shared/invoice/invoice.model';
 interface InvoiceRow extends IResidentInvoice {
   statusLabel: string;
   isOverdue: boolean;
-  /** True while this row's pay request is in flight. */
+
   paying?: boolean;
 }
 
-/**
- * Resident billing screen. Previously invoices only existed as a number on the
- * dashboard: the admin could issue them but the resident had no page to review
- * or act on them. This is that entry point.
- */
 @Component({
   selector: 'app-resident-invoices',
   standalone: true,
@@ -39,14 +34,11 @@ export class ResidentInvoices implements OnInit, OnDestroy {
   maintenanceDue = 0;
   uninvoicedMaintenanceCount = 0;
 
-  // ---------- Receipt modal ----------
   receiptOpen = false;
   receiptInvoice: IInvoiceDetail | null = null;
 
-  /** Opens the printable receipt for one of the resident's invoices. */
   openReceipt(invoice: InvoiceRow): void {
-    // The dashboard row already carries everything the receipt renders
-    // (amount, status, dates, ticket link), so there is no extra round-trip.
+
     this.receiptInvoice = invoice as unknown as IInvoiceDetail;
     this.receiptOpen = true;
     this.cdr.detectChanges();
@@ -58,15 +50,6 @@ export class ResidentInvoices implements OnInit, OnDestroy {
     this.cdr.detectChanges();
   }
 
-  /**
-   * Billing notification types that should reload this screen.
-   *
-   * NOTE: these are notification *types* carried in the payload, not socket
-   * event names. The backend emits every notification as a single
-   * `notification:new` socket event, so subscribing to `'INVOICE_PAID'` as an
-   * event name silently never fires — which is exactly why this list used to
-   * look wired up while the table stayed stale.
-   */
   private readonly REALTIME_TYPES = [
     'INVOICE_CREATED',
     'INVOICE_DUE',
@@ -75,12 +58,10 @@ export class ResidentInvoices implements OnInit, OnDestroy {
     'INVOICE_UPDATED'
   ];
 
-  /** The one socket channel the backend actually broadcasts notifications on. */
   private readonly REALTIME_CHANNEL = 'notification:new';
 
   private debounceTimer?: ReturnType<typeof setTimeout>;
 
-  /** Only reload when the incoming notification is a billing one. */
   private onRealtimeEvent = (notification: { type?: string }) => {
     if (notification?.type && !this.REALTIME_TYPES.includes(notification.type)) {
       return;
@@ -100,8 +81,6 @@ export class ResidentInvoices implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.load();
 
-    // Zoneless app: no `runOutsideAngular` needed — the listener just calls the
-    // loader and Angular schedules the render from the state change.
     this.chatSocket.connect();
     this.chatSocket.on(this.REALTIME_CHANNEL, this.onRealtimeEvent);
   }
@@ -154,12 +133,6 @@ export class ResidentInvoices implements OnInit, OnDestroy {
     });
   }
 
-  /**
-   * Total = the grand total of everything billed to the resident:
-   *  - every non-cancelled invoice, INCLUDING already PAID ones
-   *    (PENDING / OVERDUE / PAYMENT_SUBMITTED / PAID all count)
-   *  - PLUS agreed maintenance work not invoiced yet (maintenanceDue)
-   */
   private computeOutstanding(invoices: InvoiceRow[]): number {
     const invoicesTotal = invoices
       .filter(i => i.status !== 'CANCELLED')
@@ -184,14 +157,6 @@ export class ResidentInvoices implements OnInit, OnDestroy {
     };
   }
 
-  // ==================================================================
-  // PAY
-  // ==================================================================
-
-  /**
-   * A resident may claim a payment while anything is still owed. Once the
-   * claim is in (PAYMENT_SUBMITTED) the button is hidden until an admin acts.
-   */
   canPay(invoice: InvoiceRow): boolean {
     return invoice.status === 'PENDING' || invoice.status === 'OVERDUE';
   }
@@ -231,8 +196,6 @@ export class ResidentInvoices implements OnInit, OnDestroy {
                 'Payment submitted. An admin will confirm it shortly.'
             );
 
-            // Re-read the dashboard so the outstanding balance reflects the
-            // new status instead of waiting for the next realtime event.
             this.load(true);
             this.cdr.detectChanges();
           },
@@ -272,7 +235,6 @@ export class ResidentInvoices implements OnInit, OnDestroy {
     }
   }
 
-  /** Human label for the badge, e.g. PAYMENT_SUBMITTED -> "Awaiting approval". */
   statusLabel(status: string): string {
     switch (status) {
       case 'PAYMENT_SUBMITTED':

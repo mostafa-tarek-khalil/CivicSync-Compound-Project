@@ -13,10 +13,6 @@ import { ModalService } from '../../../core/services/modal.service';
 import { ChatSocket } from '../../../core/services/chat-socket';
 import { resolveUploadUrl } from '../../../../environments/environment';
 
-/**
- * Admin maintenance oversight: every ticket across the compound, so the
- * admin can monitor the resident -> technician flow operationally.
- */
 @Component({
   selector: 'app-admin-maintenance',
   standalone: true,
@@ -51,8 +47,7 @@ export class AdminMaintenance implements OnInit, OnDestroy {
         'MAINTENANCE_CREATED',
         'TICKET_ASSIGNED',
         'TICKET_STATUS_CHANGED',
-        // A technical/admin ticket change usually comes with a billing change
-        // (invoice raised on CLOSED, or cancelled), so refresh on those too.
+
         'INVOICE_CREATED',
         'INVOICE_UPDATED'
       ],
@@ -105,10 +100,6 @@ export class AdminMaintenance implements OnInit, OnDestroy {
     return this.tickets.filter(ticket => ticket.status === status).length;
   }
 
-  // ==================================================================
-  // TICKET DETAILS MODAL
-  // ==================================================================
-
   ticketModalOpen = false;
   detailsLoading = false;
   detailsError = '';
@@ -118,8 +109,7 @@ export class AdminMaintenance implements OnInit, OnDestroy {
     this.ticketModalOpen = true;
     this.detailsLoading = true;
     this.detailsError = '';
-    // Clear the previous ticket's payload so the modal cannot render a stale
-    // invoice/review while the new request is still in flight.
+
     this.details = null;
     this.activeTicketId = ticket._id;
     this.cdr.detectChanges();
@@ -140,13 +130,6 @@ export class AdminMaintenance implements OnInit, OnDestroy {
     });
   }
 
-  /**
-   * Re-read the open ticket's details when a realtime event touches it.
-   *
-   * The list refresh (`this.load()`) is deliberately NOT used here: it would
-   * leave the modal showing the invoice/review snapshot captured when it was
-   * opened, which is exactly the staleness this screen had.
-   */
   private refreshOpenTicket(): void {
     if (!this.ticketModalOpen || !this.activeTicketId) {
       return;
@@ -154,16 +137,14 @@ export class AdminMaintenance implements OnInit, OnDestroy {
 
     this.adminService.getMaintenanceTicket(this.activeTicketId).subscribe({
       next: response => {
-        // Ignore a response for a ticket the operator has since navigated away
-        // from, otherwise the modal would swap content under them.
+
         if (this.ticketModalOpen && this.activeTicketId === response.data?.ticket?._id) {
           this.details = response.data;
           this.cdr.detectChanges();
         }
       },
       error: () => {
-        // A failed background refresh must not blow away the content the
-        // operator is already reading.
+
       }
     });
   }
@@ -175,15 +156,8 @@ export class AdminMaintenance implements OnInit, OnDestroy {
     this.activeTicketId = '';
   }
 
-  /** The ticket currently rendered in the details modal, if any. */
   activeTicketId = '';
 
-  /**
-   * Opens the printable invoice receipt raised for this ticket.
-   *
-   * The modal is closed first so the admin lands on a full page rather than a
-   * receipt stacked behind a dialog.
-   */
   openInvoice(invoiceId: string): void {
     if (!invoiceId) {
       return;
@@ -213,7 +187,6 @@ export class AdminMaintenance implements OnInit, OnDestroy {
     return technician.name || 'Technician';
   }
 
-  /** e.g. `AC, PLUMBING · ★ 4.6 (12)`. */
   get technicianMeta(): string {
     const technician = this.details?.ticket.assignedTo;
 

@@ -1,19 +1,9 @@
 @import '../shared/tech-theme.css';
 
-
-/* =========================
-   PAGE
-========================= */
-
 .dashboard-page {
   min-height: 100vh;
   background-color: var(--page-bg);
 }
-
-
-/* =========================
-   HEADER
-========================= */
 
 .page-title {
   margin: 0 0 4px;
@@ -32,15 +22,9 @@
   color: var(--text-muted);
 }
 
-/* The title block and the loading / error states ride in first. */
 .dashboard-page > .mb-4 {
   animation: cs-fade-up 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
-
-
-/* =========================
-   STAT CARDS
-========================= */
 
 .stat-card {
   background: var(--surface);
@@ -66,7 +50,6 @@
     border-color 0.22s ease;
 }
 
-/* The four stat cards cascade in one after another. */
 .col-6 .stat-card {
   animation-delay: 0.08s;
 }
@@ -108,8 +91,6 @@
   transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-/* Each summary card carries its own accent, the same way the resident
-   dashboard colours Visitors / Maintenance / Completed / Paid. */
 .stat-icon.available {
   color: var(--primary);
   background: var(--primary-soft);
@@ -156,11 +137,6 @@
   line-height: 1.2;
 }
 
-
-/* =========================
-   PANELS
-========================= */
-
 .dashboard-card {
   background: var(--surface);
 
@@ -182,7 +158,6 @@
   box-shadow: var(--shadow-md);
 }
 
-/* Each card waits a beat longer than the one above it. */
 .row .dashboard-card {
   animation-delay: 0.34s;
 }
@@ -236,11 +211,6 @@
   color: var(--primary-dark);
   text-decoration: underline;
 }
-
-
-/* =========================
-   TICKET ROWS
-========================= */
 
 .ticket-row {
   display: flex;
@@ -302,8 +272,6 @@
   transform: scale(1.1);
 }
 
-/* Unclaimed work is brand blue; a job already in hand is amber. The two
-   lists sit side by side, so colour is what tells them apart at a glance. */
 .ticket-icon.available {
   color: var(--primary);
   background: var(--primary-soft);
@@ -340,11 +308,6 @@
 
   margin-top: 2px;
 }
-
-
-/* =========================
-   BADGES
-========================= */
 
 .priority,
 .status {
@@ -393,11 +356,6 @@
   background: var(--gray-soft);
 }
 
-
-/* =========================
-   BUTTONS
-========================= */
-
 .btn-primary {
   background: var(--primary) !important;
   border-color: var(--primary) !important;
@@ -423,11 +381,6 @@
 .btn-primary:active {
   transform: translateY(0) scale(0.99);
 }
-
-
-/* =========================
-   REVIEWS
-========================= */
 
 .review-row {
   display: flex;
@@ -531,11 +484,6 @@
   line-height: 1.6;
 }
 
-
-/* =========================
-   EMPTY + LOADING
-========================= */
-
 .empty-small {
   text-align: center;
 
@@ -549,11 +497,6 @@
 .spinner-border {
   color: var(--primary) !important;
 }
-
-
-/* =========================
-   STATUS BADGE COUNTERPARTS
-========================= */
 
 .status.open {
   color: var(--text-secondary);
@@ -581,9 +524,6 @@
   background: var(--cat-ac-soft);
 }
 
-
-/* Respect users who ask the OS to cut motion. */
-
 @media (prefers-reduced-motion: reduce) {
 
   .dashboard-page > .mb-4,
@@ -595,11 +535,6 @@
   }
 
 }
-
-
-/* =========================
-   RESPONSIVE
-========================= */
 
 @media (max-width: 767px) {
 

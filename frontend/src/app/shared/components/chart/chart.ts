@@ -12,15 +12,6 @@ export interface ChartPoint {
   value: number;
 }
 
-/**
- * Small dependency-free chart kit (donut + bars + line).
- *
- * Implemented with plain SVG rather than pulling in Chart.js/ApexCharts: the
- * app needs three simple, print-friendly visuals and nothing interactive, so a
- * library would add ~200 kB and a canvas lifecycle for no gain. Everything is
- * a function of the `data` inputs, so it also renders correctly in the
- * printable report.
- */
 @Component({
   selector: 'app-chart',
   standalone: true,
@@ -29,18 +20,15 @@ export interface ChartPoint {
   styleUrl: './chart.css'
 })
 export class ChartComponent implements OnChanges {
-  /** Which visual to render. */
+
   @Input() type: 'donut' | 'bars' | 'line' = 'donut';
 
-  /** Used by donut + bars. */
   @Input() slices: ChartSlice[] = [];
 
-  /** Used by the line chart. */
   @Input() points: ChartPoint[] = [];
 
   @Input() height = 220;
 
-  /** Donut geometry, recomputed whenever the data changes. */
   donutSegments: { color: string; dash: string; offset: number }[] = [];
 
   donutTotal = 0;
@@ -62,12 +50,10 @@ export class ChartComponent implements OnChanges {
     return Math.max(1, ...values);
   }
 
-  /** Bar height as a percentage of the tallest bar. */
   barHeight(value: number): number {
     return Math.round((value / this.maxValue) * 100);
   }
 
-  /** SVG polyline path for the line chart. */
   get linePath(): string {
     if (this.points.length === 0) {
       return '';
@@ -93,10 +79,6 @@ export class ChartComponent implements OnChanges {
     this.buildDonut();
   }
 
-  /**
-   * Convert absolute values into stroke-dasharray segments on a 100-unit
-   * circumference circle, so the donut needs no trigonometry.
-   */
   private buildDonut(): void {
     const total = this.slices.reduce((sum, slice) => sum + slice.value, 0);
 
@@ -107,8 +89,6 @@ export class ChartComponent implements OnChanges {
       return;
     }
 
-    // Stroke-dasharray pattern: `<filled> <gap>` where the gap is always the
-    // full remaining circumference (100 - filled).
     this.donutSegments = this.slices
       .filter(slice => slice.value > 0)
       .map(slice => {
@@ -121,7 +101,6 @@ export class ChartComponent implements OnChanges {
         };
       });
 
-    // Each ring is rotated so it starts where the previous one ended.
     let running = 0;
 
     this.donutSegments = this.donutSegments.map(segment => {

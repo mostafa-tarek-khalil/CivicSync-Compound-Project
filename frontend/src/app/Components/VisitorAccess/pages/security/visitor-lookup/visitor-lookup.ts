@@ -42,7 +42,7 @@ export class VisitorLookup {
     private visitorFlow: VisitorFlow,
     private cdr: ChangeDetectorRef
   ) {
-    // Pre-fill with the email of a saved in-progress visit, if any.
+
     const saved = this.visitorFlow.getVisit();
     if (saved.visitorEmail) {
       this.email = saved.visitorEmail;
@@ -103,7 +103,7 @@ export class VisitorLookup {
   }
 
   open(row: LookupRow): void {
-    // Track the real backend status code — no local re-interpretation.
+
     this.visitorFlow.trackVisit({
       requestId: row.id,
       visitorEmail: row.email,
@@ -118,8 +118,6 @@ export class VisitorLookup {
       status: row.statusCode
     });
 
-    // A visit that is already approved (e.g. a resident invite, or an approved
-    // request) goes straight to the QR pass — there is no OTP step left to do.
     if (row.statusCode === 'APPROVED' || row.statusCode === 'QR_GENERATED') {
       this.router.navigate(['/qr-code-display']);
       return;

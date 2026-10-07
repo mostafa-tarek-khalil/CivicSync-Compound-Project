@@ -94,11 +94,7 @@
   .invoice-print-page {
     padding: 1rem;
   }
-}/* =========================================================
-   MOTION LAYER
-   Keyframes are global (styles.css); this only wires them onto the
-   classes this page uses.
-   ========================================================= */
+}
 
 .page-head {
   animation: cs-fade-up 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
@@ -112,8 +108,6 @@
   animation: cs-pop-in 0.45s cubic-bezier(0.22, 1, 0.36, 1) 0.08s both;
 }
 
-/* The receipt itself gets a 3D lift so it reads as the single object on
-   the page rather than another flat panel. */
 .invoice-print-area {
   transform-style: preserve-3d;
   animation: cs-fade-up 0.55s cubic-bezier(0.22, 1, 0.36, 1) 0.14s both;
@@ -146,7 +140,6 @@
   transform: translateY(0) scale(0.97);
 }
 
-/* Printing must never animate — force the static, final state. */
 @media print {
   .page-head,
   .eyebrow,

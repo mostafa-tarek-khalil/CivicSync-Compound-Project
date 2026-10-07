@@ -6,10 +6,6 @@ import { ModalService } from '../../../core/services/modal.service';
 import { RealtimeRefresh } from '../../../core/utils/realtime-refresh';
 import { ChatSocket } from '../../../core/services/chat-socket';
 
-/**
- * Admin user management: every account, with the approval queue that was
- * previously only reachable from the overview card.
- */
 @Component({
   selector: 'app-admin-users',
   standalone: true,
@@ -28,15 +24,10 @@ export class AdminUsers implements OnInit, OnDestroy {
   roleFilter = '';
   search = '';
 
-  // ---------- Edit user modal ----------
   userModalOpen = false;
   savingUser = false;
   editingUserId = '';
-  /**
-   * Only email + phone are editable here. The display name belongs to the
-   * user's own profile page, so it is shown read-only rather than hidden, and
-   * it is never sent to the API.
-   */
+
   userForm = { name: '', email: '', phone: '' };
 
   readonly statuses = ['', 'PENDING', 'ACTIVE', 'REJECTED'];
@@ -50,8 +41,7 @@ export class AdminUsers implements OnInit, OnDestroy {
     private chatSocket: ChatSocket,
     private cdr: ChangeDetectorRef
   ) {
-    // New sign-ups and approvals elsewhere in the console should land here
-    // without the admin having to touch the filter bar.
+
     this.realtime = new RealtimeRefresh(
       this.chatSocket,
       ['ACCOUNT_APPROVED'],
@@ -68,13 +58,6 @@ export class AdminUsers implements OnInit, OnDestroy {
     this.realtime.stop();
   }
 
-  /**
-   * Query params as the API expects them.
-   *
-   * Any value that means "no filter" (blank, or the literal `ALL` some
-   * dropdowns carry) is dropped entirely rather than sent — sending
-   * `status=ALL` used to match zero rows and blank out the table.
-   */
   private get filterParams(): { status?: string; role?: string; search?: string } {
     const params: { status?: string; role?: string; search?: string } = {};
 
@@ -152,10 +135,6 @@ export class AdminUsers implements OnInit, OnDestroy {
     });
   }
 
-  // ==================================================================
-  // EDIT USER (email / phone only)
-  // ==================================================================
-
   openEditUser(user: AdminUser): void {
     this.editingUserId = user._id;
     this.userForm = {
@@ -181,8 +160,6 @@ export class AdminUsers implements OnInit, OnDestroy {
     this.savingUser = true;
     this.errorMessage = '';
 
-    // `name` is deliberately omitted: the admin console cannot rename an
-    // account, and the backend ignores it anyway.
     this.adminService
       .updateUser(this.editingUserId, {
         email: this.userForm.email.trim(),

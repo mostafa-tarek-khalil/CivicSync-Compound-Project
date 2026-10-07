@@ -1,6 +1,6 @@
 <div class="profile-page">
 
-  <!-- HEADER -->
+
   <header class="page-header">
     <button class="back-btn" type="button" (click)="goHome()">
       <span class="material-symbols-outlined">arrow_back</span>
@@ -14,23 +14,23 @@
     </div>
   </header>
 
-  <!-- LOADING -->
+
   <div class="state-box" *ngIf="loading">
     <span class="material-symbols-outlined spinning">hourglass_top</span>
     <p>Loading your profile…</p>
   </div>
 
-  <!-- ERROR (initial load) -->
+
   <div class="state-box error" *ngIf="!loading && !profile && errorMessage">
     <span class="material-symbols-outlined">error</span>
     <p>{{ errorMessage }}</p>
     <button class="retry-btn" type="button" (click)="loadProfile()">Retry</button>
   </div>
 
-  <!-- CONTENT -->
+
   <div class="profile-grid" *ngIf="!loading && profile">
 
-    <!-- IDENTITY CARD -->
+
     <section class="card identity-card">
       <div class="avatar-upload">
         <app-avatar
@@ -95,7 +95,7 @@
       </div>
     </section>
 
-    <!-- EDIT CARD -->
+
     <section class="card edit-card">
       <div class="card-heading">
         <span class="material-symbols-outlined">edit</span>
@@ -153,7 +153,7 @@
       </div>
     </section>
 
-    <!-- PASSWORD CARD -->
+
     <section class="card password-card">
       <div class="card-heading">
         <span class="material-symbols-outlined">lock_reset</span>

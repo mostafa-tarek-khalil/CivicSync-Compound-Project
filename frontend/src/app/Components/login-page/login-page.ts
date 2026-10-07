@@ -59,7 +59,7 @@ export class LoginPage {
     }
 
     this.loading = true;
-    // Paint the spinner before the request starts.
+
     this.cdr.markForCheck();
 
     this.authService
@@ -69,9 +69,7 @@ export class LoginPage {
       )
       .pipe(
         timeout(9000),
-        // `finalize` is the single place the spinner is cleared, so a success,
-        // an HTTP error and a timeout all release the button immediately even
-        // though this app runs zoneless and never patches the callback queue.
+
         finalize(() => {
           this.loading = false;
           this.cdr.markForCheck();

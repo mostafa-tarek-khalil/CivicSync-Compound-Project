@@ -599,9 +599,6 @@
     font-size: 10px;
   }
 }
-/* =========================================================
-   DARK MODE
-========================================================= */
 
 :host-context(html.dark-mode) .register-page {
   background: #0d1420;
@@ -680,11 +677,6 @@
 :host-context(html.dark-mode) .role-content span {
   color: #94a3b8;
 }
-/* =========================================================
-   MOTION LAYER
-   Keyframes are global (styles.css); this only wires them onto the
-   classes this page uses.
-   ========================================================= */
 
 .background-shape {
   animation: cs-reg-drift 16s ease-in-out infinite;
@@ -709,7 +701,6 @@
   }
 }
 
-/* Split layout: showcase enters left, form card enters right. */
 .register-showcase {
   animation: cs-slide-in-left 0.65s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
@@ -727,7 +718,6 @@
   animation: cs-pop-in 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.2s both;
 }
 
-/* Progress steps light up one after another. */
 .step {
   animation: cs-slide-in-left 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
@@ -786,7 +776,6 @@
   }
 }
 
-/* Role cards are the choice on this screen — they pop in and tilt. */
 .role-list {
   perspective: 1200px;
 }

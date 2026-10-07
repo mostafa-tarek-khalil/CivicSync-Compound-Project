@@ -67,7 +67,7 @@ export class CreateOfferComponent implements OnInit {
     });
   }
 
-  // Alias في حال استدعائها بأي من الاسمين
+
   submitOffer(): void {
     this.createOffer();
   }

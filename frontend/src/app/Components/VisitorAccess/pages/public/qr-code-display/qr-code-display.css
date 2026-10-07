@@ -3,10 +3,6 @@
   min-height: 100%;
 }
 
-/* =========================
-   PAGE
-========================= */
-
 .qr-page {
   position: relative;
 
@@ -31,10 +27,6 @@
   color: #12233f;
   font-family: 'Inter', sans-serif;
 }
-
-/* =========================
-   AMBIENT
-========================= */
 
 .ambient {
   position: absolute;
@@ -63,10 +55,6 @@
   background: rgba(31, 70, 120, 0.07);
   filter: blur(2px);
 }
-
-/* =========================
-   HEADER
-========================= */
 
 .page-header {
   position: relative;
@@ -184,10 +172,6 @@
   font-weight: 800;
 }
 
-/* =========================
-   MAIN
-========================= */
-
 .qr-layout {
   position: relative;
   z-index: 2;
@@ -204,10 +188,6 @@
   gap: 28px;
   align-items: stretch;
 }
-
-/* =========================
-   PASS
-========================= */
 
 .pass-card {
   position: relative;
@@ -247,10 +227,6 @@
 
   pointer-events: none;
 }
-
-/* =========================
-   PASS TOP
-========================= */
 
 .pass-top {
   position: relative;
@@ -349,10 +325,6 @@
   font-family: 'Manrope', sans-serif;
   font-size: 13px;
 }
-
-/* =========================
-   QR
-========================= */
 
 .qr-section {
   position: relative;
@@ -460,10 +432,6 @@
   font-size: 15px;
 }
 
-/* =========================
-   VISITOR
-========================= */
-
 .visitor-preview {
   display: flex;
   align-items: center;
@@ -545,10 +513,6 @@
   letter-spacing: normal;
 }
 
-/* =========================
-   DIVIDER
-========================= */
-
 .ticket-divider {
   display: flex;
   align-items: center;
@@ -571,10 +535,6 @@
   flex: 1;
   border-top: 1px dashed #d8e0ea;
 }
-
-/* =========================
-   INFO GRID
-========================= */
 
 .visit-grid {
   display: grid;
@@ -628,10 +588,6 @@
   line-height: 1.4;
 }
 
-/* =========================
-   DETAILS PANEL
-========================= */
-
 .details-panel {
   min-width: 0;
 
@@ -668,10 +624,6 @@
   font-size: 13px;
   line-height: 1.6;
 }
-
-/* =========================
-   STATUS
-========================= */
 
 .status-card {
   display: flex;
@@ -726,10 +678,6 @@
   font-size: 11px;
 }
 
-/* =========================
-   PURPOSE
-========================= */
-
 .detail-card {
   display: flex;
   align-items: center;
@@ -772,10 +720,6 @@
 
   font-size: 13px;
 }
-
-/* =========================
-   EXPIRATION
-========================= */
 
 .expiration-card {
   margin-top: 14px;
@@ -853,10 +797,6 @@
   font-size: 10px;
   line-height: 1.5;
 }
-
-/* =========================
-   BUTTONS
-========================= */
 
 .status-button {
   width: 100%;
@@ -938,10 +878,6 @@
   border-color: #cbd7e4;
 }
 
-/* =========================
-   DARK MODE
-========================= */
-
 :host-context(html.dark-mode) .qr-page {
   background:
     radial-gradient(
@@ -996,10 +932,6 @@
   color: #67c59a;
 }
 
-/* =========================
-   DARK PASS
-========================= */
-
 :host-context(html.dark-mode) .pass-card {
   border-color: #26364d;
 
@@ -1039,10 +971,6 @@
   color: #cbd7e6;
 }
 
-/* =========================
-   DARK QR
-========================= */
-
 :host-context(html.dark-mode) .qr-glow {
   background: rgba(64, 126, 194, 0.13);
 }
@@ -1064,10 +992,6 @@
   background: #182b47;
   color: #78a8e8;
 }
-
-/* =========================
-   DARK VISITOR
-========================= */
 
 :host-context(html.dark-mode) .visitor-preview {
   border-color: #29394f;
@@ -1100,10 +1024,6 @@
   color: #8c9aae;
 }
 
-/* =========================
-   DARK INFO
-========================= */
-
 :host-context(html.dark-mode) .ticket-divider span {
   background: #34445a;
 }
@@ -1121,10 +1041,6 @@
   color: #cbd7e6;
 }
 
-/* =========================
-   DARK DETAILS
-========================= */
-
 :host-context(html.dark-mode) .details-panel {
   border-color: #26364d;
   background: rgba(17, 29, 48, 0.92);
@@ -1140,10 +1056,6 @@
 :host-context(html.dark-mode) .details-heading p {
   color: #94a2b8;
 }
-
-/* =========================
-   DARK STATUS
-========================= */
 
 :host-context(html.dark-mode) .status-card {
   border-color: #28553f;
@@ -1163,10 +1075,6 @@
   color: #8aaa9a;
 }
 
-/* =========================
-   DARK PURPOSE
-========================= */
-
 :host-context(html.dark-mode) .detail-card {
   border-color: #29394f;
   background: #162337;
@@ -1180,10 +1088,6 @@
 :host-context(html.dark-mode) .detail-card strong {
   color: #cbd7e6;
 }
-
-/* =========================
-   DARK EXPIRATION
-========================= */
 
 :host-context(html.dark-mode) .expiration-card {
   border-color: #29394f;
@@ -1216,10 +1120,6 @@
   color: #7f8ea3;
 }
 
-/* =========================
-   DARK BUTTONS
-========================= */
-
 :host-context(html.dark-mode) .status-button {
   background: #182f4d;
 }
@@ -1238,10 +1138,6 @@
   background: #182437;
   border-color: #3a4c65;
 }
-
-/* =========================
-   RESPONSIVE
-========================= */
 
 @media (max-width: 1000px) {
   .qr-layout {
@@ -1307,11 +1203,6 @@
   }
 }
 
-/* =========================
-   MATERIAL SYMBOL ICON SIZING
-   (icon containers use the Material Symbols font instead of glyphs)
-========================= */
-
 .info-icon .material-symbols-outlined {
   font-size: 19px;
 }
@@ -1348,14 +1239,8 @@
   height: auto;
   display: block;
   margin: 0 auto;
-}/* =========================================================
-   QR PASS — IMAGE HARDENING + SCHEDULED NOTICE
-   ========================================================= */
+}
 
-/* The QR is a base64 data-URL rendered at a fixed intrinsic size. Pinning the
-   box prevents a broken-image icon from collapsing the layout while the
-   image decodes, and `image-rendering: pixelated` keeps the modules crisp
-   when the browser upscales it on a high-DPI screen. */
 .qr-image {
   display: block;
   width: 100%;
@@ -1411,11 +1296,7 @@ html.dark-mode .qr-scheduled p {
 
 html.dark-mode .qr-scheduled small {
   color: #7fb0e8;
-}/* =========================================================
-   MOTION LAYER
-   Keyframes are global (styles.css); this only wires them onto the
-   classes this page uses.
-   ========================================================= */
+}
 
 .page-header {
   animation: cs-fade-up 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
@@ -1425,7 +1306,6 @@ html.dark-mode .qr-scheduled small {
   animation: cs-fade-in 0.45s ease 0.06s both;
 }
 
-/* The QR card is the focus of this page — it lifts toward the visitor. */
 .qr-card,
 .qr-shell,
 .card,

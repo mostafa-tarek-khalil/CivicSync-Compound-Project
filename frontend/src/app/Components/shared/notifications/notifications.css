@@ -11,8 +11,6 @@
   font-family: Arial, sans-serif;
 }
 
-/* ================= HEADER ================= */
-
 .page-header {
   display: flex;
   justify-content: space-between;
@@ -43,8 +41,6 @@
   font-size: 16px;
 }
 
-/* ================= BUTTON ================= */
-
 .mark-all-btn {
   border: none;
   border-radius: 8px;
@@ -61,8 +57,6 @@
   background: #123d78;
   transform: translateY(-1px);
 }
-
-/* ================= SUMMARY ================= */
 
 .summary-grid {
   display: grid;
@@ -115,8 +109,6 @@
   font-size: 32px;
 }
 
-/* ================= FILTER ================= */
-
 .filter-bar {
   display: flex;
   justify-content: space-between;
@@ -162,8 +154,6 @@
   font-weight: 700;
 }
 
-/* ================= NOTIFICATIONS ================= */
-
 .notification-list {
   display: flex;
   flex-direction: column;
@@ -187,14 +177,10 @@
   box-shadow: 0 7px 20px rgba(20, 40, 70, 0.08);
 }
 
-/* Unread */
-
 .notification-card.unread {
   border-left: 4px solid #3159b5;
   background: #ffffff;
 }
-
-/* Read */
 
 .notification-card.read {
   opacity: 0.68;
@@ -218,8 +204,6 @@
   color: #71829a;
 }
 
-/* ================= ICON ================= */
-
 .notification-icon {
   width: 55px;
   height: 55px;
@@ -232,8 +216,6 @@
   color: #3159b5;
   font-size: 23px;
 }
-
-/* ================= CONTENT ================= */
 
 .notification-content {
   flex: 1;
@@ -283,8 +265,6 @@
   border-radius: 50%;
 }
 
-/* ================= EMPTY ================= */
-
 .empty-state {
   padding: 70px 20px;
   text-align: center;
@@ -306,8 +286,6 @@
   margin: 0;
   color: #75859c;
 }
-
-/* ================= DARK MODE ================= */
 
 :host-context(html.dark-mode) .notifications-page {
   background: #0f172a;
@@ -414,8 +392,6 @@
   background: #223149;
 }
 
-/* ================= RESPONSIVE ================= */
-
 @media (max-width: 900px) {
   .summary-grid {
     grid-template-columns: 1fr;
@@ -455,11 +431,6 @@
     align-items: flex-start;
   }
 }
-
-
-/* =========================================================
-   BACK BUTTON
-========================================================= */
 
 .back-btn {
   display: inline-flex;
@@ -505,11 +476,7 @@
 
 .material-symbols-outlined {
   font-size: 24px;
-}/* =========================================================
-   MOTION LAYER
-   Keyframes are global (styles.css); this only wires them onto the
-   classes this page uses.
-   ========================================================= */
+}
 
 .page-header {
   animation: cs-fade-up 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
@@ -534,7 +501,6 @@
   transform: translateY(0) scale(0.97);
 }
 
-/* Notification rows slide in, staggered down the list. */
 .notification-item,
 .notification-row,
 .notification-card {
@@ -581,7 +547,6 @@
   transform: translateX(3px);
 }
 
-/* The unread dot pulses to catch the eye. */
 .unread-dot,
 .notification-dot {
   animation: cs-unread-pulse 2.4s ease-in-out infinite;
@@ -598,7 +563,6 @@
   }
 }
 
-/* Filter tabs / chips. */
 .tabs,
 .filters,
 .notification-filters {

@@ -5,7 +5,6 @@ import { HttpTestingController, provideHttpClientTesting } from '@angular/common
 import { provideRouter } from '@angular/router';
 import { CheckInOut } from './check-in-out';
 
-/** Blank route target so component navigations resolve during tests. */
 @Component({ selector: 'app-test-blank', template: '' })
 class TestBlankComponent {}
 
@@ -37,8 +36,6 @@ describe('CheckInOut', () => {
     expect(component.pickerMode).toBe(true);
     expect(component.visitId).toBe('');
 
-    // The picker loads the security visit list rather than bouncing the user
-    // back to the visitor list.
     const req = httpMock.expectOne('http://localhost:3000/api/visits/security/visits');
     req.flush({
       success: true,
@@ -50,7 +47,6 @@ describe('CheckInOut', () => {
       ],
     });
 
-    // Only the actionable visits survive: APPROVED -> check in, CHECKED_IN -> check out.
     expect(component.candidates.map(c => c.id)).toEqual(['v1', 'v2']);
     expect(component.candidates.map(c => c.action)).toEqual(['in', 'out']);
   });

@@ -8,19 +8,9 @@ import { OtpVerification } from './otp-verification';
 import { VisitorFlow } from '../../../services/visitor-flow';
 import { VisitService } from '../../../../../Services/visit-service';
 
-/** Blank route target so the component's redirect resolves during tests. */
 @Component({ selector: 'app-test-blank', template: '' })
 class TestBlankComponent {}
 
-/**
- * Focused tests for the OTP screen's behaviour.
- *
- * They cover the things a browser pass cannot prove reliably: that the
- * processing phase is really entered (it used to be skipped entirely when the
- * API answered quickly), that the visible outcome mirrors the real API result,
- * that paste / arrow keys work, and that the guard only redirects when there is
- * genuinely no tracked visit.
- */
 describe('OtpVerification', () => {
   let visitServiceMock: {
     verifyVisitorOtp: ReturnType<typeof vi.fn>;
@@ -37,9 +27,7 @@ describe('OtpVerification', () => {
 
   const create = async () => {
     const fixture = TestBed.createComponent(OtpVerification);
-    // Zoneless component: the DOM is not required. Creating the instance runs
-    // the constructor (and its guard) without forcing a render pass, which would
-    // assert under zoneless change detection.
+
     return fixture.componentInstance;
   };
 
@@ -77,8 +65,6 @@ describe('OtpVerification', () => {
     document.body.innerHTML = '';
   });
 
-  // ---------------------------------------------------------------- guard
-
   it('redirects when no visit is tracked, and does not when there is one', async () => {
     const router = TestBed.inject(Router);
     const navigate = vi.spyOn(router, 'navigate').mockResolvedValue(true);
@@ -100,8 +86,6 @@ describe('OtpVerification', () => {
     expect(component.expiryLabel).toMatch(/^\d+:\d{2}$/);
     expect(component.isExpired).toBe(false);
   });
-
-  // ------------------------------------------------------------ input UX
 
   describe('inputs', () => {
     beforeEach(() => {
@@ -200,7 +184,6 @@ describe('OtpVerification', () => {
       seedVisit();
       const component = await create();
 
-      // A filled box is emptied in place...
       component.otp[3] = '5';
       component.onKeyDown(
         { key: 'Backspace', target: { value: '5' }, preventDefault: vi.fn() } as unknown as KeyboardEvent,
@@ -208,7 +191,6 @@ describe('OtpVerification', () => {
       );
       expect(component.otp[3]).toBe('');
 
-      // ...and an empty box clears the previous digit.
       component.otp[2] = '4';
       const preventDefault = vi.fn();
       component.onKeyDown(
@@ -219,8 +201,6 @@ describe('OtpVerification', () => {
       expect(preventDefault).toHaveBeenCalled();
     });
   });
-
-  // --------------------------------------------------------- verification
 
   describe('verification', () => {
     beforeEach(() => {
@@ -305,8 +285,6 @@ describe('OtpVerification', () => {
       expect(visitServiceMock.verifyVisitorOtp).not.toHaveBeenCalled();
     });
   });
-
-  // --------------------------------------------------------------- resend
 
   describe('resend', () => {
     beforeEach(() => {

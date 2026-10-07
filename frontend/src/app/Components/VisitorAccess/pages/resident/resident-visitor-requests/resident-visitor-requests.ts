@@ -35,7 +35,6 @@ export class ResidentVisitorRequests implements OnInit, OnDestroy {
   successMessage = '';
   private actioningId: string | null = null;
 
-  /** Keep the list in sync when security checks a visitor in/out. */
   private readonly REALTIME_EVENTS = ['notification:new', 'visit:updated'];
   private debounceTimer?: ReturnType<typeof setTimeout>;
   private onRealtimeEvent = () => this.scheduleReload();
@@ -117,7 +116,6 @@ export class ResidentVisitorRequests implements OnInit, OnDestroy {
     };
   }
 
-  /** Distinguishes a visit the resident invited from one a visitor requested. */
   private sourceLabel(source: string): string {
     return source === 'RESIDENT_INVITE' ? 'You invited' : 'Requested';
   }
@@ -158,16 +156,10 @@ export class ResidentVisitorRequests implements OnInit, OnDestroy {
     this.act(request, () => this.visitService.rejectVisitorRequest(request.id), 'Visitor request rejected.');
   }
 
-  /** A QR pass can be viewed once the visit has been approved. */
   canViewQr(request: ResidentRequestRow): boolean {
     return request.status === 'APPROVED' || request.status === 'QR_GENERATED';
   }
 
-  /**
-   * Open the QR pass page for this visitor. The visitor-facing QR endpoint is
-   * keyed by (visitId, visitorEmail), so we forward the email the resident
-   * already sees on the card.
-   */
   viewQrPass(request: ResidentRequestRow): void {
     this.router.navigate(['/qr-code-display'], {
       queryParams: {
@@ -192,11 +184,7 @@ export class ResidentVisitorRequests implements OnInit, OnDestroy {
       next: response => {
         this.actioningId = null;
         this.successMessage = successText;
-        // Reflect the real status returned by the backend (approving
-        // immediately moves the visit to QR_GENERATED) instead of guessing
-        // it locally, then refresh the whole list so every row - including
-        // ones security may have already acted on in the meantime - is
-        // in sync with the server.
+
         const realStatus = response?.data?.status as ResidentRequestRow['status'] | undefined;
         if (realStatus) {
           request.status = realStatus;

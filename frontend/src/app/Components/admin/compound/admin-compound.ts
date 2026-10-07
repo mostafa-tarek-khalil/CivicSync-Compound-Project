@@ -53,23 +53,18 @@ export class AdminCompound implements OnInit {
 
   readonly unitTypes = [
     'APARTMENT',
-    'DUPLEX',
-    'STUDIO',
-    'OFFICE',
-    'SHOP'
+    'VILLA'
   ];
 
   readonly unitStatuses = [
     'VACANT',
-    'OCCUPIED',
-    'MAINTENANCE'
+    'OCCUPIED'
   ];
 
   readonly unitStatusFilters = [
     '',
     'VACANT',
-    'OCCUPIED',
-    'MAINTENANCE'
+    'OCCUPIED'
   ];
 
   constructor(
@@ -398,9 +393,6 @@ export class AdminCompound implements OnInit {
     switch (status) {
       case 'OCCUPIED':
         return 'status-active';
-
-      case 'MAINTENANCE':
-        return 'status-pending';
 
       default:
         return 'status-vacant';

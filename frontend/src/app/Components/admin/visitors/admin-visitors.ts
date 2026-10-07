@@ -6,10 +6,6 @@ import { buildFilters } from '../../../core/utils/filters';
 import { RealtimeRefresh } from '../../../core/utils/realtime-refresh';
 import { ChatSocket } from '../../../core/services/chat-socket';
 
-/**
- * Admin visitor oversight: a compound-wide view of all visits, complementing
- * the resident approval list and the security gate operations.
- */
 @Component({
   selector: 'app-admin-visitors',
   standalone: true,

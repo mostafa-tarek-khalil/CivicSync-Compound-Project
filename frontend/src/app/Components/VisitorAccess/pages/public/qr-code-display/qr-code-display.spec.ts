@@ -5,7 +5,6 @@ import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { provideRouter } from '@angular/router';
 import { QrCodeDisplay } from './qr-code-display';
 
-/** Blank route target so component navigations resolve during tests. */
 @Component({ selector: 'app-test-blank', template: '' })
 class TestBlankComponent {}
 

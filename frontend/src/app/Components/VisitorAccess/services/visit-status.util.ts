@@ -1,9 +1,5 @@
 import { VisitRecord } from '../../../Services/visit-service';
 
-/**
- * View-facing status labels used across the security screens.
- * They are intentionally coarser than the backend state machine.
- */
 export type SecurityViewStatus =
   | 'Pending'
   | 'Approved'
@@ -12,7 +8,6 @@ export type SecurityViewStatus =
   | 'Rejected'
   | 'Expired';
 
-/** Map a backend visit status to the label the security UI understands. */
 export function toSecurityStatus(status: string): SecurityViewStatus {
   switch (status) {
     case 'QR_GENERATED':
@@ -34,12 +29,10 @@ export function toSecurityStatus(status: string): SecurityViewStatus {
   }
 }
 
-/** True when a visit row should be considered part of the access history. */
 export function isHistoricalVisit(visit: VisitRecord): boolean {
   return visit.status === 'CHECKED_IN' || visit.status === 'CHECKED_OUT' || visit.status === 'EXPIRED';
 }
 
-/** True when the visit is scheduled for the given day (defaults to today). */
 export function isVisitOnDay(visit: VisitRecord, day: Date = new Date()): boolean {
   if (!visit.visitDate) {
     return false;
@@ -55,7 +48,6 @@ export function isVisitOnDay(visit: VisitRecord, day: Date = new Date()): boolea
   );
 }
 
-/** Format an ISO date + HH:mm start time for the `security-visits` cards. */
 export function splitStartTime(visitStartTime: string): { time: string; period: string } {
   const match = /^([01]\d|2[0-3]):([0-5]\d)/.exec(visitStartTime || '');
   if (!match) {
@@ -69,7 +61,6 @@ export function splitStartTime(visitStartTime: string): { time: string; period: 
   return { time: `${String(hours12).padStart(2, '0')}:${minutes}`, period };
 }
 
-/** Human readable date, e.g. "September 22, 2026". */
 export function formatDate(value?: string | null): string {
   if (!value) {
     return '-';
@@ -81,7 +72,6 @@ export function formatDate(value?: string | null): string {
   return date.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
 }
 
-/** Human readable time (hour:minute AM/PM) from an ISO timestamp. */
 export function formatTime(value?: string | null): string {
   if (!value) {
     return '-';

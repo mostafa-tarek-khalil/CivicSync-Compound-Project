@@ -1,19 +1,9 @@
 @import '../shared/tech-theme.css';
 
-
-/* =========================
-   PAGE
-========================= */
-
 .assigned-page {
   min-height: 100vh;
   background-color: var(--page-bg);
 }
-
-
-/* =========================
-   HEADER
-========================= */
 
 .page-header {
   display: flex;
@@ -41,11 +31,6 @@
   color: var(--text-muted);
 }
 
-
-/* =========================
-   COUNT
-========================= */
-
 .jobs-count {
   display: flex;
   align-items: center;
@@ -70,11 +55,6 @@
 .jobs-count i {
   font-size: 13px;
 }
-
-
-/* =========================
-   JOB CARD
-========================= */
 
 .job-card {
   height: 100%;
@@ -150,11 +130,6 @@
   transform: scale(1.1) rotate(-5deg);
 }
 
-
-/* =========================
-   STATUS BADGE
-========================= */
-
 .status {
   padding: 4px 8px;
 
@@ -188,11 +163,6 @@
   color: var(--text-secondary);
   background: var(--gray-soft);
 }
-
-
-/* =========================
-   CONTENT
-========================= */
 
 .job-title {
   margin-bottom: 8px;
@@ -234,11 +204,6 @@
   overflow: hidden;
 }
 
-
-/* =========================
-   INFO
-========================= */
-
 .job-info {
   border-top: 1px solid var(--border-soft);
   border-bottom: 1px solid var(--border-soft);
@@ -271,7 +236,6 @@
   color: var(--icon);
 }
 
-/* Each field carries its own cue: urgency, then when it was raised. */
 .info-item .fa-flag {
   color: var(--orange);
 }
@@ -322,11 +286,6 @@
   color: #ffffff !important;
   background: var(--red);
 }
-
-
-/* =========================
-   ACTIONS
-========================= */
 
 .job-actions {
   display: flex;
@@ -408,11 +367,6 @@
   background: var(--primary);
   border-color: var(--primary);
 }
-
-
-/* =========================
-   LOADING / ERROR / EMPTY
-========================= */
 
 .loading-box,
 .error-box,
@@ -563,11 +517,6 @@
   transform: translateY(-1px);
 }
 
-
-/* =========================
-   MOTION PREFERENCES
-========================= */
-
 @media (prefers-reduced-motion: reduce) {
 
   .page-header,
@@ -579,11 +528,6 @@
   }
 
 }
-
-
-/* =========================
-   RESPONSIVE
-========================= */
 
 @media (max-width: 767px) {
 
@@ -606,7 +550,6 @@
   }
 
 }
-
 
 @media (max-width: 480px) {
 

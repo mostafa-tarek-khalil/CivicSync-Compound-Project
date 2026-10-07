@@ -4,7 +4,7 @@
 
   <div class="lookup-container">
 
-    <!-- BRAND -->
+
     <header class="lookup-brand">
       <a class="brand" routerLink="/visitor-entry">
         <span class="brand-icon">
@@ -14,7 +14,7 @@
       </a>
     </header>
 
-    <!-- HERO -->
+
     <section class="lookup-hero">
       <span class="eyebrow">VISITOR ACCESS</span>
       <h1>Track Your Request</h1>
@@ -24,7 +24,7 @@
       </p>
     </section>
 
-    <!-- SEARCH -->
+
     <section class="lookup-card">
       <label for="lookupEmail">Email address</label>
 
@@ -46,19 +46,19 @@
       </p>
     </section>
 
-    <!-- ERROR -->
+
     <div class="state-box error" *ngIf="state === 'error'">
       <span class="material-symbols-outlined">error</span>
       <p>{{ errorMessage }}</p>
     </div>
 
-    <!-- LOADING -->
+
     <div class="state-box" *ngIf="state === 'loading'">
       <span class="material-symbols-outlined spinning">hourglass_top</span>
       <p>Looking up your requests…</p>
     </div>
 
-    <!-- EMPTY -->
+
     <div class="state-box" *ngIf="state === 'empty'">
       <span class="material-symbols-outlined">search_off</span>
       <h3>No requests found</h3>
@@ -69,7 +69,7 @@
       </a>
     </div>
 
-    <!-- RESULTS -->
+
     <section class="results" *ngIf="state === 'results'">
       <div class="results-heading">
         <span class="mini-label">YOUR REQUESTS</span>
@@ -127,7 +127,7 @@
       </button>
     </section>
 
-    <!-- BACK -->
+
     <a class="back-link" routerLink="/visitor-entry">
       <span class="material-symbols-outlined">arrow_back</span>
       Back

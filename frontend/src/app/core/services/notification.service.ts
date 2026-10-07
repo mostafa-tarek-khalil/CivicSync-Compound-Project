@@ -7,11 +7,7 @@ import { environment } from '../../../environments/environment';
 
 const API_URL = `${environment.apiUrl}/notifications`;
 
-/**
- * Mirrors the single backend Notification model
- * (userId, type, title, message, relatedId, isRead, createdAt, updatedAt).
- * There is no second notification concept anywhere in the app.
- */
+
 export interface NotificationItem {
   _id: string;
   userId: string;
@@ -30,18 +26,12 @@ export interface NotificationsResponse {
   data: NotificationItem[];
 }
 
-/**
- * THE single notification service.
- *
- * Owns fetching, marking read/unread state, deleting, and the unread badge
- * count that the topbar/sidebar bind to. The unread count lives in a signal so
- * every shell shows the same number without polling independently.
- */
+
 @Injectable({ providedIn: 'root' })
 export class NotificationService {
   private readonly unreadSignal = signal(0);
 
-  /** Reactive badge source, shared by the topbar, sidebar and toast stack. */
+  
   readonly unreadCount = this.unreadSignal.asReadonly();
 
   constructor(private http: HttpClient) {}
@@ -62,7 +52,7 @@ export class NotificationService {
       );
   }
 
-  /** Re-reads the unread list and republishes the badge count. */
+  
   refreshUnreadCount(): Observable<NotificationsResponse> {
     return this.getNotifications(true);
   }
@@ -95,7 +85,7 @@ export class NotificationService {
     );
   }
 
-  /** Called by the realtime listener when a `notification:new` event arrives. */
+  
   incrementUnread(): void {
     this.unreadSignal.update(count => count + 1);
   }

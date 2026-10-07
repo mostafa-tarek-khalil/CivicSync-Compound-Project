@@ -1,10 +1,10 @@
-<!-- Empty state ------------------------------------------------------------->
+
 <div class="chart-empty" *ngIf="!hasData">
   <span class="material-symbols-outlined">insights</span>
   <p>No data to display yet.</p>
 </div>
 
-<!-- DONUT ------------------------------------------------------------------->
+
 <div class="donut-wrap" *ngIf="hasData && type === 'donut'">
   <svg class="donut" viewBox="0 0 42 42" [style.height.px]="height">
     <circle class="donut-track" cx="21" cy="21" r="15.915" />
@@ -24,7 +24,7 @@
   </ul>
 </div>
 
-<!-- BARS -------------------------------------------------------------------->
+
 <div class="bars-wrap" *ngIf="hasData && type === 'bars'" [style.height.px]="height">
   <div class="bar-column" *ngFor="let slice of slices">
     <span class="bar-value">{{ slice.value }}</span>
@@ -38,7 +38,7 @@
   </div>
 </div>
 
-<!-- LINE -------------------------------------------------------------------->
+
 <div class="line-wrap" *ngIf="hasData && type === 'line'">
   <svg class="line-svg" viewBox="0 0 100 100" preserveAspectRatio="none" [style.height.px]="height">
     <path class="line-path" [attr.d]="linePath" />

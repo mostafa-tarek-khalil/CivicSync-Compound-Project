@@ -24,15 +24,6 @@ type ScanState = 'ready' | 'scanning' | 'valid' | 'invalid' | 'expired' | 'used'
 export class QrScanner implements OnDestroy {
   @ViewChild('cameraVideo') cameraVideo?: ElementRef<HTMLVideoElement>;
 
-  /**
-   * Scan state lives in signals.
-   *
-   * This app runs with `provideZonelessChangeDetection()`, so nothing patches
-   * `requestAnimationFrame` / promise callbacks. A plain field mutated from the
-   * frame loop or the HTTP callback would only repaint when some OTHER event
-   * happened to trigger a render — the "spinner stays until you click twice"
-   * bug. Signals notify the scheduler directly, so the UI updates itself.
-   */
   readonly scanState = signal<ScanState>('ready');
   readonly manualQrToken = signal('');
   readonly errorMessage = signal('');
@@ -59,7 +50,6 @@ export class QrScanner implements OnDestroy {
     private cdr: ChangeDetectorRef
   ) {}
 
-  /** Two-way binding helper for the manual token input. */
   setManualToken(value: string): void {
     this.manualQrToken.set(value);
   }
@@ -76,9 +66,6 @@ export class QrScanner implements OnDestroy {
       this.errorMessage.set('');
       this.scanState.set('scanning');
 
-      // BarcodeDetector is used only when the browser actually supports it
-      // (mainly Android Chrome). On desktop / iOS we fall back to jsQR which
-      // decodes frames drawn onto a canvas and works everywhere.
       const Detector = (window as any)['BarcodeDetector'];
       if (Detector) {
         try {
@@ -122,9 +109,7 @@ export class QrScanner implements OnDestroy {
         this.visitService.getSecurityVisit(visitId).subscribe({
           next: details => {
             this.setVisitor(details.data);
-            // The scan result belongs to the security operator, not to the
-            // visitor's own tracked visit, so we deliberately do not touch
-            // VisitorFlow here.
+
             this.scanState.set('valid');
             this.manualQrToken.set('');
             this.verifying.set(false);
@@ -166,17 +151,15 @@ export class QrScanner implements OnDestroy {
       if (video.readyState >= HTMLMediaElement.HAVE_CURRENT_DATA && video.videoWidth > 0) {
         let token = '';
 
-        // 1) Native detector (fastest) when available
         if (this.detector) {
           try {
             const results = await this.detector.detect(video);
             token = results[0]?.rawValue || '';
           } catch {
-            // Detector unsupported/failed at runtime — rely on jsQR below.
+
           }
         }
 
-        // 2) jsQR fallback: draw the current frame onto a canvas and decode.
         if (!token) {
           token = this.decodeWithJsQr(video);
         }
@@ -229,9 +212,6 @@ export class QrScanner implements OnDestroy {
       purpose: visit.purpose || ''
     });
 
-    // NOTE: the scanner intentionally does NOT write into the visitor's
-    // tracked-visit store. Security is operating on someone else's visit; a
-    // scan must not mutate the visitor's own session state.
   }
 
   resetScanner(): void {

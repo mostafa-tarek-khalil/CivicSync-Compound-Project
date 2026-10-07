@@ -3,7 +3,6 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { provideRouter } from '@angular/router';
 import { SecurityDashboard } from './security-dashboard';
 
-/** Blank route target so component navigations resolve during tests. */
 @Component({ selector: 'app-test-blank', template: '' })
 class TestBlankComponent {}
 

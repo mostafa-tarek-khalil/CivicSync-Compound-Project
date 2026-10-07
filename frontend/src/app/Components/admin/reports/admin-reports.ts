@@ -24,7 +24,6 @@ import {
   reportFilename
 } from '../../../core/utils/report-export';
 
-/** Palette shared by every donut/bar so the same entity keeps its colour. */
 const PALETTE = [
   '#315b8f',
   '#2f9e8f',
@@ -99,10 +98,6 @@ export class AdminReportsPage implements OnInit, OnDestroy {
     });
   }
 
-  // ------------------------------------------------------------------
-  // Chart inputs — each maps an aggregate bucket list onto chart data.
-  // ------------------------------------------------------------------
-
   private toSlices(
     buckets: { _id: string | null; count: number }[],
     emptyLabel = 'None'
@@ -134,7 +129,6 @@ export class AdminReportsPage implements OnInit, OnDestroy {
     return this.toSlices(this.reports?.visits.byStatus || []);
   }
 
-  /** Occupancy chart: derived from the unit status buckets. */
   get occupancySlices(): ChartSlice[] {
     const buckets = this.reports?.units.byStatus || [];
 
@@ -163,10 +157,6 @@ export class AdminReportsPage implements OnInit, OnDestroy {
     return Math.round((slices[0].value / total) * 100);
   }
 
-  /**
-   * Visit series, zero-filled for the whole window so days without visits show
-   * as a dip in the line rather than being silently compressed away.
-   */
   get visitsOverTime(): ChartPoint[] {
     const points = this.reports?.visits.overTime || [];
     const byDate = new Map(points.map(point => [point.date, point.count]));
@@ -182,7 +172,7 @@ export class AdminReportsPage implements OnInit, OnDestroy {
       const key = date.toISOString().slice(0, 10);
 
       window.push({
-        label: key.slice(5), // MM-DD keeps the axis readable
+        label: key.slice(5),
         value: byDate.get(key) ?? 0
       });
     }
@@ -214,10 +204,6 @@ export class AdminReportsPage implements OnInit, OnDestroy {
       0
     );
   }
-
-  // ------------------------------------------------------------------
-  // Full report download
-  // ------------------------------------------------------------------
 
   downloadFullReport(): void {
     if (this.exporting) {
@@ -254,19 +240,10 @@ export class AdminReportsPage implements OnInit, OnDestroy {
     });
   }
 
-  /**
-   * Print-ready version: the browser's print dialog can save the current view
-   * as PDF, so "PDF export" needs no extra library.
-   */
   printReport(): void {
     window.print();
   }
 
-  // ------------------------------------------------------------------
-  // Formatting
-  // ------------------------------------------------------------------
-
-  /** `QR_GENERATED` -> `Qr generated`. */
   humanize(value: string | null | undefined): string {
     if (!value) {
       return '';

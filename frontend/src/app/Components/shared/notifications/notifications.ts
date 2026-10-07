@@ -90,7 +90,6 @@ export class Notifications implements OnInit {
   get unreadCount(): number { return this.notificationsList.filter(n => !n.read).length; }
   get readCount(): number { return this.notificationsList.filter(n => n.read).length; }
 
-  /** Marks as read (if needed) AND navigates to the relevant page. */
   openNotification(notification: AppNotification): void {
     if (!notification.read) {
       this.notificationService.markAsRead(notification.id).subscribe({

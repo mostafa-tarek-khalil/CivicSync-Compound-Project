@@ -25,12 +25,10 @@
   background: var(--cs-surface, #ffffff);
   box-shadow: 0 24px 60px rgba(15, 23, 42, 0.28);
 
-  /* The dialog swings in from behind the backdrop — a 3D pop. */
   transform-style: preserve-3d;
   animation: dialog-pop 0.26s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-/* A soft halo pulses behind the status icon to draw the eye. */
 .dialog-icon {
   animation: dialog-icon-in 0.4s cubic-bezier(0.22, 1, 0.36, 1) 0.06s both;
 }

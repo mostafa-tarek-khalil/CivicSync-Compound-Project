@@ -42,13 +42,10 @@ interface IDashboardData {
   completedCount: number;
   outstandingBalance: number;
   paidBalance: number;
-  /** The paid total split into the two things it was spent on. */
+  
   paidMaintenance: number;
   paidInvoicesTotal: number;
-  /**
-   * Finished maintenance jobs that have not been invoiced yet. The resident
-   * owes the agreed price for these the moment the ticket closes.
-   */
+  
   closedMaintenanceValue: number;
   closedMaintenanceCount: number;
   invoicesDue: number;
@@ -111,12 +108,7 @@ export class ResidentDashboardComponent implements OnInit, OnDestroy {
   lastUpdated: Date | null = null;
   errorMessage = '';
 
-  /**
-   * Anything that can change the numbers on this page (new offer accepted,
-   * ticket moved by the technician, invoice issued or paid, visitor request)
-   * arrives over the realtime socket. We debounce the burst of events and
-   * reload once.
-   */
+  
   private readonly REALTIME_TYPES = [
     'MAINTENANCE_CREATED',
     'TICKET_ASSIGNED',
@@ -136,11 +128,7 @@ export class ResidentDashboardComponent implements OnInit, OnDestroy {
     'VISITOR_CHECKED_IN',
     'VISITOR_CHECKED_OUT'
   ];
-  /**
-   * The socket channels this page listens on. `notification:new` is the
-   * per-user fan-out (already used by the notifications screen), `visit:updated`
-   * is emitted by the visit state machine.
-   */
+  
   private readonly REALTIME_CHANNELS = ['notification:new', 'visit:updated'];
 
   private readonly AUTO_REFRESH_MS = 60 * 1000;
@@ -148,11 +136,7 @@ export class ResidentDashboardComponent implements OnInit, OnDestroy {
   private refreshTimer?: ReturnType<typeof setInterval>;
   private debounceTimer?: ReturnType<typeof setTimeout>;
 
-  /**
-   * One listener for both transports: the per-user notification channel and the
-   * visit channel. Unrelated notifications (e.g. a new chat message) are
-   * ignored so the dashboard is not re-fetched on every message.
-   */
+  
   private onRealtimeEvent = (payload?: { type?: string }) => {
     if (payload?.type && !this.REALTIME_TYPES.includes(payload.type)) {
       return;
@@ -194,12 +178,7 @@ export class ResidentDashboardComponent implements OnInit, OnDestroy {
     this.userName = user?.name || 'Resident';
   }
 
-  /** Realtime updates + a slow safety-net poll (visitor/ticket data can also
-   *  change from the security or technician side without notifying us).
-   *
-   *  No `runOutsideAngular` wrapper: this app is zoneless, so there is no zone
-   *  to escape from. The socket listeners and the interval simply mutate signals
-   *  / call the loader, and Angular schedules the render itself. */
+  
   private setupAutoRefresh(): void {
     this.chatSocket.connect();
 
@@ -222,7 +201,7 @@ export class ResidentDashboardComponent implements OnInit, OnDestroy {
     this.debounceTimer = setTimeout(() => this.loadDashboard(true), 400);
   }
 
-  /** Manual refresh from the Refresh button. */
+  
   refresh(): void {
     this.loadDashboard(true);
   }
@@ -272,8 +251,7 @@ export class ResidentDashboardComponent implements OnInit, OnDestroy {
 
     this.dashboard.recentTickets = tickets;
 
-    // Outstanding = unpaid invoices + agreed maintenance cost that has not
-    // been invoiced yet (accepted offers on tickets still in progress).
+
     const billing = data.billing;
     this.dashboard.outstandingBalance = billing?.outstandingBalance ?? 0;
     this.dashboard.paidBalance = billing?.paidBalance ?? 0;

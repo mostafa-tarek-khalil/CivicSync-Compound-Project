@@ -1209,9 +1209,6 @@
     padding: 0 6px;
   }
 }
-/* =========================================================
-   DARK MODE
-========================================================= */
 
 :host-context(html.dark-mode) .register-page {
   background: #0d1420;
@@ -1321,11 +1318,6 @@
   background: #16233a;
   border-color: #2a3a4e;
 }
-/* =========================================================
-   MOTION LAYER
-   Keyframes are global (styles.css); this only wires them onto the
-   classes this page uses.
-   ========================================================= */
 
 .background-shape {
   animation: cs-regd-drift 16s ease-in-out infinite;
@@ -1350,7 +1342,6 @@
   }
 }
 
-/* Split layout: showcase enters left, form card enters right. */
 .register-showcase {
   animation: cs-slide-in-left 0.65s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
@@ -1458,7 +1449,6 @@
   transition: transform 0.26s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-/* The dropdown unfolds with a slight lift. */
 .custom-select-menu {
   animation: cs-pop-in 0.28s cubic-bezier(0.22, 1, 0.36, 1) both;
   transform-origin: top center;
@@ -1479,7 +1469,6 @@
   transform: translateX(4px);
 }
 
-/* Specialization picker tiles. */
 .specialization-grid {
   perspective: 1000px;
 }

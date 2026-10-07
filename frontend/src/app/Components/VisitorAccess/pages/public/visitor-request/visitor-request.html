@@ -1,7 +1,7 @@
 
 <div class="request-page">
 
-  <!-- LEFT SIDE -->
+
   <aside class="info-side">
 
     <div class="info-content">
@@ -31,10 +31,10 @@
 
       </div>
 
-      <!-- STEPS -->
+
       <div class="steps">
 
-        <!-- STEP 1 -->
+
         <div
           class="step"
           [class.active]="currentStep === 1"
@@ -67,7 +67,7 @@
 
         </div>
 
-        <!-- STEP 2 -->
+
         <div
           class="step"
           [class.active]="currentStep === 2"
@@ -100,7 +100,7 @@
 
         </div>
 
-        <!-- STEP 3 -->
+
         <div
           class="step"
           [class.active]="currentStep === 3"
@@ -128,7 +128,7 @@
 
     </div>
 
-    <!-- FOOTER -->
+
     <div class="side-footer">
 
       <span>
@@ -144,15 +144,13 @@
   </aside>
 
 
-  <!-- RIGHT SIDE -->
+
   <main class="form-side">
 
     <div class="form-container">
 
 
-      <!-- ========================= -->
-      <!-- STEP 01 -->
-      <!-- ========================= -->
+
 
       <section
         class="form-step"
@@ -172,7 +170,7 @@
         </p>
 
 
-        <!-- FULL NAME -->
+
         <div class="form-group">
 
           <label for="fullName">
@@ -214,7 +212,7 @@
         </div>
 
 
-        <!-- PHONE -->
+
         <div class="form-group">
 
           <label for="phone">
@@ -262,7 +260,7 @@
         </div>
 
 
-        <!-- EMAIL -->
+
         <div class="form-group">
 
           <label for="email">
@@ -307,7 +305,7 @@
         </div>
 
 
-        <!-- CONTINUE -->
+
         <button
           class="primary-btn"
           type="button"
@@ -327,9 +325,7 @@
       </section>
 
 
-      <!-- ========================= -->
-      <!-- STEP 02 -->
-      <!-- ========================= -->
+
 
       <section
         class="form-step"
@@ -349,7 +345,7 @@
         </p>
 
 
-        <!-- BUILDING -->
+
         <div class="form-group">
 
           <label for="building">
@@ -408,7 +404,7 @@
         </div>
 
 
-        <!-- UNIT -->
+
         <div class="form-group">
 
           <label for="unit">
@@ -477,11 +473,11 @@
         </div>
 
 
-        <!-- DATE + TIME -->
+
         <div class="two-columns">
 
 
-          <!-- DATE -->
+
           <div class="form-group">
 
             <label for="date">
@@ -544,7 +540,7 @@
           </div>
 
 
-          <!-- TIME -->
+
           <div class="form-group">
 
             <label for="time">
@@ -589,7 +585,7 @@
         </div>
 
 
-        <!-- PURPOSE -->
+
         <div class="form-group">
 
           <label for="purpose">
@@ -630,7 +626,7 @@
         </div>
 
 
-        <!-- BUTTONS -->
+
         <p class="form-error" role="alert" *ngIf="errorMessage">{{ errorMessage }}</p>
         <p class="form-hint" *ngIf="loadingUnits">Loading occupied units...</p>
         <p class="form-hint" *ngIf="!loadingUnits && !buildings.length && !errorMessage">No occupied units are available for visitor requests.</p>

@@ -4,11 +4,7 @@ import { Router } from '@angular/router';
 
 import { AuthService } from '../../../core/services/auth.service';
 
-/**
- * Shown by the RoleGuard when a signed-in user reaches a page their role may
- * not open. Explains the situation and offers a safe way back — it never
- * silently swaps the requested page for an unrelated dashboard.
- */
+
 @Component({
   selector: 'app-access-denied',
   standalone: true,

@@ -101,8 +101,7 @@
             </td>
             <td>
               <div class="row-actions">
-                <!-- Opens the receipt screen, which is also what the Print
-                     action prints. -->
+
                 <button type="button" class="btn-sm view" (click)="openInvoice(invoice)">
                   <span class="material-symbols-outlined">receipt_long</span>
                   View
@@ -140,7 +139,7 @@
 
 </div>
 
-<!-- ===================== CREATE INVOICE MODAL ===================== -->
+
 @if (invoiceModalOpen) {
 <div class="modal-backdrop" (click)="closeInvoiceModal()">
   <div class="modal-card" (click)="$event.stopPropagation()">

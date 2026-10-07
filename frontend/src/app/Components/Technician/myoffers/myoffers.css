@@ -1,19 +1,9 @@
 @import '../shared/tech-theme.css';
 
-
-/* =========================
-   PAGE
-========================= */
-
 .offers-page {
   min-height: 100vh;
   background-color: var(--page-bg);
 }
-
-
-/* =========================
-   HEADER
-========================= */
 
 .page-header {
   display: flex;
@@ -61,11 +51,6 @@
 
   box-shadow: var(--shadow-sm);
 }
-
-
-/* =========================
-   OFFER CARD
-========================= */
 
 .offer-card {
   height: 100%;
@@ -139,11 +124,6 @@
   transform: scale(1.1) rotate(-5deg);
 }
 
-
-/* =========================
-   STATUS BADGE
-========================= */
-
 .status {
   padding: 4px 8px;
 
@@ -174,11 +154,6 @@
   color: var(--text-secondary);
   background: var(--gray-soft);
 }
-
-
-/* =========================
-   CONTENT
-========================= */
 
 .offer-title {
   margin: 16px 0;
@@ -216,7 +191,6 @@
   font-size: 12px;
 }
 
-/* Money and time are the two things an offer is judged on. */
 .info-item .fa-money-bill {
   color: var(--green);
 }
@@ -283,11 +257,6 @@
 
   color: var(--cat-electricity);
 }
-
-
-/* =========================
-   ACTIONS
-========================= */
 
 .offer-actions {
   display: flex;
@@ -357,11 +326,6 @@
 .withdraw-btn:active {
   transform: translateY(0) scale(0.98);
 }
-
-
-/* =========================
-   LOADING / ERROR / EMPTY
-========================= */
 
 .loading-box,
 .error-box,
@@ -508,11 +472,6 @@
   transform: translateY(-1px);
 }
 
-
-/* =========================
-   MOTION PREFERENCES
-========================= */
-
 @media (prefers-reduced-motion: reduce) {
 
   .page-header,
@@ -524,11 +483,6 @@
   }
 
 }
-
-
-/* =========================
-   RESPONSIVE
-========================= */
 
 @media (max-width: 767px) {
 

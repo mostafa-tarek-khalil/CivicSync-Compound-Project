@@ -1,6 +1,6 @@
 <div class="notifications-page">
 
-  <!-- HEADER -->
+
   <div class="page-header">
 
     <div>
@@ -27,7 +27,7 @@
   </div>
 
 
-  <!-- SUMMARY CARDS -->
+
   <div class="summary-grid">
 
     <div class="summary-card">
@@ -74,7 +74,7 @@
   </div>
 
 
-  <!-- FILTER BAR -->
+
   <div class="filter-bar">
 
     <div class="filters">
@@ -100,7 +100,7 @@
   </div>
 
 
-  <!-- NOTIFICATIONS -->
+
   <div class="notification-list">
 
     <div
@@ -111,7 +111,7 @@
       (click)="openNotification(notification)"
     >
 
-      <!-- استبدال الإيموجي بأسلوب Dynamic Icon إذا كانت الدالة تُرجع اسم أيقونة Material -->
+
       <div class="notification-icon">
         <span class="material-symbols-outlined">{{ notification.icon || 'notifications' }}</span>
       </div>
@@ -154,7 +154,7 @@
     </div>
 
 
-    <!-- EMPTY STATE -->
+
     <div
       *ngIf="filteredNotifications.length === 0"
       class="empty-state">

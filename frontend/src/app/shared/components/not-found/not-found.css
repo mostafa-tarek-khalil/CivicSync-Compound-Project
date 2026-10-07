@@ -24,7 +24,6 @@
   background: var(--cs-surface, #ffffff);
   box-shadow: 0 18px 45px rgba(15, 23, 42, 0.08);
 
-  /* The card rotates up out of the page — a real 3D reveal. */
   transform-style: preserve-3d;
   animation: cs-notfound-in 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
   transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),

@@ -3,13 +3,7 @@ import { Routes } from '@angular/router';
 import { authGuard } from './core/guards/auth-guard';
 import { AuthenticatedLayoutComponent } from './core/layout/authenticated-layout/authenticated-layout';
 
-/**
- * Application routes.
- *
- * Every page is lazy-loaded with `loadComponent`, so each feature ships in its
- * own chunk on first visit instead of inflating the initial bundle. Only the
- * authenticated shell (used on almost every route) is imported eagerly.
- */
+
 export const routes: Routes = [
   {
     path: '',
@@ -62,9 +56,9 @@ export const routes: Routes = [
       )
   },
 
-  // ---------- Shared authenticated pages (unified shell) ----------
-  // Chat, notifications and profile are role-agnostic, so they live under the
-  // single AuthenticatedLayout (topbar + role-aware sidebar + outlet).
+
+
+
   {
     path: '',
     component: AuthenticatedLayoutComponent,
@@ -90,7 +84,7 @@ export const routes: Routes = [
     ]
   },
 
-  // Access denied is reached through the guard when a role is not allowed.
+
   {
     path: 'access-denied',
     loadComponent: () =>
@@ -164,7 +158,7 @@ export const routes: Routes = [
     ]
   },
 
-  // ---------- Public visitor access (no account required) ----------
+
   {
     path: 'visitor-entry',
     loadComponent: () =>
@@ -186,8 +180,8 @@ export const routes: Routes = [
         m => m.VisitorRequest
       )
   },
-  // Visitors now live inside the resident shell (same sidebar/navigation);
-  // the old flat URL is kept as a redirect so existing links still work.
+
+
   { path: 'resident-visitor-requests', redirectTo: 'resident/visitors', pathMatch: 'full' },
   {
     path: 'otp-verification',
@@ -232,9 +226,9 @@ export const routes: Routes = [
       ).then(m => m.VisitInProgress)
   },
 
-  // ---------- Security (visitor access control) ----------
-  // The old flat URLs redirect into the consolidated module so existing
-  // links and bookmarks keep working.
+
+
+
   { path: 'security-dashboard', redirectTo: 'security/visitors', pathMatch: 'full' },
   { path: 'security-visits', redirectTo: 'security/visitors/list', pathMatch: 'full' },
   { path: 'qr-scanner', redirectTo: 'security/visitors/scanner', pathMatch: 'full' },
@@ -298,7 +292,7 @@ export const routes: Routes = [
     ]
   },
 
-  // ---------- Resident (maintenance) ----------
+
   {
     path: 'resident',
     component: AuthenticatedLayoutComponent,
@@ -365,7 +359,7 @@ export const routes: Routes = [
     ]
   },
 
-  // ---------- Technician ----------
+
   {
     path: 'technician',
     component: AuthenticatedLayoutComponent,
@@ -443,7 +437,7 @@ export const routes: Routes = [
     ]
   },
 
-  // Unknown URLs get a real 404 page (not a silent redirect home).
+
   {
     path: '**',
     loadComponent: () =>

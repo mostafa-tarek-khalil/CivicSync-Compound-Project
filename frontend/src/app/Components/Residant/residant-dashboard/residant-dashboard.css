@@ -36,11 +36,6 @@
   --shadow-md: 0 8px 24px rgba(20, 43, 70, 0.10);
 }
 
-
-/* =========================
-   PAGE
-========================= */
-
 .dashboard-page {
   min-height: 100vh;
   background-color: var(--page-bg);
@@ -49,11 +44,6 @@
 .dashboard-content {
   min-width: 0;
 }
-
-
-/* =========================
-   HEADER
-========================= */
 
 .dashboard-header {
   display: flex;
@@ -127,11 +117,6 @@
     transform: rotate(360deg);
   }
 }
-
-
-/* =========================
-   ENTRANCE ANIMATIONS
-========================= */
 
 @keyframes fade-up {
   from {
@@ -214,11 +199,6 @@
   animation: fade-in 0.4s ease both;
 }
 
-
-/* =========================
-   STAT CARDS
-========================= */
-
 .stat-card {
   background: var(--surface);
 
@@ -249,7 +229,6 @@
   border-color: #cfdcee;
 }
 
-/* Staggered reveal across the four stat cards. */
 .stat-card:nth-child(1) {
   animation-delay: 0.08s;
 }
@@ -343,8 +322,6 @@
   font-size: 10px !important;
 }
 
-/* Secondary line under a stat value (e.g. how much of the outstanding
-   balance comes from agreed maintenance). */
 .stat-hint {
   display: block;
 
@@ -355,9 +332,6 @@
   line-height: 1.3;
 }
 
-/* Splits the "Paid" total into what went to compound invoices and what went
-   to maintenance jobs. The two rows sit under the total and stay quiet — the
-   big number is still the headline. */
 .paid-breakdown {
   display: flex;
   flex-direction: column;
@@ -401,14 +375,11 @@
   color: var(--orange);
 }
 
-/* Finished maintenance awaiting an invoice. Uses the warning tone because the
-   money is owed but not billed yet — distinct from an unpaid invoice. */
 .stat-hint.closed-hint {
   color: var(--orange);
   font-weight: 600;
 }
 
-/* The Outstanding card is a link to the invoices screen. */
 .stat-card-link {
   cursor: pointer;
   transition: border-color 0.15s ease, box-shadow 0.15s ease;
@@ -429,11 +400,6 @@
   font-size: 9px;
 }
 
-
-/* =========================
-   PANELS
-========================= */
-
 .panel {
   background: var(--surface);
 
@@ -448,8 +414,6 @@
   animation: fade-up 0.55s cubic-bezier(0.22, 1, 0.36, 1) 0.3s both;
 }
 
-/* The panels sit one after another down the page, so each one waits a beat
-   longer than the one above it instead of all appearing at once. */
 .panel:nth-of-type(2) {
   animation-delay: 0.38s;
 }
@@ -491,11 +455,6 @@
 
   color: var(--primary);
 }
-
-
-/* =========================
-   MAINTENANCE OVERVIEW
-========================= */
 
 .status-list {
   display: flex;
@@ -580,11 +539,6 @@
 .status-dot.closed {
   background: #64748b;
 }
-
-
-/* =========================
-   INVOICE
-========================= */
 
 .invoice-box {
   background: var(--surface-soft);
@@ -707,11 +661,6 @@
   color: var(--text-secondary);
 }
 
-
-/* =========================
-   TABLE
-========================= */
-
 .table-responsive {
   overflow-x: auto;
 }
@@ -779,9 +728,6 @@
   background: var(--surface-hover);
 }
 
-
-/* Request */
-
 .request-cell {
   display: flex;
 
@@ -833,11 +779,6 @@
 
   margin-top: 2px;
 }
-
-
-/* =========================
-   BADGES
-========================= */
 
 .status-badge,
 .priority-badge {
@@ -897,11 +838,6 @@
   background: var(--red-soft);
 }
 
-
-/* =========================
-   BUTTONS
-========================= */
-
 .view-all-btn {
   border: none;
 
@@ -936,11 +872,6 @@
 .view-all-btn:active {
   transform: scale(0.97);
 }
-
-
-/* =========================
-   VISITORS
-========================= */
 
 .visitors-list {
   display: flex;
@@ -1051,7 +982,6 @@
   border-radius: 5px;
 }
 
-/* Status colours are driven by the real visit status coming from the API. */
 .visitor-status.visitor-pending {
   color: var(--orange);
   background: var(--orange-soft);
@@ -1076,11 +1006,6 @@
   color: var(--text-muted);
   background: var(--border-soft);
 }
-
-
-/* =========================
-   EMPTY
-========================= */
 
 .empty-state {
   min-height: 180px;
@@ -1116,7 +1041,6 @@
   color: var(--text-muted);
 }
 
-
 @media (prefers-reduced-motion: reduce) {
   .dashboard-header,
   .stat-card,
@@ -1130,11 +1054,6 @@
     animation: none;
   }
 }
-
-
-/* =========================
-   DARK MODE
-========================= */
 
 :host-context(.dark-mode) {
 
@@ -1182,11 +1101,6 @@
 :host-context(.dark-mode) .paid-part strong {
   color: var(--text-primary);
 }
-
-
-/* =========================
-   RESPONSIVE
-========================= */
 
 @media (max-width: 768px) {
 

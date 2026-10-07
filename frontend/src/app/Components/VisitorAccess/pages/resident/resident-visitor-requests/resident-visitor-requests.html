@@ -39,8 +39,7 @@
       <p>Visitors who request access to your unit and guests you invite will appear here.</p>
     </div>
 
-    <!-- Cards stay hidden until the request settles so the previous list cannot
-         show through the loading / error placeholder above. -->
+
     <article class="request-card" *ngFor="let request of (!loading && !errorMessage) ? requests : []">
 
       <div class="request-avatar">

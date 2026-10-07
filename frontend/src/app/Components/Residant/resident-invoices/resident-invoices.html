@@ -1,6 +1,6 @@
 <div class="invoices-page">
 
-  <!-- Header -->
+
   <div class="page-header">
     <div>
       <span class="eyebrow">BILLING</span>
@@ -21,7 +21,7 @@
   </div>
   }
 
-  <!-- Summary -->
+
   <div class="row g-3 mb-4">
 
     <div class="col-xl-4 col-md-6">
@@ -61,7 +61,7 @@
 
   </div>
 
-  <!-- Invoice table -->
+
   <div class="panel">
 
     <div class="panel-header">
@@ -106,8 +106,7 @@
               </strong>
             </td>
 
-            <!-- Distinguishes a maintenance bill from a regular compound
-                 charge, both of which live in this same list. -->
+
             <td>
               @if (invoice.ticketId) {
               <span class="type-badge maintenance">Maintenance</span>
@@ -161,9 +160,7 @@
                 </span>
                 }
 
-                <!-- The receipt is available for every invoice regardless of
-                     status; only a CLOSED-ticket bill is printable per the
-                     billing rules, which the receipt itself reflects. -->
+
                 <button
                   type="button"
                   class="receipt-btn"
@@ -183,7 +180,7 @@
 
   </div>
 
-</div><!-- ===================== RECEIPT MODAL ===================== -->
+</div>
 @if (receiptOpen && receiptInvoice) {
 <div class="modal-backdrop" (click)="closeReceipt()">
   <div class="modal-card" (click)="$event.stopPropagation()">

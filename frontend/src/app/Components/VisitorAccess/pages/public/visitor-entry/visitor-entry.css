@@ -42,7 +42,6 @@
   z-index: 1;
 }
 
-/* BRAND */
 .entry-brand {
   display: flex;
   align-items: center;
@@ -106,7 +105,6 @@
   font-size: 18px;
 }
 
-/* HERO */
 .entry-hero {
   text-align: center;
   margin-bottom: 34px;
@@ -138,7 +136,6 @@
   line-height: 1.7;
 }
 
-/* RESUME */
 .resume-banner {
   display: flex;
   align-items: center;
@@ -196,7 +193,6 @@
   transform: translateY(-1px);
 }
 
-/* ACTIONS */
 .entry-actions {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -286,7 +282,6 @@
   color: rgba(255, 255, 255, 0.8);
 }
 
-/* STEPS */
 .entry-steps {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -333,7 +328,6 @@
   font-size: 11.5px;
 }
 
-/* FOOTER */
 .entry-footer {
   display: flex;
   justify-content: space-between;
@@ -342,7 +336,6 @@
   font-size: 11px;
 }
 
-/* RESPONSIVE */
 @media (max-width: 760px) {
   .entry-actions {
     grid-template-columns: 1fr;
@@ -359,7 +352,6 @@
   }
 }
 
-/* DARK MODE */
 :host-context(html.dark-mode) .entry-page {
   background: #0d1420;
   color: #e8eef6;
@@ -423,11 +415,7 @@
 :host-context(html.dark-mode) .entry-steps {
   background: rgba(21, 31, 45, 0.7);
   border-color: #29394c;
-}/* =========================================================
-   MOTION LAYER
-   Keyframes are global (styles.css); this only wires them onto the
-   classes this page uses.
-   ========================================================= */
+}
 
 .page-header,
 .page-title {

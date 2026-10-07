@@ -10,7 +10,6 @@ import {
   residentLabel
 } from '../../../services/visit-status.util';
 
-/** One selectable row in the picker shown when no visit is pre-selected. */
 interface CheckInOutCandidate {
   id: string;
   visitorName: string;
@@ -45,11 +44,6 @@ export class CheckInOut implements OnInit {
   actionLoading = false;
   errorMessage = '';
 
-  /**
-   * True when the page was opened without a specific visit (e.g. from the
-   * security sidebar). Instead of bouncing back to the visitor list, it acts as
-   * a picker: security chooses which visitor to check in or out.
-   */
   pickerMode = false;
   candidatesLoading = false;
   candidates: CheckInOutCandidate[] = [];
@@ -66,8 +60,7 @@ export class CheckInOut implements OnInit {
     this.visitId = this.route.snapshot.queryParamMap.get('visitId') || this.visitorFlow.getVisit().requestId;
 
     if (!this.visitId) {
-      // Opened directly (sidebar / bookmark) with no visit chosen yet: show the
-      // list of visitors awaiting a check-in or check-out instead of redirecting.
+
       this.pickerMode = true;
       this.loadCandidates();
       return;
@@ -76,7 +69,6 @@ export class CheckInOut implements OnInit {
     this.loadVisitData();
   }
 
-  /** Visits that can still be checked in or out right now. */
   loadCandidates(): void {
     this.candidatesLoading = true;
     this.errorMessage = '';
@@ -97,11 +89,6 @@ export class CheckInOut implements OnInit {
     });
   }
 
-  /**
-   * A visit only needs this page while it is moving through the gate:
-   * APPROVED / QR_GENERATED / QR_SCANNED can be checked in, CHECKED_IN can be
-   * checked out. Finished or pending visits are not actionable here.
-   */
   private toCandidate(visit: VisitRecord): CheckInOutCandidate | null {
     let action: 'in' | 'out';
 
@@ -128,14 +115,12 @@ export class CheckInOut implements OnInit {
     };
   }
 
-  /** Security picked a visitor from the list. */
   selectVisit(id: string): void {
     this.visitId = id;
     this.pickerMode = false;
     this.loadVisitData();
   }
 
-  /** Return to the picker from a specific visit. */
   changeVisitor(): void {
     this.visitId = '';
     this.pickerMode = true;
@@ -170,8 +155,6 @@ export class CheckInOut implements OnInit {
     this.checkInTime = visit.checkedInAt ? formatTime(visit.checkedInAt) : '';
     this.checkOutTime = visit.checkedOutAt ? formatTime(visit.checkedOutAt) : '';
 
-    // NOTE: security is acting on a visitor's visit; we do not write into the
-    // visitor's tracked-visit store from here.
   }
 
   checkIn(): void {

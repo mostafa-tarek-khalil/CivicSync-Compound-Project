@@ -1,7 +1,7 @@
 
 <div class="scanner-page">
 
-  <!-- HEADER -->
+
   <section class="page-header">
 
     <div class="back-area">
@@ -28,7 +28,7 @@
   </section>
 
 
-  <!-- SCANNER AREA -->
+
   <section class="scanner-card">
 
     <div class="scanner-header">
@@ -82,7 +82,7 @@
     </div>
 
 
-    <!-- CAMERA / SCAN FRAME -->
+
     <div
       class="scanner-frame"
       [class.scanning]="scanState() === 'scanning'"
@@ -103,14 +103,14 @@
       <video #cameraVideo class="camera-preview" *ngIf="scanState() === 'scanning'" autoplay playsinline></video>
 
 
-      <!-- SCANNING LINE -->
+
       <div
         class="scan-line"
         *ngIf="scanState() === 'scanning'"
       ></div>
 
 
-      <!-- VALID ICON -->
+
       <div
         class="result-icon valid-result"
         *ngIf="scanState() === 'valid'"
@@ -121,7 +121,7 @@
       </div>
 
 
-      <!-- ERROR ICON -->
+
       <div
         class="result-icon error-result"
         *ngIf="
@@ -142,7 +142,7 @@
       </div>
 
 
-      <!-- FRAME MESSAGE -->
+
       <div class="frame-message">
 
         <span *ngIf="scanState() === 'ready'">
@@ -194,7 +194,7 @@
     </div>
 
 
-    <!-- VALID RESULT -->
+
     <div
       class="result-card success-card"
       *ngIf="scanState() === 'valid'"
@@ -235,7 +235,7 @@
     </div>
 
 
-    <!-- ERROR RESULT -->
+
     <div
       class="result-card error-card"
       *ngIf="
@@ -288,7 +288,7 @@
     </div>
 
 
-    <!-- ACTIONS -->
+
     <div class="scanner-actions">
 
       <button
@@ -325,7 +325,7 @@
   </section>
 
 
-  <!-- SECURITY NOTE -->
+
   <section class="security-note">
 
     <span class="material-symbols-outlined">

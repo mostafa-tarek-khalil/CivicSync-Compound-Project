@@ -1,19 +1,9 @@
 @import '../shared/tech-theme.css';
 
-
-/* =========================
-   PAGE
-========================= */
-
 .available-page {
   min-height: 100vh;
   background-color: var(--page-bg);
 }
-
-
-/* =========================
-   HEADER
-========================= */
 
 .page-header {
   display: flex;
@@ -41,11 +31,6 @@
   color: var(--text-muted);
 }
 
-
-/* =========================
-   COUNT
-========================= */
-
 .requests-count {
   display: flex;
   align-items: center;
@@ -69,11 +54,6 @@
 .requests-count i {
   font-size: 13px;
 }
-
-
-/* =========================
-   REQUEST CARD
-========================= */
 
 .request-card {
   height: 100%;
@@ -143,7 +123,6 @@
   transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-/* One hue per maintenance category. */
 .category-icon.cat-plumbing {
   color: var(--cat-plumbing);
   background: var(--cat-plumbing-soft);
@@ -172,11 +151,6 @@
 .request-card:hover .category-icon {
   transform: scale(1.1) rotate(-5deg);
 }
-
-
-/* =========================
-   PRIORITY BADGE
-========================= */
 
 .priority {
   padding: 4px 8px;
@@ -212,11 +186,6 @@
   background: var(--red);
 }
 
-
-/* =========================
-   CONTENT
-========================= */
-
 .request-title {
   margin-bottom: 8px;
 
@@ -241,8 +210,6 @@
 .request-category i {
   color: var(--primary);
 }
-
-/* ---- Info rows: each field gets its own accent ---- */
 
 .info-item .fa-calendar {
   color: var(--cat-electricity);
@@ -281,11 +248,6 @@
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
-
-
-/* =========================
-   INFO
-========================= */
 
 .request-info {
   border-top: 1px solid var(--border-soft);
@@ -330,11 +292,6 @@
 
   color: var(--text-primary);
 }
-
-
-/* =========================
-   ACTIONS
-========================= */
 
 .details-btn {
   width: 100%;
@@ -409,11 +366,6 @@
 .refresh-btn:active {
   transform: translateY(0) scale(0.98);
 }
-
-
-/* =========================
-   LOADING / ERROR / EMPTY
-========================= */
 
 .loading-box,
 .error-box,
@@ -530,11 +482,6 @@
   margin-bottom: 20px;
 }
 
-
-/* =========================
-   MOTION PREFERENCES
-========================= */
-
 @media (prefers-reduced-motion: reduce) {
 
   .page-header,
@@ -546,11 +493,6 @@
   }
 
 }
-
-
-/* =========================
-   RESPONSIVE
-========================= */
 
 @media (max-width: 767px) {
 
@@ -573,7 +515,6 @@
   }
 
 }
-
 
 @media (max-width: 480px) {
 

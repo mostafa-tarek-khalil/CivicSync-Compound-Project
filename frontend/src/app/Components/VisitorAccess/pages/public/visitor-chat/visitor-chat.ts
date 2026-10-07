@@ -17,14 +17,6 @@ interface VisitorMessage {
   isMine?: boolean;
 }
 
-/**
- * Visitor-side conversation with the resident who approved the visit.
- *
- * This page is the missing entry point for visitor chat: the backend has
- * always supported it, but nothing in the UI ever opened the conversation.
- * Access is gated on the visitorChatToken, which the visitor only receives
- * once their visit is approved.
- */
 @Component({
   selector: 'app-visitor-chat',
   standalone: true,
@@ -40,12 +32,6 @@ export class VisitorChat implements OnInit, OnDestroy {
   conversationId = '';
   chatToken = '';
 
-  /**
-   * Where "Back to visit" should return to, decided once when the page loads.
-   * Chat can be opened from the request-status page (pre-check-in) or from the
-   * in-progress page (post-check-in), and the visitor must land back where they
-   * came from instead of always being sent to the status page.
-   */
   private backRoute = '/visitor-request-status';
 
   messages: VisitorMessage[] = [];
@@ -79,15 +65,11 @@ export class VisitorChat implements OnInit, OnDestroy {
     this.visitorName = visit.visitorName;
     this.residentName = visit.residentName;
 
-    // A checked-in visit lives on the in-progress page, so "Back to visit"
-    // should return there; every earlier stage lives on the status page.
     this.backRoute =
       String(visit.status || '').toUpperCase() === 'CHECKED_IN'
         ? '/visit-in-progress'
         : '/visitor-request-status';
 
-    // Re-read the visit so we always use a token the backend just validated,
-    // rather than a stale one from sessionStorage.
     this.visitService.getVisitorStatus(this.visitId, visit.visitorEmail).subscribe({
       next: response => {
         const token = response.data?.visitorChatToken || '';
@@ -125,7 +107,7 @@ export class VisitorChat implements OnInit, OnDestroy {
   private openConversation(): void {
     this.chatService.createVisitorConversation(this.visitId, this.chatToken).subscribe({
       next: response => {
-        // Backend contract: { success, conversation }
+
         const conversation = response?.conversation;
         this.conversationId = conversation?._id || '';
 
@@ -161,7 +143,7 @@ export class VisitorChat implements OnInit, OnDestroy {
       .getVisitorMessages(this.visitId, this.conversationId, this.chatToken)
       .subscribe({
         next: response => {
-          // Backend contract: { success, messages }
+
           const raw = response?.messages || [];
           this.messages = raw.map((message: any) => this.toMessage(message));
           this.loading = false;
@@ -215,7 +197,7 @@ export class VisitorChat implements OnInit, OnDestroy {
       .sendVisitorMessage(this.visitId, this.conversationId, this.chatToken, text)
       .subscribe({
         next: response => {
-          // Backend contract: { success, message }
+
           const saved = response?.message;
 
           if (saved) {

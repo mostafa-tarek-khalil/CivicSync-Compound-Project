@@ -3307,10 +3307,6 @@
   transform: translateY(-2px);
 }
 
-/* =========================================================
-   DARK MODE
-========================================================= */
-
 :host-context(html.dark-mode) .landing-page {
   --bg: #0d1420;
   --surface: #151f2d;
@@ -3330,8 +3326,6 @@
   --blue-shadow: rgba(0, 0, 0, 0.45);
   color: var(--ink);
 
-  /* Force the dark page background so the landing page never shows a light
-     body behind the hero when the global theme is toggled. */
   background: var(--bg) !important;
 }
 

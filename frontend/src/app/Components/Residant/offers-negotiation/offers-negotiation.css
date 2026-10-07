@@ -24,18 +24,12 @@
   --shadow-md: 0 8px 24px rgba(20, 43, 70, 0.10);
 }
 
-
-/* ================= PAGE ================= */
-
 .offers-content {
   min-width: 0;
   width: 100%;
   background: var(--page-bg);
   padding: 32px;
 }
-
-
-/* ================= HEADER ================= */
 
 .page-header {
   display: flex;
@@ -107,9 +101,6 @@
   margin-right: 6px;
 }
 
-
-/* ================= SUMMARY ================= */
-
 .offers-summary {
   display: flex;
   align-items: center;
@@ -142,9 +133,6 @@
   font-size: 12px;
 }
 
-
-/* ================= OFFERS ================= */
-
 .offers-list {
   display: flex;
   flex-direction: column;
@@ -163,9 +151,6 @@
 .offer-card:hover {
   box-shadow: var(--shadow-md);
 }
-
-
-/* ================= TECHNICIAN ================= */
 
 .offer-top {
   display: flex;
@@ -221,9 +206,6 @@
   font-size: 11px;
 }
 
-
-/* ================= STATUS ================= */
-
 .offer-status {
   padding: 6px 10px;
   border-radius: 7px;
@@ -250,9 +232,6 @@
   background: rgba(100, 116, 139, .12);
   color: #475569;
 }
-
-
-/* ================= OFFER DETAILS ================= */
 
 .offer-details {
   display: grid;
@@ -281,9 +260,6 @@
   font-size: 14px;
 }
 
-
-/* ================= MESSAGE ================= */
-
 .offer-message {
   margin-top: 15px;
   padding: 13px 15px;
@@ -304,9 +280,6 @@
   font-size: 12px;
   line-height: 1.6;
 }
-
-
-/* ================= ACTIONS ================= */
 
 .offer-actions {
   display: flex;
@@ -383,9 +356,6 @@
   margin-right: 7px;
 }
 
-
-/* ================= EMPTY ================= */
-
 .empty-state {
   background: var(--surface);
   border: 1px solid var(--border);
@@ -422,9 +392,6 @@
   line-height: 1.6;
 }
 
-
-/* ================= LOADING ================= */
-
 .loading-state {
   min-height: 50vh;
   display: flex;
@@ -438,9 +405,6 @@
   color: var(--primary);
   margin-bottom: 12px;
 }
-
-
-/* ================= ERROR ================= */
 
 .error-state {
   background: var(--surface);
@@ -475,9 +439,6 @@
   font-weight: 700;
 }
 
-
-/* ================= NEGOTIATION OVERLAY ================= */
-
 .negotiation-overlay {
   position: fixed;
   inset: 0;
@@ -496,9 +457,6 @@
   flex-direction: column;
   box-shadow: -10px 0 30px rgba(0, 0, 0, .15);
 }
-
-
-/* ================= NEGOTIATION HEADER ================= */
 
 .negotiation-header {
   display: flex;
@@ -537,9 +495,6 @@
   color: var(--danger);
 }
 
-
-/* ================= ORIGINAL OFFER ================= */
-
 .original-offer {
   display: flex;
   align-items: center;
@@ -570,9 +525,6 @@
   color: var(--text-secondary);
   font-size: 11px;
 }
-
-
-/* ================= CONVERSATION ================= */
 
 .conversation {
   flex: 1;
@@ -616,9 +568,6 @@
 .no-negotiations span {
   font-size: 11px;
 }
-
-
-/* ================= MESSAGES ================= */
 
 .messages {
   display: flex;
@@ -675,9 +624,6 @@
   font-size: 11px;
   line-height: 1.5;
 }
-
-
-/* ================= FORM ================= */
 
 .negotiation-form {
   padding: 18px;
@@ -773,9 +719,6 @@
   margin-right: 6px;
 }
 
-
-/* ================= DARK MODE ================= */
-
 :host-context(.dark-mode) {
 
   --primary: #6f9fd3;
@@ -797,9 +740,6 @@
   --border-soft: #304156;
 }
 
-
-/* ================= TABLET ================= */
-
 @media (max-width: 900px) {
 
   .offers-content {
@@ -811,9 +751,6 @@
   }
 
 }
-
-
-/* ================= MOBILE ================= */
 
 @media (max-width: 600px) {
 
@@ -870,9 +807,6 @@
 
 }
 
-
-/* ================= SMALL MOBILE ================= */
-
 @media (max-width: 400px) {
 
   .technician-info h3 {
@@ -884,11 +818,7 @@
     height: 42px;
   }
 
-}/* =========================================================
-   MOTION LAYER
-   Keyframes are global (styles.css); this only wires them onto the
-   classes this page uses.
-   ========================================================= */
+}
 
 .page-header {
   animation: cs-fade-up 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
@@ -915,7 +845,6 @@
   animation: cs-fade-up 0.45s cubic-bezier(0.22, 1, 0.36, 1) 0.08s both;
 }
 
-/* Offer cards tilt in 3D and cascade down the list. */
 .offers-list {
   perspective: 1200px;
 }
@@ -994,7 +923,6 @@
   box-shadow: 0 10px 24px rgba(49, 91, 143, 0.26);
 }
 
-/* The negotiation drawer slides in from the side and lifts in 3D. */
 .negotiation-overlay {
   animation: cs-fade-in 0.25s ease both;
 }

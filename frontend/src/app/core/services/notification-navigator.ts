@@ -1,11 +1,6 @@
 import { NotificationType, UserRole } from '../models/status';
 
-/**
- * Navigation target for a notification, derived from `type` + `relatedId`.
- *
- * This is the ONLY place that maps a notification to a destination, so the
- * topbar, the toast stack and the notifications page all behave identically.
- */
+
 export type NotificationRoute = (string | Record<string, string>)[];
 
 const RESIDENT_FALLBACK: NotificationRoute = ['/resident/dashboard'];
@@ -42,8 +37,7 @@ export function resolveNotificationRoute(
       case NotificationType.VISITOR_REJECTED:
       case NotificationType.VISITOR_CHECKED_IN:
       case NotificationType.VISITOR_CHECKED_OUT:
-        // The resident visitor screen is a single approval list, so the
-        // visit-scoped destination is the list itself.
+
         return ['/resident/visitors'];
 
       case NotificationType.INVOICE_CREATED:

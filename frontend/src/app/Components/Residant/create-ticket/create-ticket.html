@@ -1,4 +1,4 @@
-    <!-- Page Header -->
+
     <div class="page-header">
 
       <button
@@ -18,17 +18,17 @@
     </div>
 
 
-    <!-- Request Form -->
+
     <form
       (ngSubmit)="submitRequest()"
       #requestForm="ngForm">
 
       <div class="row g-4">
 
-        <!-- ===== Left column ===== -->
+
         <div class="col-lg-8">
 
-          <!-- Category -->
+
           <div class="panel">
 
             <h6>Category</h6>
@@ -61,7 +61,7 @@
           </div>
 
 
-          <!-- Title + Description -->
+
           <div class="panel">
 
             <label
@@ -108,7 +108,7 @@
           </div>
 
 
-          <!-- Media -->
+
           <div class="panel">
 
             <h6>Photo or video</h6>
@@ -119,8 +119,9 @@
 
 
             <input
-              type="file"
               #mediaInput
+              type="file"
+
               accept="image/*,video/*"
               class="d-none"
               (change)="onMediaSelected($event)"
@@ -171,7 +172,7 @@
         </div>
 
 
-        <!-- ===== Right column ===== -->
+
         <div class="col-lg-4">
 
           <div class="panel">
@@ -225,7 +226,7 @@
       </div>
 
 
-      <!-- Submit -->
+
       <div class="row">
 
         <div class="col-lg-8">

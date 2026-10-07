@@ -102,9 +102,7 @@ export class CreateTicket {
     this.errorMessage = '';
     this.isSubmitting = true;
 
-    // The picture is stored first: the ticket is only created once we have a
-    // URL to point at, so a ticket can never reference a file that was never
-    // written. If nothing was chosen, the flow skips straight to creation.
+
     this.resolveAttachmentUrl()
       .then(attachmentUrl => this.createTicket(attachmentUrl))
       .catch(() => {
@@ -115,7 +113,7 @@ export class CreateTicket {
       });
   }
 
-  /** Upload the selected file (if any) and resolve its public URL. */
+  
   private resolveAttachmentUrl(): Promise<string | null> {
     const file = this.mediaFile;
 

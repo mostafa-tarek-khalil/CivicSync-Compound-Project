@@ -1,29 +1,16 @@
 import { UserRole } from '../../models/status';
 
-/**
- * A single sidebar entry.
- *
- * `roles` scopes the item to the roles allowed to see it; an empty/omitted
- * list means "every signed-in role" (e.g. Chat, Notifications, Profile).
- */
 export interface NavItem {
   label: string;
   route: string;
   icon: string;
   roles?: UserRole[];
-  /** Match the route exactly (used for dashboards that share a prefix). */
+
   exact?: boolean;
 }
 
-/**
- * THE navigation map.
- *
- * The sidebar renders `visibleNavItems` for the signed-in role, so role-based
- * navigation lives in exactly one place instead of being duplicated inside
- * four separate sidebars.
- */
 export const NAV_ITEMS: NavItem[] = [
-  // ---------------------------------------------------------------- Resident
+
   {
     label: 'Dashboard',
     route: '/resident/dashboard',
@@ -62,7 +49,6 @@ export const NAV_ITEMS: NavItem[] = [
     roles: [UserRole.RESIDENT]
   },
 
-  // -------------------------------------------------------------- Technician
   {
     label: 'Dashboard',
     route: '/technician/dashboard',
@@ -95,7 +81,6 @@ export const NAV_ITEMS: NavItem[] = [
     roles: [UserRole.TECHNICIAN]
   },
 
-  // ---------------------------------------------------------------- Security
   {
     label: 'Visitors',
     route: '/security/visitors',
@@ -128,7 +113,6 @@ export const NAV_ITEMS: NavItem[] = [
     roles: [UserRole.SECURITY]
   },
 
-  // ------------------------------------------------------------------- Admin
   {
     label: 'Dashboard',
     route: '/admin/dashboard',
@@ -173,7 +157,6 @@ export const NAV_ITEMS: NavItem[] = [
     roles: [UserRole.ADMIN]
   },
 
-  // ----------------------------------------------------------------- Shared
   {
     label: 'Messages',
     route: '/chat',
@@ -192,9 +175,6 @@ export const NAV_ITEMS: NavItem[] = [
   }
 ];
 
-/**
- * Every item visible to `role`: the shared entries plus the role-specific ones.
- */
 export function visibleNavItems(role: UserRole | null): NavItem[] {
   if (!role) {
     return [];

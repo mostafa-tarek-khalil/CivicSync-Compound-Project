@@ -1,4 +1,4 @@
-    <!-- Header -->
+
     <div class="dashboard-header">
 
       <div class="welcome-section">
@@ -42,10 +42,10 @@
       </div>
 
 
-    <!-- Statistics -->
+
     <div class="row g-3 mb-4">
 
-      <!-- Visitors -->
+
       <div class="col-xl-3 col-md-6">
 
         <div class="stat-card">
@@ -83,7 +83,7 @@
       </div>
 
 
-      <!-- Maintenance -->
+
       <div class="col-xl-3 col-md-6">
 
         <div class="stat-card">
@@ -113,7 +113,7 @@
       </div>
 
 
-      <!-- Completed -->
+
       <div class="col-xl-3 col-md-6">
 
         <div class="stat-card">
@@ -136,9 +136,7 @@
               Resolved requests
             </small>
 
-            <!-- Finished jobs that have not been invoiced yet. The agreed
-                 price shows here as soon as the ticket closes, without
-                 waiting for the admin to raise the invoice. -->
+
             @if (dashboard.closedMaintenanceCount > 0) {
 
               <small class="stat-hint closed-hint">
@@ -157,7 +155,7 @@
       </div>
 
 
-      <!-- Paid -->
+
       <div class="col-xl-3 col-md-6">
 
         <div class="stat-card stat-card-link" (click)="goToInvoices()">
@@ -186,8 +184,7 @@
               Invoices &amp; maintenance paid
             </small>
 
-            <!-- What the paid total was spent on. The two parts always add
-                 up to the amount above, so the card stays self-explanatory. -->
+
             <div class="paid-breakdown">
 
               <span class="paid-part">
@@ -230,10 +227,10 @@
     </div>
 
 
-    <!-- Maintenance + Invoice -->
+
     <div class="row g-3 mb-4">
 
-      <!-- Maintenance Overview -->
+
       <div class="col-lg-7">
 
         <div class="panel h-100">
@@ -350,7 +347,7 @@
       </div>
 
 
-      <!-- Latest Invoice -->
+
       <div class="col-lg-5">
 
         <div class="panel h-100">
@@ -486,7 +483,7 @@
     </div>
 
 
-    <!-- Recent Maintenance -->
+
     <div class="panel mb-4">
 
       <div class="panel-header">
@@ -578,7 +575,7 @@
                       </strong>
 
                       <span>
-                        #{{ ticket._id }}
+
                       </span>
 
                     </div>
@@ -657,7 +654,7 @@
     </div>
 
 
-    <!-- Recent Visitors -->
+
     <div class="panel">
 
       <div class="panel-header">

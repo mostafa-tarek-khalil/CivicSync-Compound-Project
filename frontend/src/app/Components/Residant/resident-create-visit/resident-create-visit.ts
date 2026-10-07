@@ -15,13 +15,6 @@ interface VisitRow {
   statusLabel: string;
 }
 
-/**
- * Resident-side visitor invite. The backend already exposes `POST /visits`
- * (resident-only, `RESIDENT_INVITE`) which derives the building and unit from
- * the resident's own profile — this page is that endpoint's UI: the resident
- * fills in the visitor details and the visit slot, and the requested visit is
- * created straight away.
- */
 @Component({
   selector: 'app-resident-create-visit',
   standalone: true,

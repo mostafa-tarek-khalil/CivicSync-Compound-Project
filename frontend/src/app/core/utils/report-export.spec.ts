@@ -1,8 +1,4 @@
-/**
- * The report export is the actual deliverable of the "Download full compound
- * report" button, so it is tested against a minimal but structurally faithful
- * payload rather than a live API.
- */
+
 import { FullCompoundReport } from '../../Services/admin-service';
 import { buildCompoundReportCsv } from './report-export';
 

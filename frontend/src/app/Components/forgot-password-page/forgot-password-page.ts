@@ -5,10 +5,6 @@ import { timeout } from 'rxjs/operators';
 
 import { AuthService } from '../../core/services/auth.service';
 
-/**
- * "Forgot password" step 1: the user submits their e-mail and the backend
- * mails a reset token (never returned in the response body).
- */
 @Component({
   selector: 'app-forgot-password-page',
   standalone: true,

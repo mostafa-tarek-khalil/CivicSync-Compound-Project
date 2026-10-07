@@ -22,7 +22,7 @@
   </div>
   }
 
-  <!-- Filters -->
+
   <div class="filters">
     <select [(ngModel)]="statusFilter" (change)="applyFilters()">
       <option value="">All statuses</option>
@@ -47,7 +47,7 @@
     <button type="button" (click)="applyFilters()">Apply</button>
   </div>
 
-  <!-- Table -->
+
   <div class="panel">
     @if (loading) {
     <div class="loading">Loading users…</div>
@@ -114,7 +114,7 @@
 
 </div>
 
-<!-- ===================== EDIT USER MODAL ===================== -->
+
 @if (userModalOpen) {
 <div class="modal-backdrop" (click)="closeUserModal()">
   <div class="modal-card" (click)="$event.stopPropagation()">

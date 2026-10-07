@@ -45,7 +45,6 @@ export class VisitorDetails implements OnInit {
   loading = false;
   errorMessage = '';
 
-
   constructor(
     private router: Router,
     private route: ActivatedRoute,
@@ -53,7 +52,6 @@ export class VisitorDetails implements OnInit {
     private visitService: VisitService,
     private cdr: ChangeDetectorRef
   ) {}
-
 
   ngOnInit(): void {
     this.visitId = this.route.snapshot.queryParamMap.get('visitId') || this.visitorFlow.getVisit().requestId;
@@ -110,8 +108,6 @@ export class VisitorDetails implements OnInit {
     this.checkInTime = formatTime(visit.checkedInAt);
     this.checkOutTime = formatTime(visit.checkedOutAt);
 
-    // NOTE: security views someone else's visit here, so we do not push this
-    // data into the visitor's tracked-visit store.
   }
 
   private toFlowStatus(status: string): 'Pending Approval' | 'Approved' | 'QR Generated' | 'Checked In' | 'Checked Out' | 'Rejected' | 'Expired' {
@@ -134,11 +130,6 @@ export class VisitorDetails implements OnInit {
     }
   }
 
-
-  // =========================
-  // BACK
-  // =========================
-
   goBack(): void {
 
     this.router.navigate([
@@ -147,11 +138,6 @@ export class VisitorDetails implements OnInit {
 
   }
 
-
-  // =========================
-  // SCAN AGAIN
-  // =========================
-
   scanAgain(): void {
 
     this.router.navigate([
@@ -159,11 +145,6 @@ export class VisitorDetails implements OnInit {
     ]);
 
   }
-
-
-  // =========================
-  // CHECK IN / OUT
-  // =========================
 
   openCheckInOut(): void {
 

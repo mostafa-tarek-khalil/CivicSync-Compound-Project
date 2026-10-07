@@ -4,9 +4,9 @@ export type ModalVariant = 'info' | 'success' | 'warning' | 'danger' | 'confirm'
 
 export interface ModalButton {
   label: string;
-  /** Value resolved when this button is chosen. */
+
   value: boolean;
-  /** Visual emphasis. */
+
   kind?: 'primary' | 'secondary' | 'danger' | 'ghost';
 }
 
@@ -18,23 +18,14 @@ export interface ModalRequest {
   buttons: ModalButton[];
 }
 
-/**
- * THE app-wide dialog service.
- *
- * Every replaceable `alert()` / `confirm()` call goes through here so the app
- * never shows a browser-native popup again. Components render the dialog from
- * `activeRequest` and resolve it through `resolve()`.
- */
 @Injectable({ providedIn: 'root' })
 export class ModalService {
   private readonly requestSignal = signal<ModalRequest | null>(null);
 
-  /** Currently displayed dialog, or null when nothing is open. */
   readonly activeRequest = this.requestSignal.asReadonly();
 
   private resolver: ((value: boolean) => void) | null = null;
 
-  /** Simple information dialog with a single acknowledge button. */
   info(message: string, title = 'Information'): Promise<boolean> {
     return this.open({
       title,
@@ -75,7 +66,6 @@ export class ModalService {
     });
   }
 
-  /** Replaces `confirm()`: resolves true only when the user agrees. */
   confirm(options: {
     title?: string;
     message: string;
@@ -103,7 +93,6 @@ export class ModalService {
     });
   }
 
-  /** Called by the dialog component when a button is clicked. */
   resolve(value: boolean): void {
     const resolver = this.resolver;
 
@@ -114,8 +103,7 @@ export class ModalService {
   }
 
   private open(request: ModalRequest): Promise<boolean> {
-    // A second dialog opening while one is up would orphan the first promise,
-    // so the pending dialog is auto-dismissed first.
+
     this.resolver?.(false);
 
     return new Promise<boolean>((resolve) => {

@@ -10,11 +10,6 @@
   color: #14213d;
 }
 
-
-/* =========================
-   ENTRANCE ANIMATIONS
-========================= */
-
 @keyframes fade-up {
   from {
     opacity: 0;
@@ -71,11 +66,6 @@
   animation: fade-up 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
-
-/* =========================
-   HEADER
-========================= */
-
 .page-header {
   display: flex;
   justify-content: space-between;
@@ -117,11 +107,6 @@
   font-size: 14px;
 }
 
-
-/* =========================
-   PRIMARY BUTTON
-========================= */
-
 .primary-action {
   border: none;
   background: #14213d;
@@ -161,11 +146,6 @@
   transform: scale(1.12);
 }
 
-
-/* =========================
-   STAT CARDS
-========================= */
-
 .stats-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -188,7 +168,6 @@
 
   transition: 0.25s ease;
 
-  /* Now a <button> so the whole card is a click target. */
   width: 100%;
   text-align: start;
   font: inherit;
@@ -199,7 +178,6 @@
   animation: pop-in 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
-/* The four stat cards cascade in one after another. */
 .stat-card:nth-child(1) {
   animation-delay: 0.1s;
 }
@@ -311,11 +289,6 @@
   font-weight: 600;
 }
 
-
-/* =========================
-   MAIN GRID
-========================= */
-
 .dashboard-grid {
   display: grid;
 
@@ -383,11 +356,6 @@
   justify-content: center;
 }
 
-
-/* =========================
-   QUICK ACTIONS
-========================= */
-
 .action-list {
   display: flex;
   flex-direction: column;
@@ -417,7 +385,6 @@
   animation: slide-in-left 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
-/* The quick-action list reveals top to bottom. */
 .action-list .action-card:nth-child(1) {
   animation-delay: 0.44s;
 }
@@ -488,11 +455,6 @@
   transition: transform 0.22s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-
-/* =========================
-   ACTIVITY
-========================= */
-
 .view-all {
   border: none;
   background: transparent;
@@ -541,7 +503,6 @@
   animation: slide-in-left 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
-/* The activity feed fades down the list. */
 .activity-list .activity-row:nth-child(1) {
   animation-delay: 0.5s;
 }
@@ -675,11 +636,6 @@
   transition: transform 0.22s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-
-/* =========================
-   SECURITY NOTICE
-========================= */
-
 .security-notice {
   margin-top: 22px;
 
@@ -753,11 +709,6 @@
   animation: pulse-dot 2.2s ease-in-out infinite;
 }
 
-
-/* =========================
-   REDUCED MOTION
-========================= */
-
 @media (prefers-reduced-motion: reduce) {
 
   .page-header,
@@ -774,11 +725,6 @@
   }
 
 }
-
-
-/* =========================
-   DARK MODE
-========================= */
 
 :host-context(html.dark-mode) .security-dashboard {
   background: #0e1624;
@@ -842,11 +788,6 @@
 :host-context(html.dark-mode) .view-all {
   color: #91afd1;
 }
-
-
-/* =========================
-   RESPONSIVE
-========================= */
 
 @media (max-width: 1100px) {
 

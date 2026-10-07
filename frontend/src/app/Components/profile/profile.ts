@@ -36,11 +36,9 @@ export class Profile implements OnInit {
 
   profile: ProfileData | null = null;
 
-  // Editable fields
   name = '';
   phone = '';
 
-  // ---------- Change password ----------
   currentPassword = '';
   newPassword = '';
   confirmPassword = '';
@@ -49,7 +47,6 @@ export class Profile implements OnInit {
   passwordError = '';
   passwordSuccess = '';
 
-  // ---------- Profile picture ----------
   uploadingAvatar = false;
 
   constructor(
@@ -96,13 +93,6 @@ export class Profile implements OnInit {
     return role.charAt(0) + role.slice(1).toLowerCase();
   }
 
-  /**
-   * Technician rating, rounded to a single decimal.
-   *
-   * The stored value is an exact average (`totalRating / totalReviews`), so it
-   * arrives as something like 4.333333333333333. Showing that raw number was
-   * the bug — one digit after the star is all the identity card needs.
-   */
   get ratingLabel(): string {
     const rating = Number(this.profile?.rating ?? 0);
 
@@ -162,10 +152,6 @@ export class Profile implements OnInit {
     this.successMessage = '';
   }
 
-  // ==================================================================
-  // PROFILE PICTURE
-  // ==================================================================
-
   onAvatarSelected(event: Event): void {
     const input = event.target as HTMLInputElement;
     const file = input.files?.[0];
@@ -174,8 +160,6 @@ export class Profile implements OnInit {
       return;
     }
 
-    // Mirrors the backend limit so the user gets an instant answer instead of
-    // uploading 6 MB only to be rejected.
     if (file.size > 5 * 1024 * 1024) {
       this.modalService.error('The image must be 5 MB or smaller.');
       input.value = '';
@@ -209,10 +193,6 @@ export class Profile implements OnInit {
       }
     });
   }
-
-  // ==================================================================
-  // CHANGE PASSWORD
-  // ==================================================================
 
   changePassword(): void {
     this.passwordError = '';

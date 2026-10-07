@@ -4,7 +4,7 @@
 
   <div class="prog-container">
 
-    <!-- BRAND -->
+
     <header class="prog-brand">
       <span class="brand-icon">
         <span></span><span></span><span></span>
@@ -12,7 +12,7 @@
       CivicSync
     </header>
 
-    <!-- HERO -->
+
     <section class="prog-hero">
       <div class="hero-icon" [class.done]="isCheckedOut">
         <span class="material-symbols-outlined">
@@ -41,7 +41,7 @@
       <p>{{ errorMessage }}</p>
     </div>
 
-    <!-- VISIT SUMMARY -->
+
     <section class="info-card">
       <div class="card-title">
         <div class="title-icon">
@@ -81,7 +81,7 @@
       </div>
     </section>
 
-    <!-- CHAT -->
+
     <section class="info-card chat-card" *ngIf="!isCheckedOut">
       <div class="card-title">
         <div class="title-icon">
@@ -106,7 +106,7 @@
       </button>
     </section>
 
-    <!-- ACTIONS -->
+
     <div class="actions">
       <button class="secondary-btn" type="button" (click)="trackAnother()">
         <span class="material-symbols-outlined">travel_explore</span>

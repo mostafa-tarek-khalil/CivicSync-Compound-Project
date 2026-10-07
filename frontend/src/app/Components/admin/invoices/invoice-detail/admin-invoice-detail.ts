@@ -8,14 +8,6 @@ import { RealtimeRefresh } from '../../../../core/utils/realtime-refresh';
 import { InvoiceReceipt } from '../../../../shared/invoice/invoice-receipt';
 import { IInvoiceDetail } from '../../../../shared/invoice/invoice.model';
 
-/**
- * Admin invoice receipt screen.
- *
- * Reached from the invoices table ("View") and from the maintenance ticket
- * details modal, so a linked invoice is only ever one click away from the job
- * that produced it. Renders the shared receipt component, which is what makes
- * the printed document identical for Admin, Resident and Technician.
- */
 @Component({
   selector: 'app-admin-invoice-detail',
   standalone: true,
@@ -41,8 +33,7 @@ export class AdminInvoiceDetail implements OnInit, OnDestroy {
     private chatSocket: ChatSocket,
     private cdr: ChangeDetectorRef
   ) {
-    // Any change to this invoice (status confirmed, cancelled, due) reloads the
-    // receipt in place. The admin does not have to reopen it.
+
     this.realtime = new RealtimeRefresh(
       this.chatSocket,
       [
@@ -99,7 +90,6 @@ export class AdminInvoiceDetail implements OnInit, OnDestroy {
     this.router.navigate(['/admin/invoices']);
   }
 
-  /** Drill-through from the receipt to the ticket that generated it. */
   openTicket(ticketId: string): void {
     this.router.navigate(['/admin/maintenance'], {
       queryParams: { ticketId }

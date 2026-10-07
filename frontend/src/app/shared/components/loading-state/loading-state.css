@@ -60,8 +60,6 @@
   animation: cs-fade-in 0.4s ease 0.1s both;
 }
 
-/* The outer ring breathes while the spinner turns, so a slow request
-   still reads as activity rather than a freeze. */
 .variant-page .spinner,
 .variant-section .spinner {
   animation: cs-spin 0.75s linear infinite,

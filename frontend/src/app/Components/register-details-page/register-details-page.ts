@@ -285,10 +285,7 @@ export class RegisterDetailsPage implements OnInit {
     this.authService.register(payload).pipe(timeout(15000)).subscribe({
       next: () => {
         sessionStorage.removeItem('civicsync_register');
-        // New accounts are created as PENDING and can't log in until an
-        // admin approves them. Tell the login page so it can explain that
-        // instead of letting the user hit a confusing "Account is not
-        // active" error right after registering.
+
         this.router.navigate(['/login'], { queryParams: { registered: 'pending' } });
       },
       error: (error) => {

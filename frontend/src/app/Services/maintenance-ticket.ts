@@ -34,10 +34,6 @@ export class MaintenanceTicketService {
 
   constructor(private http: HttpClient) {}
 
-  /**
-   * Single aggregated payload for the resident dashboard: maintenance
-   * statistics, visitors and the billing / outstanding breakdown.
-   */
   getDashboard(): Observable<IResidentDashboardResponse> {
     return this.http.get<IResidentDashboardResponse>(
       `${this.apiUrl}/dashboard`
@@ -63,12 +59,6 @@ export class MaintenanceTicketService {
     );
   }
 
-  /**
-   * Upload a ticket photo and get back the URL to store on the ticket.
-   *
-   * Multipart rather than a JSON base64 blob, so large photos stream instead of
-   * inflating the request body.
-   */
   uploadAttachment(file: File): Observable<{
     success: boolean;
     data: { attachmentUrl: string };
@@ -82,12 +72,6 @@ export class MaintenanceTicketService {
     }>(`${environment.apiUrl}/uploads/ticket-attachment`, formData);
   }
 
-  /**
-   * Resident claims a payment on one of their own invoices.
-   *
-   * Moves the invoice to PAYMENT_SUBMITTED; an admin still has to approve it,
-   * so the button is a claim, not a settlement.
-   */
   payInvoice(
     invoiceId: string,
     reference?: string

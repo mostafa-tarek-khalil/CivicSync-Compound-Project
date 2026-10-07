@@ -63,14 +63,7 @@ export interface AuthMessageResponse {
   message: string;
 }
 
-/**
- * THE single source of truth for authentication state.
- *
- * The user object lives in a signal that is hydrated from `/auth/me`, not from
- * ad-hoc parsing of localStorage. Any component that needs the signed-in user
- * reads `authService.user()` / `authService.userRole` instead of touching
- * storage itself.
- */
+
 @Injectable({
   providedIn: 'root'
 })
@@ -88,17 +81,9 @@ export class AuthService {
 
   constructor(private http: HttpClient) {}
 
-  // ------------------------------------------------------------------
-  // AUTH FLOW
-  // ------------------------------------------------------------------
 
-  /**
-   * Bootstrap step, run once on app start (see `app.config.ts`).
-   *
-   * The cached snapshot is only a hint so the shell can paint immediately;
-   * `/auth/me` is still the authority and overwrites it. When the call fails
-   * (expired / invalid token) the session is cleared.
-   */
+
+  
   initializeSession(): Observable<CurrentUser | null> {
     if (!this.getToken()) {
       return of(null);
@@ -156,14 +141,7 @@ export class AuthService {
     );
   }
 
-  /**
-   * Upload a new profile picture for the signed-in user (any role).
-   *
-   * Sent as multipart/form-data so the browser streams the file instead of the
-   * app base64-encoding it into a JSON body. The response carries the refreshed
-   * user, which is written back into the shared signal so the topbar, profile
-   * and chat avatars all update at once.
-   */
+  
   uploadProfileImage(file: File): Observable<MeResponse> {
     const formData = new FormData();
     formData.append('image', file);
@@ -209,10 +187,7 @@ export class AuthService {
     });
   }
 
-  /**
-   * Change the signed-in user's password. The backend re-verifies the current
-   * password before writing the new one.
-   */
+  
   changePassword(
     currentPassword: string,
     newPassword: string
@@ -229,16 +204,14 @@ export class AuthService {
     this.userSignal.set(null);
   }
 
-  // ------------------------------------------------------------------
-  // READS
-  // ------------------------------------------------------------------
 
-  /** Used by the HTTP interceptor and the chat socket. */
+
+  
   getToken(): string | null {
     return readToken();
   }
 
-  /** Backwards-compatible getter; prefer the `user()` signal. */
+  
   getUser(): CurrentUser | null {
     return this.userSignal();
   }
@@ -260,13 +233,13 @@ export class AuthService {
     return !!role && roles.includes(role);
   }
 
-  /** Role-aware landing route, so redirects are never hard-coded per page. */
+  
   get homeRoute(): string {
     const role = this.userRole;
     return role ? ROLE_HOME[role] : '/';
   }
 
-  /** Single place where e-mails are normalised before hitting the API. */
+  
   private normalizeEmail(email: string): string {
     return (email ?? '').trim().toLowerCase();
   }

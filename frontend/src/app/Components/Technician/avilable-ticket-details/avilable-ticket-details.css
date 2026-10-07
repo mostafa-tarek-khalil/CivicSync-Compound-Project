@@ -1,19 +1,9 @@
 @import '../shared/tech-theme.css';
 
-
-/* =========================
-   PAGE
-========================= */
-
 .ticket-details-page {
   min-height: 100vh;
   background-color: var(--page-bg);
 }
-
-
-/* =========================
-   HEADER
-========================= */
 
 .page-header {
   display: flex;
@@ -65,11 +55,6 @@
   color: var(--text-muted);
 }
 
-
-/* =========================
-   DETAILS CARD
-========================= */
-
 .details-card {
   background: var(--surface);
 
@@ -114,7 +99,6 @@
   transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-/* One hue per maintenance category. */
 .category-icon.cat-plumbing {
   color: var(--cat-plumbing);
   background: var(--cat-plumbing-soft);
@@ -198,11 +182,6 @@
   background: var(--red);
 }
 
-
-/* =========================
-   SECTIONS
-========================= */
-
 .section {
   padding-top: 20px;
 }
@@ -224,11 +203,6 @@
 
   color: var(--text-muted);
 }
-
-
-/* =========================
-   INFO GRID
-========================= */
 
 .info-grid {
   display: grid;
@@ -263,7 +237,6 @@
   color: var(--primary);
 }
 
-/* Each info box carries the accent of the field it describes. */
 .info-box .fa-calendar {
   color: var(--cat-electricity);
 }
@@ -298,11 +271,6 @@
   color: var(--text-primary);
 }
 
-
-/* =========================
-   ATTACHMENT
-========================= */
-
 .attachment-btn {
   display: inline-flex;
   align-items: center;
@@ -326,11 +294,6 @@
 .attachment-btn:hover {
   color: var(--primary-dark);
 }
-
-
-/* =========================
-   OFFER CARD
-========================= */
 
 .offer-card {
   background: var(--surface);
@@ -430,11 +393,6 @@
   transition: background-color 0.2s ease, border-color 0.2s ease,
     color 0.2s ease;
 }
-
-
-/* =========================
-   LOADING / ERROR / EMPTY
-========================= */
 
 .loading-box,
 .error-box,
@@ -583,11 +541,6 @@
   transform: translateY(-1px);
 }
 
-
-/* =========================
-   RESIDENT & LOCATION PANEL
-========================= */
-
 .resident-panel {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -621,7 +574,6 @@
   color: var(--primary);
 }
 
-/* Contact details read as a set of distinct, recognisable cues. */
 .resident-row .fa-user {
   color: var(--cat-plumbing);
 }
@@ -665,11 +617,6 @@
   word-break: break-word;
 }
 
-
-/* =========================
-   ATTACHMENT PREVIEW
-========================= */
-
 .attachment-preview {
   display: block;
 
@@ -695,11 +642,6 @@
   background: var(--surface-soft);
 }
 
-
-/* =========================
-   MOTION PREFERENCES
-========================= */
-
 @media (prefers-reduced-motion: reduce) {
 
   .page-header,
@@ -712,11 +654,6 @@
   }
 
 }
-
-
-/* =========================
-   RESPONSIVE
-========================= */
 
 @media (max-width: 767px) {
 
@@ -743,7 +680,6 @@
 
 }
 
-
 @media (max-width: 480px) {
 
   .ticket-details-page {
@@ -763,12 +699,6 @@
   }
 
 }
-
-
-/* =========================================================
-   WORK ORDER PRINT BUTTON
-   Prints the job details card only (see core/utils/print.ts).
-   ========================================================= */
 
 .print-job-btn {
   display: inline-flex;

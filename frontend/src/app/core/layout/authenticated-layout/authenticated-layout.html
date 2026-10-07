@@ -1,12 +1,10 @@
 <div class="app-shell" [class.sidebar-collapsed]="collapsed()">
 
-  <!-- Sidebar -->
+
   <aside class="sidebar" [class.mobile-open]="mobileOpen()">
 
     <div class="sidebar-brand">
-      <!-- The brand itself is the desktop toggle. On desktop the logo is always
-           rendered (icon-only when collapsed) so the affordance never
-           disappears; on mobile it is inert and the close button takes over. -->
+
       <button
         class="brand-toggle"
         type="button"
@@ -40,7 +38,7 @@
     </nav>
 
     <div class="sidebar-footer">
-      <!-- LOGOUT BUTTON -->
+
       <button class="logout-button" type="button" (click)="logout()" title="Logout">
         <span class="material-symbols-outlined">logout</span>
         <span class="nav-label" *ngIf="!collapsed()">Logout</span>
@@ -50,13 +48,11 @@
 
   <div class="sidebar-backdrop d-mobile" *ngIf="mobileOpen()" (click)="closeMobile()"></div>
 
-  <!-- Main area -->
+
   <div class="main-area">
 
     <div class="shell-topbar">
-      <!-- Mobile-only menu affordance. On desktop the brand mark in the sidebar
-           is the toggle, so this stays hidden to avoid the two icons fighting
-           over the same corner. -->
+
       <button
         class="nav-toggle d-mobile"
         type="button"

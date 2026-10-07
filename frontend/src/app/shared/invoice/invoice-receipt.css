@@ -1,11 +1,4 @@
-/*
- * Invoice receipt styling.
- *
- * Design goals (Fawry-like, not a copy): a clear issuer header, a prominent
- * document number, an unmistakable status stamp, a tight two-column line-item
- * table, and a monospace reference strip at the bottom. The palette reuses the
- * app's existing blue (#315b8f) so the receipt belongs to this product.
- */
+
 
 :host {
   display: block;
@@ -22,8 +15,6 @@
   box-shadow: 0 2px 10px rgba(20, 43, 70, 0.07);
   font-size: 14px;
 }
-
-/* ============================ Header ============================ */
 
 .receipt-head {
   display: flex;
@@ -111,8 +102,6 @@
   letter-spacing: 0.04em;
 }
 
-/* ============================ Status stamp ============================ */
-
 .receipt-stamp {
   display: flex;
   align-items: center;
@@ -181,8 +170,6 @@
   background: rgba(234, 179, 8, 0.06);
 }
 
-/* ============================ Billed to ============================ */
-
 .receipt-split {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -217,8 +204,6 @@
   color: #64748b;
   word-break: break-word;
 }
-
-/* ============================ Line items ============================ */
 
 .receipt-table {
   width: calc(100% - 3.2rem);
@@ -286,8 +271,6 @@
   padding-top: 0.25rem;
 }
 
-/* ============================ Dates ============================ */
-
 .receipt-dates {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
@@ -306,8 +289,6 @@
   font-size: 0.9rem;
   font-weight: 600;
 }
-
-/* ============================ Reference strip ============================ */
 
 .receipt-foot {
   display: flex;
@@ -356,8 +337,6 @@
   color: #8290a5;
 }
 
-/* ============================ Actions ============================ */
-
 .receipt-actions {
   display: flex;
   gap: 0.6rem;
@@ -403,8 +382,6 @@
 .btn-ticket .material-symbols-outlined {
   font-size: 18px;
 }
-
-/* ============================ Dark mode ============================ */
 
 :host-context(html.dark-mode) .receipt {
   background: #131d2c;
@@ -458,13 +435,6 @@
   background: #1e2f47;
 }
 
-/* ============================ Print ============================ */
-
-/*
- * The global rules in styles.css already collapse the page to
- * `.invoice-print-area`. These only drop the on-screen chrome so the printed
- * sheet is a clean document.
- */
 @media print {
   .receipt {
     border: none;
@@ -480,7 +450,7 @@
   }
 
   .receipt-head {
-    /* Keep the brand band even on monochrome printers. */
+
     -webkit-print-color-adjust: exact;
     print-color-adjust: exact;
   }
@@ -527,12 +497,8 @@
   .foot-note {
     text-align: start;
   }
-}/* =========================================================
-   MOTION LAYER
-   Keyframes are global (styles.css).
-   ========================================================= */
+}
 
-/* The receipt is a 3D document — it lifts off the page and tilts. */
 .receipt {
   transform-style: preserve-3d;
   perspective: 1400px;
@@ -558,7 +524,6 @@
   }
 }
 
-/* Header block settles first, then the body rows follow. */
 .receipt-head {
   animation: cs-fade-up 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.14s both;
 }
@@ -575,7 +540,6 @@
   animation: cs-stamp-in 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.3s both;
 }
 
-/* The status stamp presses onto the page. */
 @keyframes cs-stamp-in {
   from {
     opacity: 0;
@@ -599,7 +563,6 @@
 .split-block:nth-child(1) { animation-delay: 0.32s; }
 .split-block:nth-child(2) { animation-delay: 0.38s; }
 
-/* Line items cascade down the receipt. */
 .receipt-table tbody tr {
   animation: cs-slide-in-left 0.42s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
@@ -657,7 +620,6 @@
   transform: translateY(0) scale(0.98);
 }
 
-/* Printing must never animate — force the static, final state. */
 @media print {
   .receipt,
   .receipt-head,

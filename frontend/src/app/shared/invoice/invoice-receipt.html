@@ -1,12 +1,7 @@
-<!--
-  Printable payment receipt.
 
-  The `invoice-print-area` class is the contract with the global print rules in
-  styles.css: only this subtree is emitted by window.print().
--->
 <div class="invoice-print-area receipt" *ngIf="view">
 
-  <!-- ===================== Header band ===================== -->
+
   <header class="receipt-head">
     <div class="issuer">
       <div class="issuer-mark" aria-hidden="true">
@@ -25,7 +20,7 @@
     </div>
   </header>
 
-  <!-- Status stamp: the single most important state on a receipt. -->
+
   <div class="receipt-stamp" [ngClass]="view.statusClass">
     <span class="stamp-label">{{ view.statusLabel }}</span>
     <span class="stamp-note" *ngIf="view.isSettled && view.paidLabel !== '—'">
@@ -42,7 +37,7 @@
     </span>
   </div>
 
-  <!-- ===================== Billed to / summary ===================== -->
+
   <section class="receipt-split">
     <div class="split-block">
       <span class="block-label">Billed to</span>
@@ -56,7 +51,7 @@
     </div>
   </section>
 
-  <!-- ===================== Line items ===================== -->
+
   <table class="receipt-table">
     <thead>
       <tr>
@@ -101,7 +96,7 @@
     </tfoot>
   </table>
 
-  <!-- ===================== Dates ===================== -->
+
   <section class="receipt-dates">
     <div class="date-cell">
       <span class="block-label">Invoice date</span>
@@ -119,13 +114,12 @@
     </div>
   </section>
 
-  <!-- ===================== Reference strip ===================== -->
+
   <footer class="receipt-foot">
     <div class="ref-block">
       <span class="block-label">Payment reference</span>
       <div class="ref-code" aria-hidden="true">
-        <!-- Decorative barcode-ish strip built from the invoice number; it is a
-             visual affordance only and encodes nothing. -->
+
         <span *ngFor="let bar of barcodeFor(view.number)" [style.width.px]="bar"></span>
       </div>
       <span class="ref-text">{{ view.number }}</span>
@@ -137,7 +131,7 @@
     </div>
   </footer>
 
-  <!-- ===================== Actions (never printed) ===================== -->
+
   <div class="receipt-actions no-print" *ngIf="showActions">
     <button type="button" class="btn-print" (click)="print()">
       <span class="material-symbols-outlined">print</span>

@@ -1,6 +1,6 @@
 <div class="admin-page">
 
-  <!-- ------------------------------------------------------------- Header -->
+
   <header class="page-header report-header">
     <div class="header-copy">
       <span class="eyebrow">ANALYTICS</span>
@@ -23,13 +23,13 @@
     </div>
   </header>
 
-  <!-- -------------------------------------------------------------- Errors -->
+
   <div class="alert error" *ngIf="errorMessage">
     <span class="material-symbols-outlined">error</span>
     {{ errorMessage }}
   </div>
 
-  <!-- ------------------------------------------------------------- Loading -->
+
   <div class="state-box" *ngIf="loading">
     <span class="material-symbols-outlined spinning">hourglass_top</span>
     <p>Crunching the numbers…</p>
@@ -37,7 +37,7 @@
 
   <ng-container *ngIf="!loading && reports">
 
-    <!-- ------------------------------------------------------- Summary row -->
+
     <section class="stat-row">
       <article class="stat-card">
         <span class="stat-icon blue"><span class="material-symbols-outlined">group</span></span>
@@ -72,7 +72,7 @@
       </article>
     </section>
 
-    <!-- --------------------------------------------- Users & occupancy row -->
+
     <div class="grid-2">
 
       <section class="card">
@@ -101,7 +101,7 @@
 
     </div>
 
-    <!-- ------------------------------------------------------ Tickets row -->
+
     <div class="grid-2">
 
       <section class="card">
@@ -130,7 +130,7 @@
 
     </div>
 
-    <!-- ---------------------------------------------- Revenue & invoices -->
+
     <div class="grid-2">
 
       <section class="card">
@@ -179,7 +179,7 @@
 
     </div>
 
-    <!-- -------------------------------------------------------- Visit logs -->
+
     <section class="card">
       <div class="card-heading">
         <span class="material-symbols-outlined">badge</span>

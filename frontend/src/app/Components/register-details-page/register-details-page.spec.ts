@@ -6,7 +6,6 @@ import { provideRouter } from '@angular/router';
 
 import { RegisterDetailsPage } from './register-details-page';
 
-/** Blank route target so component navigations resolve during tests. */
 @Component({ selector: 'app-test-blank', template: '' })
 class TestBlankComponent {}
 

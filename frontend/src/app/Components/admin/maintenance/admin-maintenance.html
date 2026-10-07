@@ -111,7 +111,7 @@
 
 </div>
 
-<!-- ===================== TICKET DETAILS MODAL ===================== -->
+
 @if (ticketModalOpen) {
 <div class="modal-backdrop" (click)="closeTicketModal()">
   <div class="modal-card modal-wide" (click)="$event.stopPropagation()">
@@ -180,7 +180,7 @@
       </div>
       }
 
-      <!-- Review ------------------------------------------------------- -->
+
       <div class="detail-block">
         <span class="detail-label">Resident Review</span>
 
@@ -212,7 +212,7 @@
         }
       </div>
 
-      <!-- Invoice ------------------------------------------------------ -->
+
       <div class="detail-block">
         <span class="detail-label">Invoice</span>
 
@@ -229,7 +229,7 @@
         <small class="muted">{{ details.invoice.description }}</small>
         }
 
-        <!-- Drill-through: opens the printable receipt for this invoice. -->
+
         <button type="button" class="btn-sm view invoice-open" (click)="openInvoice(details.invoice._id)">
           <span class="material-symbols-outlined">receipt_long</span>
           Open invoice

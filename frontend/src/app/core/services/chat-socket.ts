@@ -21,10 +21,6 @@ export class ChatSocket {
     private authService: AuthService
   ) {}
 
-  // =========================================================
-  // CONNECT
-  // =========================================================
-
   connect(): void {
 
     if (
@@ -63,19 +59,12 @@ export class ChatSocket {
     this.attachLifecycleHandlers('Chat');
   }
 
-  /**
-   * Connect as a VISITOR using the token the backend issued for a visit.
-   * Visitors have no account, so they authenticate with
-   * { visitId, visitorChatToken } instead of a JWT.
-   */
   connectAsVisitor(visitId: string, visitorChatToken: string): void {
     if (!visitId || !visitorChatToken) {
       console.error('Visitor chat socket: visitId and token are required');
       return;
     }
 
-    // Always start a clean visitor socket; the previous one (if any) was
-    // authenticated as a different identity.
     this.disconnect();
 
     this.socket = io(environment.apiBaseUrl, {
@@ -107,19 +96,10 @@ export class ChatSocket {
     });
   }
 
-  // =========================================================
-  // TOKEN
-  // =========================================================
-
   private getToken(): string | null {
-    // AuthService owns credential access; the socket must not re-read
-    // localStorage (that is how the token key drifted before).
+
     return this.authService.getToken();
   }
-
-  // =========================================================
-  // DISCONNECT
-  // =========================================================
 
   disconnect(): void {
 
@@ -134,10 +114,6 @@ export class ChatSocket {
     this.connected = false;
   }
 
-  // =========================================================
-  // JOIN
-  // =========================================================
-
   joinConversation(
     conversationId: string
   ): void {
@@ -148,10 +124,6 @@ export class ChatSocket {
     );
   }
 
-  // =========================================================
-  // LEAVE
-  // =========================================================
-
   leaveConversation(
     conversationId: string
   ): void {
@@ -161,10 +133,6 @@ export class ChatSocket {
       conversationId
     );
   }
-
-  // =========================================================
-  // SEND
-  // =========================================================
 
   sendMessage(
     conversationId: string,
@@ -180,10 +148,6 @@ export class ChatSocket {
     );
   }
 
-  // =========================================================
-  // READ
-  // =========================================================
-
   markAsRead(
     conversationId: string
   ): void {
@@ -193,10 +157,6 @@ export class ChatSocket {
       conversationId
     );
   }
-
-  // =========================================================
-  // DELETE MESSAGE FOR ME
-  // =========================================================
 
   deleteMessageForMe(
     messageId: string
@@ -210,10 +170,6 @@ export class ChatSocket {
     );
   }
 
-  // =========================================================
-  // DELETE MESSAGE FOR EVERYONE
-  // =========================================================
-
   deleteMessageForEveryone(
     messageId: string
   ): void {
@@ -226,10 +182,6 @@ export class ChatSocket {
     );
   }
 
-  // =========================================================
-  // DELETE CONVERSATION FOR ME
-  // =========================================================
-
   deleteConversationForMe(
     conversationId: string
   ): void {
@@ -239,10 +191,6 @@ export class ChatSocket {
       conversationId
     );
   }
-
-  // =========================================================
-  // EVENT LISTENER
-  // =========================================================
 
   on(
     event: string,
@@ -256,10 +204,6 @@ export class ChatSocket {
       callback
     );
   }
-
-  // =========================================================
-  // REMOVE LISTENER
-  // =========================================================
 
   off(
     event: string,

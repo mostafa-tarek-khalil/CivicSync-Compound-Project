@@ -1,19 +1,9 @@
 @import '../shared/tech-theme.css';
 
-
-/* =========================
-   PAGE
-========================= */
-
 .create-offer-page {
   min-height: 100vh;
   background-color: var(--page-bg);
 }
-
-
-/* =========================
-   HEADER
-========================= */
 
 .page-header {
   max-width: 900px;
@@ -61,11 +51,6 @@
 
   color: var(--text-muted);
 }
-
-
-/* =========================
-   FORM CARD
-========================= */
 
 .offer-form-card {
   background: var(--surface);
@@ -122,11 +107,6 @@
   margin-bottom: 22px;
 }
 
-
-/* =========================
-   FORM
-========================= */
-
 .form-label {
   font-size: 12px;
   font-weight: 600;
@@ -166,11 +146,6 @@
 textarea.form-control {
   resize: vertical;
 }
-
-
-/* =========================
-   ACTIONS
-========================= */
 
 .error-box {
   display: flex;
@@ -256,11 +231,6 @@ textarea.form-control {
   cursor: not-allowed;
 }
 
-
-/* =========================
-   MOTION PREFERENCES
-========================= */
-
 @media (prefers-reduced-motion: reduce) {
 
   .page-header,
@@ -269,11 +239,6 @@ textarea.form-control {
   }
 
 }
-
-
-/* =========================
-   RESPONSIVE
-========================= */
 
 @media (max-width: 480px) {
 

@@ -81,7 +81,7 @@ export class MyOffersComponent implements OnInit {
     return 'pending';
   }
 
-  /** الـ ticketId ممكن يكون populate كـ object من الباك إند — نضمن إنه string */
+  
   getTicketId(offer: IOffer): string {
     if (typeof offer.ticketId === 'string') {
       return offer.ticketId;
@@ -90,11 +90,7 @@ export class MyOffersComponent implements OnInit {
     return (offer.ticketId as { _id?: string })?._id || '';
   }
 
-  /**
-   * Negotiation is only meaningful while the offer is still PENDING; once it is
-   * accepted/rejected/withdrawn (or the job is resolved/closed) the thread is
-   * read-only, so the action is removed entirely.
-   */
+  
   canNegotiate(offer: IOffer): boolean {
     return offer.status === 'PENDING';
   }

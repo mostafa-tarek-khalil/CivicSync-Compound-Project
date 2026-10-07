@@ -1,11 +1,4 @@
-/**
- * SINGLE STATUS CONTRACT (frontend side).
- *
- * Every value here mirrors the Mongoose `enum` in the corresponding backend
- * model 1:1 (see backend/utils/statusConstants.js). The UI must never invent
- * a status of its own — add it here AND in the backend model, or don't add it
- * at all.
- */
+
 
 export enum UserRole {
   RESIDENT = 'RESIDENT',
@@ -86,16 +79,13 @@ export enum NotificationType {
   ACCOUNT_REJECTED = 'ACCOUNT_REJECTED',
   INVOICE_CREATED = 'INVOICE_CREATED',
   INVOICE_DUE = 'INVOICE_DUE',
-  // Must mirror the backend Notification enum exactly — these two drive the
-  // realtime refresh of the invoice screens.
+
   INVOICE_PAID = 'INVOICE_PAID',
   INVOICE_PAYMENT_SUBMITTED = 'INVOICE_PAYMENT_SUBMITTED',
   INVOICE_UPDATED = 'INVOICE_UPDATED'
 }
 
-// ---------------------------------------------------------------------------
-// Output-variable → CSS class helpers (used for status pills across the app)
-// ---------------------------------------------------------------------------
+
 
 const STATUS_SLUGS: Record<string, string> = {
   [TicketStatus.OPEN]: 'open',
@@ -115,18 +105,14 @@ const STATUS_SLUGS: Record<string, string> = {
   [InvoiceStatus.CANCELLED]: 'cancelled'
 };
 
-/**
- * Shared slug values (`PENDING`, `REJECTED` …) appear in several enums with the
- * same spelling, so they are declared once here instead of once per enum — a
- * duplicate literal key in an object is a compile error in TypeScript.
- */
+
 const SHARED_STATUS_SLUGS: Record<string, string> = {
   PENDING: 'pending',
   REJECTED: 'rejected',
   APPROVED: 'approved'
 };
 
-/** `IN_PROGRESS` -> `in-progress` (safe CSS-class fragment for any status). */
+
 export function statusSlug(status?: string | null): string {
   if (!status) {
     return 'unknown';
@@ -135,7 +121,7 @@ export function statusSlug(status?: string | null): string {
   return STATUS_SLUGS[status] ?? SHARED_STATUS_SLUGS[status] ?? status.toLowerCase().replace(/_/g, '-');
 }
 
-/** `IN_PROGRESS` -> `In Progress` */
+
 export function statusLabel(status?: string | null): string {
   if (!status) {
     return 'Unknown';
@@ -148,10 +134,7 @@ export function statusLabel(status?: string | null): string {
     .join(' ');
 }
 
-/**
- * The maintenance state machine, mirrored from
- * backend/utils/statusConstants.js.
- */
+
 export const TICKET_TRANSITIONS: Record<TicketStatus, TicketStatus[]> = {
   [TicketStatus.OPEN]: [TicketStatus.ASSIGNED],
   [TicketStatus.ASSIGNED]: [TicketStatus.IN_PROGRESS, TicketStatus.OPEN],
@@ -167,7 +150,7 @@ export function canTransitionTicket(
   return (TICKET_TRANSITIONS[from] ?? []).includes(to);
 }
 
-/** Statuses for which a visitor chat conversation stays open. */
+
 export const VISIT_CHAT_ALLOWED_STATUSES: VisitStatus[] = [
   VisitStatus.APPROVED,
   VisitStatus.QR_GENERATED,
@@ -179,7 +162,7 @@ export function isVisitChatOpen(status?: string | null): boolean {
   return VISIT_CHAT_ALLOWED_STATUSES.includes(status as VisitStatus);
 }
 
-/** Where each role belongs after login / on an access-denied redirect. */
+
 export const ROLE_HOME: Record<UserRole, string> = {
   [UserRole.RESIDENT]: '/resident/dashboard',
   [UserRole.TECHNICIAN]: '/technician/dashboard',

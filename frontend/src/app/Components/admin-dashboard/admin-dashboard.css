@@ -102,10 +102,6 @@
   }
 }
 
-/* =========================
-   ENTRANCE ANIMATIONS
-========================= */
-
 @keyframes fade-up {
   from {
     opacity: 0;

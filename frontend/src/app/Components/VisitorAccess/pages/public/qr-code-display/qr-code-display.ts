@@ -32,18 +32,9 @@ export class QrCodeDisplay implements OnInit, OnDestroy {
   loading = false;
   errorMessage = '';
 
-  /**
-   * Set when the pass exists but the 1-hour window has not opened yet. The
-   * scheduled time and the moment the QR unlocks are both shown to the user.
-   */
   notYetAvailable = false;
   availableFrom = '';
 
-  /**
-   * While the pass is on screen the visitor is (usually) standing at the gate,
-   * so we poll the live status: once security checks them in we forward them to
-   * the post-check-in page where they can message their host.
-   */
   private statusPoll?: ReturnType<typeof setInterval>;
 
   constructor(
@@ -55,8 +46,6 @@ export class QrCodeDisplay implements OnInit, OnDestroy {
   ) {
     const visit = this.visitorFlow.getVisit();
 
-    // A resident may open this page for a specific request via query params
-    // (visitId + email), which takes precedence over the visitor's own flow.
     const paramVisitId = this.route.snapshot.queryParamMap.get('visitId');
     const paramEmail = this.route.snapshot.queryParamMap.get('email');
 
@@ -85,7 +74,6 @@ export class QrCodeDisplay implements OnInit, OnDestroy {
     }
   }
 
-  /** Redirect the visitor as soon as their QR has actually checked them in. */
   private watchForCheckIn(): void {
     this.statusPoll = setInterval(() => {
       if (!this.requestId || !this.visitorEmail) {
@@ -110,7 +98,7 @@ export class QrCodeDisplay implements OnInit, OnDestroy {
           }
         },
         error: () => {
-          // A transient poll error is not worth surfacing on the pass screen.
+
         }
       });
     }, 8000);
@@ -153,8 +141,6 @@ export class QrCodeDisplay implements OnInit, OnDestroy {
           this.expiresAt = this.formatExpiry(response.data.expiresAt);
           this.status = 'QR_GENERATED';
 
-          // Only the visitor's own session store is updated; a resident opening
-          // it for a request does not need to mutate their tracked visit.
           this.visitorFlow.updateVisit({
             status: 'QR_GENERATED',
             qrExpiresAt: response.data.expiresAt
@@ -184,8 +170,6 @@ export class QrCodeDisplay implements OnInit, OnDestroy {
             error?.error?.error ||
             'The visitor QR pass is not available.';
 
-          // The backend rejects an early request with the 1-hour rule message.
-          // Show it as a scheduled notice rather than a hard error.
           if (/1 hour prior/i.test(message)) {
             this.notYetAvailable = true;
             this.availableFrom =
@@ -201,12 +185,6 @@ export class QrCodeDisplay implements OnInit, OnDestroy {
       });
   }
 
-  /**
-   * "1 hour before the scheduled visit", expressed on the visit's own date.
-   *
-   * Used as a fallback label when the server did not send an exact timestamp,
-   * so the visitor always sees *when* to come back.
-   */
   get notBeforeLabel(): string {
     if (!this.visitDate) {
       return '1 hour before your visit time';
@@ -233,7 +211,6 @@ export class QrCodeDisplay implements OnInit, OnDestroy {
     });
   }
 
-  /** Human-friendly expiry, e.g. "Sep 24, 2026 · 05:30 PM". */
   private formatExpiry(value?: string | null): string {
     if (!value) {
       return 'Not available';
@@ -261,8 +238,7 @@ export class QrCodeDisplay implements OnInit, OnDestroy {
   }
 
   goBack(): void {
-    // Prefer real history so a resident who opened this from their visitor
-    // list returns there, not to the visitor-only status page.
+
     if (window.history.length > 1) {
       window.history.back();
       return;

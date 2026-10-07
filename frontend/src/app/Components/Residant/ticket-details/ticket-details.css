@@ -31,9 +31,6 @@
   padding: 32px;
 }
 
-
-/* ================= HEADER ================= */
-
 .details-header {
   display: flex;
   justify-content: space-between;
@@ -97,9 +94,6 @@
   align-items: center;
   gap: 9px;
 }
-
-
-/* ================= BADGES ================= */
 
 .status-badge,
 .priority-badge {
@@ -178,9 +172,6 @@
   border-color: var(--primary);
 }
 
-
-/* ================= STATUS CARD ================= */
-
 .status-card {
   background: var(--surface);
   border: 1px solid var(--border);
@@ -218,9 +209,6 @@
   color: var(--text-secondary);
   font-weight: 600;
 }
-
-
-/* ================= PROGRESS BAR ================= */
 
 .progress-container {
   position: relative;
@@ -296,9 +284,6 @@
   font-weight: 800;
 }
 
-
-/* ================= GRID ================= */
-
 .details-grid {
   display: grid;
   grid-template-columns: minmax(0, 1.7fr) minmax(300px, .9fr);
@@ -311,9 +296,6 @@
   flex-direction: column;
   gap: 25px;
 }
-
-
-/* ================= CARDS ================= */
 
 .info-card,
 .priority-card {
@@ -358,9 +340,6 @@
   font-size: 12px;
 }
 
-
-/* ================= DESCRIPTION ================= */
-
 .description-box {
   background: var(--surface-soft);
   border-radius: 9px;
@@ -382,9 +361,6 @@
   font-size: 14px;
   line-height: 1.7;
 }
-
-
-/* ================= INFO GRID ================= */
 
 .info-grid {
   display: grid;
@@ -408,9 +384,6 @@
   color: var(--text-primary);
   font-size: 13px;
 }
-
-
-/* ================= ATTACHMENT ================= */
 
 .attachment-box {
   display: flex;
@@ -475,9 +448,6 @@
 .empty-attachment i {
   font-size: 18px;
 }
-
-
-/* ================= ACTIONS ================= */
 
 .actions-area {
   display: flex;
@@ -573,9 +543,6 @@
   font-size: 11px;
 }
 
-
-/* ================= ASSIGNMENT ================= */
-
 .person-row {
   display: flex;
   align-items: center;
@@ -625,9 +592,6 @@
   font-size: 13px;
 }
 
-
-/* ================= PRIORITY CARD ================= */
-
 .priority-card {
   padding: 22px;
 }
@@ -666,9 +630,6 @@
   line-height: 1.6;
 }
 
-
-/* ================= LOADING / ERROR ================= */
-
 .loading-state,
 .error-state {
   min-height: 70vh;
@@ -700,9 +661,6 @@
   margin-bottom: 18px;
 }
 
-
-/* ================= DARK MODE ================= */
-
 :host-context(.dark-mode) {
   --primary: #6f9fd3;
   --primary-dark: #8ab4e3;
@@ -723,9 +681,6 @@
   --border-soft: #304156;
 }
 
-
-/* ================= TABLET ================= */
-
 @media (max-width: 1100px) {
 
   .details-content {
@@ -742,9 +697,6 @@
   }
 
 }
-
-
-/* ================= MOBILE ================= */
 
 @media (max-width: 768px) {
 
@@ -788,9 +740,6 @@
   }
 
 }
-
-
-/* ================= SMALL MOBILE ================= */
 
 @media (max-width: 480px) {
 
@@ -912,11 +861,6 @@
 .review-submitted span {
   color: #6d7890;
 }
-/* =========================================================
-   ATTACHMENT THUMBNAIL
-   The stored path is a relative /uploads URL; it must be
-   resolved against the backend origin or the image 404s.
-   ========================================================= */
 
 .attachment-thumb {
   display: block;
@@ -937,11 +881,7 @@
 
 html.dark-mode .attachment-thumb {
   border-color: #29394c;
-}/* =========================================================
-   MOTION LAYER
-   Keyframes are global (styles.css); this only wires them onto the
-   classes this page uses.
-   ========================================================= */
+}
 
 .details-header {
   animation: cs-fade-up 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
@@ -968,8 +908,6 @@ html.dark-mode .attachment-thumb {
   transform: rotate(90deg);
 }
 
-/* The progress card rises in, then each step of the timeline lights up
-   in order so the eye follows the ticket from open to closed. */
 .status-card {
   animation: cs-fade-up 0.55s cubic-bezier(0.22, 1, 0.36, 1) 0.08s both;
 }
@@ -994,7 +932,6 @@ html.dark-mode .attachment-thumb {
   box-shadow: 0 0 0 4px rgba(49, 91, 143, 0.12);
 }
 
-/* Progress line draws itself across as the card settles. */
 .progress-line {
   transform-origin: left center;
   animation: cs-grow-line 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.3s both;
@@ -1010,7 +947,6 @@ html.dark-mode .attachment-thumb {
   }
 }
 
-/* Detail cards: gentle 3D tilt on hover. */
 .details-grid {
   perspective: 1200px;
 }

@@ -1,7 +1,7 @@
 
 <div class="security-dashboard">
 
-  <!-- HEADER -->
+
   <section class="page-header">
 
     <div class="header-content">
@@ -27,7 +27,7 @@
   </section>
 
 
-  <!-- STATISTICS -->
+
   <section class="stats-grid">
 
     <button
@@ -65,11 +65,11 @@
   </section>
 
 
-  <!-- MAIN CONTENT -->
+
   <section class="dashboard-grid">
 
 
-    <!-- QUICK ACTIONS -->
+
     <div class="panel">
 
       <div class="panel-header">
@@ -89,7 +89,7 @@
       <div class="action-list">
 
 
-        <!-- SCAN QR -->
+
         <button class="action-card" (click)="openScanner()">
 
           <div class="action-icon">
@@ -110,7 +110,7 @@
         </button>
 
 
-        <!-- TODAY'S VISITORS -->
+
         <button class="action-card" (click)="openTodayVisitors()">
 
           <div class="action-icon">
@@ -131,7 +131,7 @@
         </button>
 
 
-        <!-- ACCESS HISTORY -->
+
         <button class="action-card" (click)="openAccessHistory()">
 
           <div class="action-icon">
@@ -152,7 +152,7 @@
         </button>
 
 
-        <!-- MESSAGES / CHAT -->
+
         <button class="action-card" (click)="openMessages()">
 
           <div class="action-icon">
@@ -177,7 +177,7 @@
     </div>
 
 
-    <!-- RECENT ACTIVITY -->
+
     <div class="panel activity-panel">
 
       <div class="panel-header">
@@ -211,8 +211,7 @@
           No visitor activity yet.
         </div>
 
-        <!-- Rows only render once the request has settled, otherwise a stale
-             list shows through the loading placeholder. -->
+
         <button
           class="activity-row"
           *ngFor="let activity of (!loading && !errorMessage) ? recentActivity : []"
@@ -273,7 +272,7 @@
   </section>
 
 
-  <!-- SECURITY STATUS -->
+
   <section class="security-notice">
 
     <div class="notice-icon">

@@ -25,7 +25,7 @@ interface SecurityVisitor {
   period: string;
   purpose: string;
   status: SecurityViewStatus;
-  /** Raw ISO visit date, used by the Today/date filters. */
+
   isoDate?: string;
 }
 
@@ -44,7 +44,6 @@ export class SecurityVisits implements OnInit {
   searchTerm = '';
   selectedStatus = 'All';
 
-  /** Default view is today's schedule; the toggle opens the full history. */
   showAll = false;
   filterDate = '';
 
@@ -62,15 +61,13 @@ export class SecurityVisits implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // A dashboard stat card links here with ?filter=..., so honour it on load:
-    // the operator lands on exactly the rows they clicked.
+
     const filter = this.route.snapshot.queryParamMap.get('filter');
     this.applyIncomingFilter(filter);
 
     this.loadVisits();
   }
 
-  /** Map a dashboard card's target onto this page's own filters. */
   private applyIncomingFilter(filter: string | null): void {
     switch (filter) {
       case 'pending':
@@ -93,7 +90,7 @@ export class SecurityVisits implements OnInit {
         break;
 
       default:
-        // No filter param: keep the default "today's schedule" view.
+
         break;
     }
   }
@@ -116,7 +113,6 @@ export class SecurityVisits implements OnInit {
     });
   }
 
-  /** Toggle between "today only" (default) and the full history. */
   toggleShowAll(): void {
     this.showAll = !this.showAll;
     if (!this.showAll) {
@@ -137,7 +133,7 @@ export class SecurityVisits implements OnInit {
       period,
       purpose: visit.purpose || 'Visit',
       status: toSecurityStatus(visit.status),
-      // Keep the raw date so the Today/All + date filters can compare exactly.
+
       isoDate: visit.visitDate
     };
   }
@@ -167,7 +163,6 @@ export class SecurityVisits implements OnInit {
     });
   }
 
-  /** Today-only by default; a specific day when the operator picks one; all days when toggled. */
   private matchesDateFilter(visitor: SecurityVisitor): boolean {
     if (this.filterDate) {
       return visitor.isoDate

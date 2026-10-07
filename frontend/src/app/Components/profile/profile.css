@@ -644,11 +644,7 @@
   .secondary-btn {
     width: 100%;
   }
-}/* =========================================================
-   MOTION LAYER
-   Keyframes are global (styles.css); this only wires them onto the
-   classes this page uses.
-   ========================================================= */
+}
 
 .page-header {
   animation: cs-fade-up 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
@@ -670,7 +666,6 @@
   animation: cs-pop-in 0.45s cubic-bezier(0.22, 1, 0.36, 1) 0.1s both;
 }
 
-/* The identity card and edit card arrive as a pair, tilting in 3D. */
 .profile-grid {
   perspective: 1300px;
 }
@@ -699,7 +694,6 @@
   box-shadow: 0 18px 40px rgba(20, 43, 70, 0.13);
 }
 
-/* The avatar is the anchor of the identity card — it lifts toward the user. */
 .avatar-upload {
   transition: transform 0.36s cubic-bezier(0.22, 1, 0.36, 1);
 }
@@ -741,7 +735,6 @@
   }
 }
 
-/* Meta rows slide in, staggered. */
 .meta-row {
   animation: cs-slide-in-left 0.42s cubic-bezier(0.22, 1, 0.36, 1) both;
   transition: background-color 0.2s ease;
@@ -752,7 +745,6 @@
 .meta-row:nth-child(3) { animation-delay: 0.4s; }
 .meta-row:nth-child(4) { animation-delay: 0.46s; }
 
-/* Specialization chips pop in one by one. */
 .spec-list {
   perspective: 800px;
 }

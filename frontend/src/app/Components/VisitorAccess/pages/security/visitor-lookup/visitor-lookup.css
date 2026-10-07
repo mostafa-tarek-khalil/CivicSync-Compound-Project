@@ -34,7 +34,6 @@
   z-index: 1;
 }
 
-/* BRAND */
 .lookup-brand {
   margin-bottom: 40px;
 }
@@ -81,7 +80,6 @@
   height: 15px;
 }
 
-/* HERO */
 .lookup-hero {
   margin-bottom: 28px;
 }
@@ -112,7 +110,6 @@
   line-height: 1.7;
 }
 
-/* SEARCH CARD */
 .lookup-card {
   background: #ffffff;
   border: 1px solid #e2e8f0;
@@ -210,7 +207,6 @@
   font-size: 12px;
 }
 
-/* STATE BOXES */
 .state-box {
   display: flex;
   flex-direction: column;
@@ -273,7 +269,6 @@
   text-decoration: none;
 }
 
-/* RESULTS */
 .results {
   margin-bottom: 24px;
 }
@@ -446,7 +441,6 @@
   font-size: 18px;
 }
 
-/* BACK */
 .back-link {
   display: inline-flex;
   align-items: center;
@@ -461,7 +455,6 @@
   font-size: 18px;
 }
 
-/* RESPONSIVE */
 @media (max-width: 620px) {
   .search-row {
     flex-direction: column;
@@ -476,7 +469,6 @@
   }
 }
 
-/* DARK MODE */
 :host-context(html.dark-mode) .lookup-page {
   background: #0d1420;
   color: #e8eef6;
@@ -538,11 +530,7 @@
 :host-context(html.dark-mode) .status-badge {
   background: #223146;
   color: #b6c2d1;
-}/* =========================================================
-   MOTION LAYER
-   Keyframes are global (styles.css); this only wires them onto the
-   classes this page uses.
-   ========================================================= */
+}
 
 .page-header {
   animation: cs-fade-up 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
@@ -584,7 +572,6 @@ textarea:focus,
   box-shadow: 0 0 0 3px rgba(49, 91, 143, 0.12);
 }
 
-/* Result rows cascade in. */
 .result-row,
 .visitor-row,
 .result-item,

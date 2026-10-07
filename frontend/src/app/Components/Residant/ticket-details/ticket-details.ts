@@ -167,7 +167,6 @@ export class ResidentTicketDetailsComponent implements OnInit, OnDestroy {
     });
   }
 
-  /** Absolute URL for the ticket photo (stored as a relative /uploads path). */
   get attachmentUrl(): string {
     return resolveUploadUrl(this.ticket?.attachmentUrl);
   }

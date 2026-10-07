@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 
 import { AuthService } from '../../../core/services/auth.service';
 
-/** 404 page used for the wildcard route. */
+
 @Component({
   selector: 'app-not-found',
   standalone: true,

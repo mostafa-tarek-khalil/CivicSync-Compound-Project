@@ -37,8 +37,7 @@ describe('buildFilters', () => {
   });
 
   it('returns an empty object for an all-empty filter set', () => {
-    // Regression guard: an empty params object must reach the API as
-    // "no query string", which is what made the ALL option blow up.
+
     expect(buildFilters({ status: '', role: '', search: '' })).toEqual({});
   });
 });

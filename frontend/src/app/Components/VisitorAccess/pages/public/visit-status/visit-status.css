@@ -19,20 +19,12 @@
   --shadow: 0 18px 45px rgba(15, 31, 61, 0.08);
 }
 
-/* =========================
-   PAGE
-========================= */
-
 .status-page {
   min-height: 100%;
   padding: 34px 38px 50px;
   background: var(--background);
   color: var(--text);
 }
-
-/* =========================
-   HEADER
-========================= */
 
 .page-header {
   display: flex;
@@ -124,10 +116,6 @@
   color: var(--navy);
   font-size: 13px;
 }
-
-/* =========================
-   HERO
-========================= */
 
 .status-hero {
   display: flex;
@@ -230,10 +218,6 @@
   font-size: 17px;
 }
 
-/* =========================
-   MAIN LAYOUT
-========================= */
-
 .content-layout {
   display: grid;
 
@@ -244,10 +228,6 @@
   gap: 25px;
   align-items: start;
 }
-
-/* =========================
-   TIMELINE CARD
-========================= */
 
 .timeline-card {
   padding: 28px;
@@ -292,10 +272,6 @@
   font-size: 11px;
   font-weight: 800;
 }
-
-/* =========================
-   TIMELINE
-========================= */
 
 .timeline {
   padding-top: 24px;
@@ -374,10 +350,6 @@
   line-height: 1.6;
 }
 
-/* =========================
-   TIMELINE STATES
-========================= */
-
 .timeline-item.completed .timeline-marker {
   border-color: var(--success);
   background: var(--success);
@@ -405,10 +377,6 @@
   color: #9aa5b5;
 }
 
-/* =========================
-   BADGES
-========================= */
-
 .step-badge {
   flex: 0 0 auto;
 
@@ -434,10 +402,6 @@
   background: var(--background);
   color: var(--muted);
 }
-
-/* =========================
-   DETAILS COLUMN
-========================= */
 
 .details-column {
   display: flex;
@@ -501,10 +465,6 @@
   font-weight: 800;
 }
 
-/* =========================
-   VISITOR
-========================= */
-
 .visitor-profile {
   display: flex;
   align-items: center;
@@ -539,10 +499,6 @@
   font-size: 11px;
 }
 
-/* =========================
-   VISIT DETAILS
-========================= */
-
 .details-list {
   display: flex;
   flex-direction: column;
@@ -567,10 +523,6 @@
   font-size: 11px;
   text-align: right;
 }
-
-/* =========================
-   NOTICE
-========================= */
 
 .notice-card {
   display: flex;
@@ -615,10 +567,6 @@
   font-size: 10px;
   line-height: 1.6;
 }
-
-/* =========================
-   ACTIONS
-========================= */
 
 .actions {
   display: flex;
@@ -672,10 +620,6 @@
   box-shadow: 0 10px 22px rgba(15, 31, 61, 0.16);
 }
 
-/* =========================
-   DARK MODE
-========================= */
-
 :host-context(html.dark-mode) {
   --navy: #e8eef8;
   --blue: #78a8e8;
@@ -719,10 +663,6 @@
 :host-context(html.dark-mode) .notice-card {
   border-color: #29425f;
 }
-
-/* =========================
-   RESPONSIVE
-========================= */
 
 @media (max-width: 1000px) {
   .content-layout {
@@ -785,12 +725,6 @@
   }
 }
 
-/* =========================================================
-   MOTION LAYER
-   Keyframes are global (styles.css); this only wires them onto the
-   classes this page uses.
-   ========================================================= */
-
 .page-header {
   animation: cs-fade-up 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
@@ -799,7 +733,6 @@
   animation: cs-fade-in 0.45s ease 0.06s both;
 }
 
-/* The status hero rises in — it is the first thing the visitor reads. */
 .status-hero {
   transform-style: preserve-3d;
   animation: cs-pop-in 0.55s cubic-bezier(0.22, 1, 0.36, 1) 0.1s both;
@@ -812,7 +745,6 @@
   box-shadow: 0 20px 42px rgba(20, 43, 70, 0.14);
 }
 
-/* The hero icon pulses gently to draw the eye to the state. */
 .hero-icon {
   animation: cs-hero-pulse 2.6s ease-in-out infinite;
 }
@@ -856,7 +788,6 @@
   box-shadow: 0 16px 36px rgba(20, 43, 70, 0.12);
 }
 
-/* Timeline steps light up one after another. */
 .timeline-step,
 .step,
 .status-step {

@@ -28,11 +28,7 @@ interface Conversation {
   lastMessageAt?: string | null;
   unreadCount?: number;
   deletedFor?: string[];
-  /**
-   * Set by the backend when this DIRECT conversation is a finished maintenance
-   * thread. The composer is replaced with a notice; the server also rejects
-   * any message sent anyway.
-   */
+
   chatLocked?: boolean;
 }
 
@@ -82,44 +78,24 @@ export class Chat implements OnInit, OnDestroy {
 
   showGroupMembers = false;
 
-  // =========================================================
-  // NEW CHAT
-  // =========================================================
-
   showNewChat = false;
   newChatPhone = '';
   newChatUsers: any[] = [];
   searchingUsers = false;
   creatingConversation = false;
 
-  // =========================================================
-  // MENUS
-  // =========================================================
-
   conversationMenuId: string | null = null;
   messageMenuId: string | null = null;
   deletingMessageId: string | null = null;
 
-  // =========================================================
-  // DELETE MESSAGE MODAL
-  // =========================================================
-
   showDeleteModal = false;
   messageToDelete: Message | null = null;
-
-  // =========================================================
-  // DELETE CONVERSATION MODAL
-  // =========================================================
 
   showDeleteConversationModal = false;
   conversationToDelete: Conversation | null = null;
 
   @ViewChild('messagesEnd')
   messagesEnd?: ElementRef<HTMLElement>;
-
-  // =========================================================
-  // DARK MODE
-  // =========================================================
 
   get isDarkMode(): boolean {
     return this.themeService.isDark;
@@ -132,10 +108,6 @@ export class Chat implements OnInit, OnDestroy {
     private themeService: ThemeService,
     private cdr: ChangeDetectorRef
   ) {}
-
-  // =========================================================
-  // INIT
-  // =========================================================
 
   ngOnInit(): void {
 
@@ -153,17 +125,9 @@ export class Chat implements OnInit, OnDestroy {
     this.loadConversations();
   }
 
-  // =========================================================
-  // DARK MODE
-  // =========================================================
-
   toggleDarkMode(): void {
     this.themeService.toggleTheme();
   }
-
-  // =========================================================
-  // GLOBAL CLICK
-  // =========================================================
 
   @HostListener('document:click')
   closeMenus(): void {
@@ -171,28 +135,16 @@ export class Chat implements OnInit, OnDestroy {
     this.messageMenuId = null;
   }
 
-  // =========================================================
-  // SOCKET
-  // =========================================================
-
   private setupSocket(): void {
 
     this.chatSocket.connect();
 
-    // -------------------------------------------------------
-    // Conversation joined
-    // -------------------------------------------------------
-
     this.chatSocket.on(
       'conversation:joined',
       () => {
-        // Nothing required here.
+
       }
     );
-
-    // -------------------------------------------------------
-    // New message
-    // -------------------------------------------------------
 
     this.chatSocket.on(
       'message:new',
@@ -286,10 +238,6 @@ export class Chat implements OnInit, OnDestroy {
       }
     );
 
-    // -------------------------------------------------------
-    // Message deleted for me
-    // -------------------------------------------------------
-
     this.chatSocket.on(
       'message:deletedForMe',
       (data: any) => {
@@ -358,10 +306,6 @@ export class Chat implements OnInit, OnDestroy {
         this.cdr.detectChanges();
       }
     );
-
-    // -------------------------------------------------------
-    // Message deleted for everyone
-    // -------------------------------------------------------
 
     this.chatSocket.on(
       'message:deleted',
@@ -432,10 +376,6 @@ export class Chat implements OnInit, OnDestroy {
       }
     );
 
-    // -------------------------------------------------------
-    // Conversation deleted
-    // -------------------------------------------------------
-
     this.chatSocket.on(
       'conversation:deleted',
       (data: any) => {
@@ -489,10 +429,6 @@ export class Chat implements OnInit, OnDestroy {
       }
     );
 
-    // -------------------------------------------------------
-    // Chat error
-    // -------------------------------------------------------
-
     this.chatSocket.on(
       'chat:error',
       (data: any) => {
@@ -513,10 +449,6 @@ export class Chat implements OnInit, OnDestroy {
       }
     );
   }
-
-  // =========================================================
-  // LOAD CONVERSATIONS
-  // =========================================================
 
   loadConversations(): void {
 
@@ -581,10 +513,6 @@ export class Chat implements OnInit, OnDestroy {
       });
   }
 
-  // =========================================================
-  // FILTER
-  // =========================================================
-
   filterConversations(): void {
 
     this.filteredConversations =
@@ -638,10 +566,6 @@ export class Chat implements OnInit, OnDestroy {
     this.filterConversations();
   }
 
-  // =========================================================
-  // SELECT CONVERSATION
-  // =========================================================
-
   selectConversation(
     conversation: Conversation
   ): void {
@@ -685,10 +609,6 @@ export class Chat implements OnInit, OnDestroy {
     );
   }
 
-  // =========================================================
-  // BACK
-  // =========================================================
-
   backToConversations(): void {
 
     if (this.selectedConversation) {
@@ -713,10 +633,6 @@ export class Chat implements OnInit, OnDestroy {
 
     this.errorMessage = '';
   }
-
-  // =========================================================
-  // LOAD MESSAGES
-  // =========================================================
 
   loadMessages(
     conversationId: string
@@ -776,10 +692,6 @@ export class Chat implements OnInit, OnDestroy {
       });
   }
 
-  // =========================================================
-  // SCROLL
-  // =========================================================
-
   private scrollToBottom(): void {
 
     setTimeout(() => {
@@ -793,10 +705,6 @@ export class Chat implements OnInit, OnDestroy {
 
     });
   }
-
-  // =========================================================
-  // SEND MESSAGE
-  // =========================================================
 
   sendMessage(): void {
 
@@ -830,10 +738,6 @@ export class Chat implements OnInit, OnDestroy {
     }, 300);
   }
 
-  // =========================================================
-  // KEYDOWN
-  // =========================================================
-
   handleMessageKeydown(
     event: KeyboardEvent
   ): void {
@@ -848,10 +752,6 @@ export class Chat implements OnInit, OnDestroy {
       this.sendMessage();
     }
   }
-
-  // =========================================================
-  // NEW CHAT
-  // =========================================================
 
   openNewChat(): void {
 
@@ -977,10 +877,6 @@ export class Chat implements OnInit, OnDestroy {
       });
   }
 
-  // =========================================================
-  // DELETE MESSAGE FOR ME
-  // =========================================================
-
   deleteMessageForMe(
     message: Message
   ): void {
@@ -1002,10 +898,6 @@ export class Chat implements OnInit, OnDestroy {
       message._id
     );
   }
-
-  // =========================================================
-  // DELETE MESSAGE FOR EVERYONE
-  // =========================================================
 
   deleteMessageForEveryone(
     message: Message
@@ -1056,10 +948,6 @@ export class Chat implements OnInit, OnDestroy {
     this.cancelDeleteMessage();
   }
 
-  // =========================================================
-  // DELETE CONVERSATION
-  // =========================================================
-
   deleteConversation(
     conversation: Conversation
   ): void {
@@ -1101,10 +989,6 @@ export class Chat implements OnInit, OnDestroy {
     );
   }
 
-  // =========================================================
-  // MESSAGE MENU
-  // =========================================================
-
   toggleMessageMenu(
     messageId: string
   ): void {
@@ -1122,10 +1006,6 @@ export class Chat implements OnInit, OnDestroy {
 
     this.conversationMenuId = null;
   }
-
-  // =========================================================
-  // CONVERSATION MENU
-  // =========================================================
 
   toggleConversationMenu(
     conversationId: string
@@ -1146,10 +1026,6 @@ export class Chat implements OnInit, OnDestroy {
 
     this.messageMenuId = null;
   }
-
-  // =========================================================
-  // MESSAGE HELPERS
-  // =========================================================
 
   getSenderId(
     message: Message
@@ -1239,10 +1115,6 @@ export class Chat implements OnInit, OnDestroy {
     return '';
   }
 
-  // =========================================================
-  // FIND CONVERSATION BY MESSAGE
-  // =========================================================
-
   private findConversationByMessageId(
     messageId: string,
     conversationId?: string
@@ -1269,10 +1141,6 @@ export class Chat implements OnInit, OnDestroy {
         ) === String(messageId)
     );
   }
-
-  // =========================================================
-  // CONVERSATION HELPERS
-  // =========================================================
 
   getConversationTitle(
     conversation: Conversation
@@ -1409,22 +1277,10 @@ export class Chat implements OnInit, OnDestroy {
     );
   }
 
-  /**
-   * True when the open conversation is a finished maintenance thread.
-   *
-   * Drives the read-only composer: the server rejects these messages anyway, so
-   * the UI stops the user from typing one in the first place.
-   */
   get isConversationLocked(): boolean {
     return !!this.selectedConversation?.chatLocked;
   }
 
-  /**
-   * Profile picture of the other participant in a DIRECT chat.
-   *
-   * Groups have no single owner, so they keep their initial. Returns null when
-   * the peer has not uploaded a picture (the avatar then shows initials).
-   */
   getConversationAvatarImage(
     conversation: Conversation
   ): string | null {
@@ -1472,10 +1328,6 @@ export class Chat implements OnInit, OnDestroy {
     );
   }
 
-  // =========================================================
-  // GROUP MEMBERS
-  // =========================================================
-
   getGroupMembers(
     conversation: Conversation
   ): any[] {
@@ -1521,10 +1373,6 @@ export class Chat implements OnInit, OnDestroy {
     this.showGroupMembers =
       !this.showGroupMembers;
   }
-
-  // =========================================================
-  // DESTROY
-  // =========================================================
 
   ngOnDestroy(): void {
 

@@ -1,6 +1,6 @@
 <div class="available-page container-fluid p-3 p-md-4 p-lg-5">
 
-  <!-- Header -->
+
 
   <div class="page-header mb-4">
 
@@ -27,7 +27,7 @@
   </div>
 
 
-  <!-- Loading -->
+
 
   @if (loading) {
 
@@ -44,7 +44,7 @@
   }
 
 
-  <!-- Error -->
+
 
   @else if (errorMessage) {
 
@@ -70,7 +70,7 @@
   }
 
 
-  <!-- Requests -->
+
 
   @else {
 
@@ -88,7 +88,7 @@
             <div class="request-card">
 
 
-              <!-- Header -->
+
 
               <div class="request-header">
 
@@ -114,14 +114,14 @@
               </div>
 
 
-              <!-- Title -->
+
 
               <h5 class="request-title">
                 {{ ticket.title }}
               </h5>
 
 
-              <!-- Category -->
+
 
               <div class="request-category">
 
@@ -134,14 +134,14 @@
               </div>
 
 
-              <!-- Description -->
+
 
               <p class="request-description">
                 {{ ticket.description }}
               </p>
 
 
-              <!-- Info -->
+
 
               <div class="request-info">
 
@@ -177,7 +177,7 @@
               </div>
 
 
-              <!-- Action -->
+
 
               <a
                 [routerLink]="['/technician/available-request', ticket._id]"

@@ -2,28 +2,21 @@ import { Injectable, signal } from '@angular/core';
 
 const THEME_KEY = 'civicsync-theme';
 
-/**
- * SINGLE source of truth for the app theme.
- *
- * The theme is expressed as the `dark-mode` class on <html>, which every
- * component styles against via `html.dark-mode` / `:host-context(html.dark-mode)`
- * and the CSS variables declared in `src/styles.css`. Nothing else in the app
- * may toggle that class.
- */
+
 @Injectable({
   providedIn: 'root'
 })
 export class ThemeService {
   private readonly darkState = signal(false);
 
-  /** Reactive read access for templates/components. */
+  
   readonly darkMode = this.darkState.asReadonly();
 
   constructor() {
     this.setDark(this.resolveInitialTheme(), { persist: false });
   }
 
-  /** Backwards-compatible synchronous getter. */
+  
   get isDark(): boolean {
     return this.darkState();
   }
@@ -53,7 +46,7 @@ export class ThemeService {
     if (saved === 'dark') return true;
     if (saved === 'light') return false;
 
-    // Migrate legacy keys from earlier versions.
+
     if (localStorage.getItem('theme') === 'dark') return true;
     if (localStorage.getItem('civicsync-dark-mode') === 'true') return true;
 

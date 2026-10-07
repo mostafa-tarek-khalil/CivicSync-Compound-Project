@@ -239,8 +239,6 @@ td strong {
   margin: 0;
 }
 
-/* Dark Mode */
-
 :host-context(html.dark-mode) h1,
 :host-context(html.dark-mode) .summary-card strong,
 :host-context(html.dark-mode) td strong,
@@ -318,12 +316,6 @@ td strong {
   }
 }
 
-/* =========================================================
-   MOTION LAYER
-   Keyframes are global (styles.css); this only wires them onto the
-   classes this page uses.
-   ========================================================= */
-
 .page-header {
   animation: cs-fade-up 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
@@ -348,7 +340,6 @@ td strong {
   transform: scale(0.97);
 }
 
-/* Summary tiles lift in 3D — the grid provides the perspective. */
 .summary {
   perspective: 1000px;
 }
@@ -396,7 +387,6 @@ td strong {
   box-shadow: 0 0 0 3px rgba(49, 91, 143, 0.12);
 }
 
-/* History rows cascade down the table. */
 .table-wrapper tbody tr {
   animation: cs-slide-in-left 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
   transition: background-color 0.2s ease;

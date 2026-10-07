@@ -1,6 +1,5 @@
 import { IMaintenanceTicket } from './imaintenance-ticket';
 
-/** Maintenance counters returned by GET /api/resident/dashboard. */
 export interface IDashboardTicketStats {
   total: number;
   open: number;
@@ -27,14 +26,10 @@ export interface IDashboardInvoice {
   ticketTitle: string | null;
 }
 
-/** Full invoice row returned in the billing history list. */
 export interface IResidentInvoice extends IDashboardInvoice {
   ticketId: string | null;
   ticketCategory: string | null;
-  /**
-   * Populated unit (building + number + floor) so the resident receipt can
-   * render the same location block as the admin one.
-   */
+
   unitId?:
     | {
         unitNumber?: number | string | null;
@@ -50,32 +45,22 @@ export interface IResidentInvoice extends IDashboardInvoice {
 }
 
 export interface IDashboardBilling {
-  /**
-   * What the resident still owes:
-   * unpaid invoices + agreed maintenance cost not invoiced yet.
-   */
+
   outstandingBalance: number;
   invoicesDue: number;
   maintenanceDue: number;
-  /** Everything the resident has actually settled (PAID invoices). */
+
   paidBalance: number;
-  /**
-   * The part of `paidBalance` that settled maintenance jobs, and the part that
-   * settled compound invoices. These two always add up to `paidBalance`.
-   */
+
   paidMaintenance: number;
   paidInvoicesTotal: number;
   unpaidInvoicesCount: number;
   uninvoicedMaintenanceCount: number;
-  /**
-   * Finished (CLOSED) maintenance jobs whose invoice has not been raised yet.
-   * The agreed price of these is owed as soon as the ticket closes, so the
-   * dashboard can show it without waiting for the admin to invoice.
-   */
+
   closedMaintenanceValue: number;
   closedMaintenanceCount: number;
   latestInvoice: IDashboardInvoice | null;
-  /** Full billing history for the resident invoices screen. */
+
   invoices: IResidentInvoice[];
 }
 
