@@ -610,7 +610,11 @@ Proposals only — none of these exist today.
 ## Contributors
 
 Contribution split is documented in [`TASKS.md`](./TASKS.md). The contributors named there are:
-**جمال**, **مينا**, **احمد ماهر**, **سما** and **نيرة**.
+**Mostafa Tarek**,
+ **Gamal Mahmoud**,
+ **Sama Salama**,
+ **Ahmed Maher**,
+ **Nayera**
 
 ---
 
