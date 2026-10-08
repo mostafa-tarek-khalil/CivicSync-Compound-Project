@@ -128,8 +128,6 @@ const forgotPassword = async (req, res) => {
   try {
     await authService.requestPasswordReset(req.body.email);
 
-    // Deliberately generic: the client must not be able to tell whether the
-    // address is registered.
     res.status(200).json({
       success: true,
       message: "If that email is registered, a reset link has been sent.",

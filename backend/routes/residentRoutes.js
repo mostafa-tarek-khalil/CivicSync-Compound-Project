@@ -40,8 +40,7 @@ router.use(
 
 router.get("/dashboard", getResidentDashboard);
 
-// Resident payment claim: PENDING / OVERDUE -> PAYMENT_SUBMITTED.
-// Confirming it as PAID stays an admin action.
+
 router.patch("/invoices/:invoiceId/pay", payInvoice);
 
 router.get("/tickets", getResidentTickets);

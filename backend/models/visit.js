@@ -104,12 +104,7 @@ const visitSchema = new mongoose.Schema(
             select: false,
         },
 
-        // Raw copy of the currently-active QR token, kept ONLY so a legitimate
-        // holder (resident / visitor who already proved ownership) can be
-        // re-shown the same still-valid pass without minting a new one every
-        // time the QR screen is (re)loaded. This is intentionally separate
-        // from qrTokenHash (used for scan verification) and is cleared
-        // whenever the QR is consumed, replaced, or the visit moves on.
+
         qrToken: {
             type: String,
             default: null,
@@ -127,11 +122,7 @@ const visitSchema = new mongoose.Schema(
             select: false,
         },
 
-        // Raw copy of the currently-active visitor chat token. Kept for the
-        // same reason as qrToken below: a legitimate holder (the visitor who
-        // already proved ownership) must be able to re-open the same still-valid
-        // conversation instead of getting a new token on every poll, which
-        // would invalidate the one already in their hands.
+
         visitorChatTokenRaw: {
             type: String,
             default: null,

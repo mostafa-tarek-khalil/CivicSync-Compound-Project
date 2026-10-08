@@ -1,10 +1,4 @@
-/**
- * Route-surface contract tests.
- *
- * These assert the API the frontend services depend on actually exists —
- * in particular that every technician operation lives under /api/technician
- * and that the forgot/reset password endpoints are registered.
- */
+
 const test = require("node:test");
 const assert = require("node:assert/strict");
 
@@ -13,7 +7,7 @@ const technicianRoutes = require("../routes/technicianRoutes");
 const residentRoutes = require("../routes/residentRoutes");
 const notificationRoutes = require("../routes/notificationRoutes");
 
-/** Recursively collect `METHOD path` pairs from an Express router. */
+
 const collectRoutes = (router) => {
     const routes = [];
 
@@ -111,8 +105,7 @@ test("notification routes support list, unread filter, read and delete", () => {
 });
 
 test("technician and resident route prefixes are fully separated", () => {
-    // Guards against the regression this refactor fixes: technician screens
-    // calling /api/resident endpoints (and vice-versa).
+
     const technicianRoutesList = collectRoutes(technicianRoutes);
     const residentRoutesList = collectRoutes(residentRoutes);
 

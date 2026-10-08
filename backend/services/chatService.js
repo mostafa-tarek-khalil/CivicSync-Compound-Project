@@ -22,9 +22,7 @@ const escapeRegex = (value) => {
     );
 };
 
-// =========================================================
-// USER HELPERS
-// =========================================================
+
 
 const getActiveUserById = async (userId) => {
     if (!isValidObjectId(userId)) {
@@ -52,9 +50,7 @@ const getActiveUserById = async (userId) => {
     return user;
 };
 
-// =========================================================
-// SEARCH USERS
-// =========================================================
+
 
 const searchUsersByPhone = async (userId, phone) => {
     await getActiveUserById(userId);
@@ -90,9 +86,7 @@ const searchUsersByPhone = async (userId, phone) => {
     return users;
 };
 
-// =========================================================
-// DIRECT CHAT PERMISSIONS
-// =========================================================
+
 
 const canResidentAndTechnicianChat = async (
     residentId,
@@ -103,20 +97,13 @@ const canResidentAndTechnicianChat = async (
         assignedTo: technicianId,
     }).select("status _id");
 
-    // A resident and a technician may talk while at least ONE shared ticket is
-    // still live. Once every shared job is finished (RESOLVED / CLOSED) the
-    // channel closes with it.
+
     return tickets.some(
         (ticket) => !isTicketChatLocked(ticket.status)
     );
 };
 
-/**
- * Throw a 403 when the maintenance conversation tied to this ticket is locked.
- *
- * The link is derived from the conversation's two participants: for a
- * resident <-> technician DIRECT chat the active ticket is the one they share.
- */
+
 const assertMaintenanceChatOpen = async (sender, receiver) => {
     const isResidentTechnicianPair =
         (sender.role === "RESIDENT" && receiver.role === "TECHNICIAN") ||
@@ -208,9 +195,7 @@ const canDirectChat = async (sender, receiver) => {
     return false;
 };
 
-// =========================================================
-// CREATE / REUSE DIRECT CHAT
-// =========================================================
+
 
 const getOrCreateDirectConversation = async (
     senderId,
@@ -297,9 +282,7 @@ const getOrCreateDirectConversation = async (
     return conversation;
 };
 
-// =========================================================
-// COMPOUND GROUP
-// =========================================================
+
 
 const getCompoundGroup = async (userId) => {
     const user = await getActiveUserById(userId);
@@ -381,9 +364,7 @@ const getCompoundGroup = async (userId) => {
     return conversation;
 };
 
-// =========================================================
-// BUILDING GROUP
-// =========================================================
+
 
 const getBuildingGroup = async (
     userId,
@@ -552,13 +533,7 @@ const getBuildingGroup = async (
     return conversation;
 };
 
-/**
- * Ensure a conversation contains every id in `memberIds`, without ever
- * removing an existing participant.
- *
- * `$addToSet` is used so concurrent calls (two residents approved at once)
- * cannot clobber each other the way a read-modify-write `save()` would.
- */
+
 const addParticipantsToConversation = async (conversationId, memberIds) => {
     if (!conversationId || memberIds.length === 0) {
         return;
@@ -573,16 +548,7 @@ const addParticipantsToConversation = async (conversationId, memberIds) => {
     );
 };
 
-/**
- * Add a resident to the two system groups every resident belongs to:
- *  1. the compound-wide group, and
- *  2. their own building group.
- *
- * Called whenever a resident becomes usable (admin approval) or their unit
- * association changes, so the groups show up in their chat list with no manual
- * "join" step. Safe to call repeatedly: the lookups are by (type, groupType,
- * buildingId) and membership is added with $addToSet.
- */
+
 const syncResidentGroupMemberships = async (resident) => {
     if (!resident || resident.role !== "RESIDENT") {
         return { compound: null, building: null };
@@ -591,8 +557,7 @@ const syncResidentGroupMemberships = async (resident) => {
     const residentId = resident._id || resident.id;
     const result = { compound: null, building: null };
 
-    // 1. Compound group — created on demand so a brand-new compound still gets
-    //    a group as soon as its first resident is approved.
+
     const compoundParticipants = await User.find({
         role: { $in: ["RESIDENT", "SECURITY", "ADMIN"] },
         status: "ACTIVE",
@@ -627,7 +592,7 @@ const syncResidentGroupMemberships = async (resident) => {
         result.compound = compoundGroup._id;
     }
 
-    // 2. Building group — only possible when the resident has a unit.
+
     if (!resident.unitId) {
         return result;
     }
@@ -694,9 +659,7 @@ const syncResidentGroupMemberships = async (resident) => {
     return result;
 };
 
-// =========================================================
-// VISITOR TOKEN
-// =========================================================
+
 
 const verifyVisitorChatToken = async (
     visitId,
@@ -795,9 +758,7 @@ const verifyVisitorChatToken = async (
     return visit;
 };
 
-// =========================================================
-// VISITOR CONVERSATION
-// =========================================================
+
 
 const getOrCreateVisitorConversation =
     async (
@@ -854,9 +815,7 @@ const getOrCreateVisitorConversation =
         return conversation;
     };
 
-// =========================================================
-// UNREAD COUNT
-// =========================================================
+
 
 const getUnreadCount = async (
     userId,
@@ -924,9 +883,7 @@ const getUnreadCount = async (
     });
 };
 
-// =========================================================
-// GET LAST VISIBLE MESSAGE
-// =========================================================
+
 
 const getLastVisibleMessage = async (
     conversationId,
@@ -946,13 +903,7 @@ const getLastVisibleMessage = async (
         );
 };
 
-/**
- * Whether a DIRECT conversation is a finished maintenance thread.
- *
- * The client uses this to render a read-only composer instead of letting the
- * user type a message the server would reject. Returns false for group and
- * visitor conversations, which have their own lifecycles.
- */
+
 const isConversationChatLocked = async (conversation) => {
     if (!conversation || conversation.type !== "DIRECT") {
         return false;
@@ -987,9 +938,7 @@ const isConversationChatLocked = async (conversation) => {
     return tickets.every((ticket) => isTicketChatLocked(ticket.status));
 };
 
-// =========================================================
-// GET MY CONVERSATIONS
-// =========================================================
+
 
 const getMyConversations = async (
     userId
@@ -1073,9 +1022,7 @@ const getMyConversations = async (
     return result;
 };
 
-// =========================================================
-// GET CONVERSATION
-// =========================================================
+
 
 const getConversationById = async (
     userId,
@@ -1161,9 +1108,7 @@ const getConversationById = async (
     return object;
 };
 
-// =========================================================
-// SEND USER MESSAGE
-// =========================================================
+
 
 const sendUserMessage = async (
     userId,
@@ -1245,9 +1190,7 @@ const sendUserMessage = async (
     }
 
     if (conversation.type === "DIRECT") {
-        // Maintenance conversations close with the job. Resolve the OTHER
-        // participant so the resident/technician pair can be checked against
-        // the ticket state machine.
+
         const otherParticipantId = conversation.participants.find(
             (participantId) =>
                 participantId.toString() !== sender._id.toString()
@@ -1313,7 +1256,6 @@ const sendUserMessage = async (
     conversation.lastMessageAt =
         message.createdAt;
 
-    // New activity should restore a conversation that a participant hid.
     conversation.deletedFor = [];
 
     await conversation.save();
@@ -1336,9 +1278,7 @@ const sendUserMessage = async (
     return message;
 };
 
-// =========================================================
-// SEND VISITOR MESSAGE
-// =========================================================
+
 
 const sendVisitorMessage = async (
     visitId,
@@ -1414,7 +1354,6 @@ const sendVisitorMessage = async (
     conversation.lastMessageAt =
         message.createdAt;
 
-    // A new visitor message restores the resident's hidden conversation.
     conversation.deletedFor = [];
 
     await conversation.save();
@@ -1434,9 +1373,7 @@ const sendVisitorMessage = async (
     return message;
 };
 
-// =========================================================
-// GET USER MESSAGES
-// =========================================================
+
 
 const getMessages = async (
     userId,
@@ -1467,9 +1404,7 @@ const getMessages = async (
         });
 };
 
-// =========================================================
-// GET VISITOR MESSAGES
-// =========================================================
+
 
 const getVisitorMessages = async (
     visitId,
@@ -1523,9 +1458,7 @@ const getVisitorMessages = async (
         });
 };
 
-// =========================================================
-// MARK USER MESSAGES AS READ
-// =========================================================
+
 
 const markMessagesAsRead = async (
     userId,
@@ -1670,9 +1603,7 @@ const markMessagesAsRead = async (
     };
 };
 
-// =========================================================
-// MARK VISITOR MESSAGES AS READ
-// =========================================================
+
 
 const markVisitorMessagesAsRead =
     async (
@@ -1741,9 +1672,7 @@ const markVisitorMessagesAsRead =
         };
     };
 
-// =========================================================
-// DELETE MESSAGE FOR ME
-// =========================================================
+
 
 const deleteMessageForMe = async (
     userId,
@@ -1846,9 +1775,7 @@ const deleteMessageForMe = async (
     };
 };
 
-// =========================================================
-// DELETE MESSAGE FOR EVERYONE
-// =========================================================
+
 
 const deleteMessageForEveryone =
     async (
@@ -1955,9 +1882,7 @@ const deleteMessageForEveryone =
         };
     };
 
-// =========================================================
-// DELETE CONVERSATION FOR ME
-// =========================================================
+
 
 const deleteConversationForMe =
     async (

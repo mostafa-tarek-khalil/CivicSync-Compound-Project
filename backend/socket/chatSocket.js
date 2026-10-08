@@ -6,9 +6,7 @@ const Conversation = require("../models/conversation");
 const chatService = require("../services/chatService");
 const notificationService = require("../services/notificationService");
 
-// =========================================================
-// USER SOCKET AUTH
-// =========================================================
+
 
 const authenticateUserSocket = async (
     socket,
@@ -86,9 +84,7 @@ const authenticateUserSocket = async (
     }
 };
 
-// =========================================================
-// VISITOR SOCKET AUTH
-// =========================================================
+
 
 const authenticateVisitorSocket =
     async (
@@ -160,9 +156,7 @@ const authenticateVisitorSocket =
         }
     };
 
-// =========================================================
-// GENERAL AUTH
-// =========================================================
+
 
 const authenticateSocket =
     async (
@@ -188,9 +182,7 @@ const authenticateSocket =
         );
     };
 
-// =========================================================
-// INITIALIZE SOCKET
-// =========================================================
+
 
 const initializeChatSocket = (
     io
@@ -218,9 +210,7 @@ const initializeChatSocket = (
                 );
             }
 
-            // =====================================================
-            // JOIN CONVERSATION
-            // =====================================================
+
 
             socket.on(
                 "conversation:join",
@@ -302,9 +292,7 @@ const initializeChatSocket = (
                 }
             );
 
-            // =====================================================
-            // LEAVE CONVERSATION
-            // =====================================================
+
 
             socket.on(
                 "conversation:leave",
@@ -330,9 +318,7 @@ const initializeChatSocket = (
                 }
             );
 
-            // =====================================================
-            // SEND USER MESSAGE
-            // =====================================================
+
 
             socket.on(
                 "message:send",
@@ -409,9 +395,7 @@ const initializeChatSocket = (
                 }
             );
 
-            // =====================================================
-            // SEND VISITOR MESSAGE
-            // =====================================================
+
 
             socket.on(
                 "visitor:message:send",
@@ -489,9 +473,7 @@ const initializeChatSocket = (
                 }
             );
 
-            // =====================================================
-            // MARK AS READ
-            // =====================================================
+
 
             socket.on(
                 "conversation:read",
@@ -543,9 +525,7 @@ const initializeChatSocket = (
                 }
             );
 
-            // =====================================================
-            // DELETE MESSAGE FOR ME
-            // =====================================================
+
 
             socket.on(
                 "message:delete:me",
@@ -584,7 +564,7 @@ const initializeChatSocket = (
                                 messageId
                             );
 
-                        // Only the current socket gets this event.
+
                         socket.emit(
                             "message:deletedForMe",
                             {
@@ -607,9 +587,7 @@ const initializeChatSocket = (
                 }
             );
 
-            // =====================================================
-            // DELETE MESSAGE FOR EVERYONE
-            // =====================================================
+
 
             socket.on(
                 "message:delete:everyone",
@@ -675,9 +653,7 @@ const initializeChatSocket = (
                 }
             );
 
-            // =====================================================
-            // DELETE CONVERSATION FOR ME
-            // =====================================================
+
 
             socket.on(
                 "conversation:delete:me",
@@ -739,9 +715,7 @@ const initializeChatSocket = (
                 }
             );
 
-            // =====================================================
-            // DISCONNECT
-            // =====================================================
+
 
             socket.on(
                 "disconnect",

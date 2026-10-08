@@ -1,8 +1,5 @@
-// Focused check for the Resident dashboard "Paid" card and the maintenance
-// invoice surfacing. Runs against the live database using the real service,
-// then removes exactly what it created.
-//
-// Run from the project root:  node backend/tests/manual/verify-paid-card.js
+
+
 require("dotenv").config();
 const mongoose = require("mongoose");
 
@@ -32,7 +29,6 @@ const check = (label, actual, expected) => {
         serverSelectionTimeoutMS: 10000,
     });
 
-    // ---- clean any previous run -------------------------------------------
     await User.deleteMany({ email: EMAIL });
 
     const building = await Building.create({
@@ -71,7 +67,6 @@ const check = (label, actual, expected) => {
 
     const due = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000);
 
-    // 1) A PAID regular (ticket-less) invoice  -> counts toward Paid
     const paidRegular = await Invoice.create({
         residentId: resident._id,
         ticketId: null,
@@ -83,7 +78,6 @@ const check = (label, actual, expected) => {
         paidAt: new Date(),
     });
 
-    // 2) A PAID maintenance invoice -> also counts toward Paid
     const paidMaintenance = await Invoice.create({
         residentId: resident._id,
         ticketId: ticket._id,
@@ -95,7 +89,6 @@ const check = (label, actual, expected) => {
         paidAt: new Date(),
     });
 
-    // 3) Statuses that must NOT count toward Paid
     const pending = await Invoice.create({
         residentId: resident._id,
         unitId: unit._id,
@@ -153,13 +146,11 @@ const check = (label, actual, expected) => {
         );
         console.log("");
 
-        // ---- Issue 4: Paid = PAID invoices only --------------------------
-        const expectedPaid = 2500 + 3500; // paid regular + paid maintenance
+        const expectedPaid = 2500 + 3500;
         if (!check("Paid = PAID regular + PAID maintenance", billing.paidBalance, expectedPaid)) {
             failures += 1;
         }
 
-        // ---- Paid split: regular bills vs maintenance jobs ---------------
         if (!check("paidInvoicesTotal = PAID regular only", billing.paidInvoicesTotal, 2500)) {
             failures += 1;
         }
@@ -173,12 +164,11 @@ const check = (label, actual, expected) => {
         )) {
             failures += 1;
         }
-        // Unpaid invoices must not leak into either half of the split.
+
         if (!check("split ignores unpaid invoices", billing.paidInvoicesTotal + billing.paidMaintenance !== 6500 + 1000 + 700 + 400, true)) {
             failures += 1;
         }
 
-        // Explicitly prove the excluded statuses are excluded.
         if (!check("Paid excludes PENDING (1000)", billing.paidBalance !== 3500 + 1000, true)) {
             failures += 1;
         }
@@ -189,8 +179,6 @@ const check = (label, actual, expected) => {
             failures += 1;
         }
 
-        // ---- Outstanding = PENDING + OVERDUE + PAYMENT_SUBMITTED ---------
-        // (maintenanceDue is 0 here: the ticket has no accepted offer.)
         const expectedDue = 1000 + 700 + 400;
         if (!check("invoicesDue = PENDING+OVERDUE+SUBMITTED", billing.invoicesDue, expectedDue)) {
             failures += 1;
@@ -200,7 +188,6 @@ const check = (label, actual, expected) => {
             failures += 1;
         }
 
-        // ---- Issue 5: maintenance invoice present in the list ------------
         const rows = billing.invoices;
         const maintenanceRow = rows.find(
             (row) => String(row.ticketId) === String(ticket._id)
@@ -232,7 +219,7 @@ const check = (label, actual, expected) => {
         console.error("VERIFICATION ERROR:", error.message);
         failures += 1;
     } finally {
-        // ---- remove exactly what this script created ----------------------
+
         await Invoice.deleteMany({
             _id: {
                 $in: [

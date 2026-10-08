@@ -39,7 +39,7 @@ const messageSchema = new mongoose.Schema(
             },
         ],
 
-        // Hidden only for specific users
+
         deletedFor: [
             {
                 type: mongoose.Schema.Types.ObjectId,
@@ -47,7 +47,7 @@ const messageSchema = new mongoose.Schema(
             },
         ],
 
-        // Deleted for everyone
+
         isDeleted: {
             type: Boolean,
             default: false,

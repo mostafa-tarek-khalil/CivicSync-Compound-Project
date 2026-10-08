@@ -4,15 +4,6 @@ const Invoice = require("../models/invoice");
 const { createNotification, notifyRole } = require("./notificationService");
 const { INVOICE_STATUS } = require("../utils/statusConstants");
 
-/**
- * Resident-side invoice actions.
- *
- * The resident can only ever CLAIM a payment (PENDING / OVERDUE ->
- * PAYMENT_SUBMITTED); confirming it as PAID is an admin decision that lives in
- * adminService.updateInvoiceStatus. Keeping the two halves apart is what makes
- * "Approve paid" meaningful rather than cosmetic.
- */
-
 const validateObjectId = (id) => {
     if (!mongoose.Types.ObjectId.isValid(id)) {
         const error = new Error("Invalid invoice ID");
@@ -21,12 +12,6 @@ const validateObjectId = (id) => {
     }
 };
 
-/**
- * Statuses a resident is allowed to pay from.
- *
- * Deliberately NOT including PAYMENT_SUBMITTED: once their claim is in, the
- * invoice is waiting on the admin and re-submitting would just create noise.
- */
 const PAYABLE_STATUSES = [
     INVOICE_STATUS.PENDING,
     INVOICE_STATUS.OVERDUE,
@@ -78,8 +63,6 @@ const submitInvoicePayment = async (
         throw error;
     }
 
-    // Conditional update: two taps on "Pay" (or two devices) must not both win
-    // and produce a duplicate admin notification.
     const updated = await Invoice.findOneAndUpdate(
         {
             _id: invoiceId,
@@ -106,7 +89,6 @@ const submitInvoicePayment = async (
         throw error;
     }
 
-    // Tell the resident their claim was received...
     await createNotification({
         userId: updated.residentId,
         type: "INVOICE_PAYMENT_SUBMITTED",
@@ -116,7 +98,6 @@ const submitInvoicePayment = async (
         relatedId: updated._id,
     });
 
-    // ...and tell every admin there is a transfer to verify.
     await notifyRole("ADMIN", {
         type: "INVOICE_PAYMENT_SUBMITTED",
         title: "Payment awaiting approval",

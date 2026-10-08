@@ -8,10 +8,6 @@ const handleError = (res, error) => {
     });
 };
 
-/**
- * Store a new profile picture for the signed-in user (any role) and return
- * the updated user payload so the client can refresh its cached avatar.
- */
 const uploadProfileImage = async (req, res) => {
     try {
         if (!req.file) {
@@ -59,7 +55,6 @@ const uploadProfileImage = async (req, res) => {
     }
 };
 
-/** Upload an image to attach to a maintenance ticket. */
 const uploadTicketAttachment = async (req, res) => {
     try {
         if (!req.file) {

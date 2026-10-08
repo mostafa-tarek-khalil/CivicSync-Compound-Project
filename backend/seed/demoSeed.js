@@ -1,16 +1,4 @@
-/**
- * Demo seed for CivicSync.
- *
- * Creates a small but complete compound dataset so the visitor-access flow
- * can be exercised end to end:
- *   - 2 buildings
- *   - a few units (some OCCUPIED, some VACANT)
- *   - 1 active resident (occupying a unit) + 1 vacant unit for registration
- *   - 1 active security officer
- *
- * Run with:  npm run seed:demo
- * (make sure DB_URI is set in .env and the database is reachable)
- */
+
 const mongoose = require("mongoose");
 require("dotenv").config();
 
@@ -29,7 +17,6 @@ const seedDemo = async () => {
     await mongoose.connect(process.env.DB_URI);
     console.log("Database connected");
 
-    // ---------- Buildings ----------
     const buildingsData = [
       { name: "Building A", buildingNumber: 1, floorsCount: 5, description: "Demo building A" },
       { name: "Building B", buildingNumber: 2, floorsCount: 4, description: "Demo building B" },
@@ -47,8 +34,6 @@ const seedDemo = async () => {
 
     console.log(`Buildings ready: ${buildings.length}`);
 
-    // ---------- Units ----------
-    // Two occupied units (linked to the demo residents below) and two vacant.
     const unitPlan = [
       { building: buildings[0], unitNumber: 101, floor: 1, type: "APARTMENT", status: "OCCUPIED" },
       { building: buildings[0], unitNumber: 102, floor: 1, type: "APARTMENT", status: "VACANT" },
@@ -78,7 +63,6 @@ const seedDemo = async () => {
 
     const occupiedUnits = units.filter((unit) => unit.status === "OCCUPIED");
 
-    // ---------- Users ----------
     const usersToSeed = [
       {
         name: "Demo Resident",

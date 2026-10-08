@@ -358,15 +358,6 @@ const acceptOffer = async (offerId, residentId) => {
         ? latestNegotiation.price
         : offer.price;
 
-    // ---------------------------------------------------------------
-    // CONCURRENCY GUARD
-    // ---------------------------------------------------------------
-    // The offer is the exclusive resource of this operation, so it is
-    // claimed FIRST. `findOneAndUpdate({ status: "PENDING" })` is a single
-    // atomic compare-and-set: of N simultaneous callers (double click, two
-    // tabs, retried request) exactly ONE flips PENDING -> ACCEPTED. Every
-    // other caller fails here, before any ticket mutation happens, so the
-    // ticket can never be assigned by two racing requests.
     const acceptedOffer = await Offer.findOneAndUpdate(
         {
             _id: offer._id,
@@ -391,10 +382,6 @@ const acceptOffer = async (offerId, residentId) => {
         throw error;
     }
 
-    // The ticket assignment is also a single conditional update. Accepting a
-    // *different* offer for the same ticket at the same time is possible, so
-    // this is what decides the winner: only the request that still sees
-    // status OPEN assigns the ticket.
     const assignedTicket = await MaintenanceTicket.findOneAndUpdate(
         {
             _id: ticket._id,
@@ -413,8 +400,7 @@ const acceptOffer = async (offerId, residentId) => {
     );
 
     if (!assignedTicket) {
-        // This request lost the race for the ticket. Release the claim it
-        // placed on its own offer so the resident can still act on it.
+
         await Offer.findOneAndUpdate(
             {
                 _id: acceptedOffer._id,

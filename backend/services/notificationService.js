@@ -13,7 +13,7 @@ const createNotification = async ({ userId, type, title, message, relatedId = nu
         socketServer?.to(`user:${userId}`).emit("notification:new", notification);
         return notification;
     } catch (error) {
-        // A notification failure must not roll back the action that produced it.
+
         console.error("Failed to create notification:", error.message);
         return null;
     }
@@ -24,11 +24,6 @@ const getNotifications = (userId, unreadOnly = false) => Notification.find({
     ...(unreadOnly ? { isRead: false } : {}),
 }).sort({ createdAt: -1 }).limit(100);
 
-/**
- * Fan-out a notification to every active user with the given role.
- * Used so e.g. all security officers are told when a new visitor pass is
- * ready or when a visitor checks in. Failures never break the caller.
- */
 const notifyRole = async (role, { type, title, message, relatedId = null }) => {
     try {
         const users = await User.find({ role, status: "ACTIVE" }).select("_id");

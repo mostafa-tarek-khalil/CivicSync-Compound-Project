@@ -1,18 +1,9 @@
-// Creates throwaway tickets assigned to the QA technician so the job screen can
-// be driven against REAL data — including one in IN_PROGRESS, which is the case
-// that used to 404 on the technician detail endpoint.
-//
-// Run from the project root:
-//   node backend/tests/manual/qa-assigned-ticket.js create
-//   node backend/tests/manual/qa-assigned-ticket.js delete
+
+
 require("dotenv").config();
 const dns = require("dns");
 const mongoose = require("mongoose");
 
-// This machine's DNS resolver refuses SRV lookups (querySrv ECONNREFUSED) even
-// though `mongodb+srv://` needs one, while plain TCP to the shards works fine.
-// Pointing Node at public resolvers lets the helper run. Scoped to this QA
-// script so nothing in the app's own runtime behaviour changes.
 dns.setServers(["8.8.8.8", "1.1.1.1"]);
 
 const MaintenanceTicket = require("../../models/maintenanceTicket");
@@ -21,8 +12,6 @@ const User = require("../../models/user");
 const TECH_EMAIL = "qa.technician@civicsync.test";
 const RESIDENT_EMAIL = "qa.resident@civicsync.test";
 
-// One marker prefix, so delete can remove exactly what this script created and
-// never touch a ticket the user raised themselves.
 const TITLE_PREFIX = "QA ASSIGNED";
 
 const SPECS = [

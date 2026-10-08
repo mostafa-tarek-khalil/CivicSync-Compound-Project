@@ -21,12 +21,6 @@ const getResidentDashboard = async (req, res) => {
     }
 };
 
-/**
- * Resident claims a payment on one of their own invoices.
- *
- * Moves PENDING / OVERDUE -> PAYMENT_SUBMITTED; only an admin can confirm it
- * as PAID (see adminService.updateInvoiceStatus).
- */
 const payInvoice = async (req, res) => {
     try {
         const invoice = await invoiceService.submitInvoicePayment(

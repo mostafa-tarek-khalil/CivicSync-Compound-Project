@@ -7,9 +7,7 @@ const handleError = (res, error) => {
     });
 };
 
-// =========================================================
-// USER CHAT
-// =========================================================
+
 
 const searchUsers = async (req, res) => {
     try {
@@ -162,9 +160,7 @@ const markMessagesAsRead = async (req, res) => {
     }
 };
 
-// =========================================================
-// VISITOR CHAT
-// =========================================================
+
 
 const createVisitorConversation = async (req, res) => {
     try {
@@ -238,9 +234,7 @@ const markVisitorMessagesAsRead = async (req, res) => {
     }
 };
 
-// =========================================================
-// DELETE MESSAGE FOR ME
-// =========================================================
+
 
 const deleteMessageForMe = async (req, res) => {
     try {
@@ -259,9 +253,7 @@ const deleteMessageForMe = async (req, res) => {
     }
 };
 
-// =========================================================
-// DELETE MESSAGE FOR EVERYONE
-// =========================================================
+
 
 const deleteMessageForEveryone = async (req, res) => {
     try {
@@ -280,9 +272,7 @@ const deleteMessageForEveryone = async (req, res) => {
     }
 };
 
-// =========================================================
-// DELETE CONVERSATION FOR ME
-// =========================================================
+
 
 const deleteConversationForMe = async (req, res) => {
     try {

@@ -1,7 +1,4 @@
-/**
- * Guards for the invoice payment flow, the QR 1-hour window and the financial
- * totals. Pure helpers only — no database required.
- */
+
 const test = require("node:test");
 const assert = require("node:assert/strict");
 
@@ -22,7 +19,6 @@ const {
 
 const { PAYABLE_STATUSES } = require("../services/invoiceService");
 
-/** Recursively collect `METHOD path` pairs from an Express router. */
 const collectRoutes = (router) => {
     const routes = [];
 
@@ -49,10 +45,6 @@ const collectRoutes = (router) => {
 
     return routes;
 };
-
-// =========================================================
-// INVOICE PAYMENT FLOW
-// =========================================================
 
 test("Invoice.status accepts PAYMENT_SUBMITTED", () => {
     const invoice = new Invoice({
@@ -87,8 +79,6 @@ test("a resident may only pay from PENDING or OVERDUE", () => {
         INVOICE_STATUS.OVERDUE,
     ]);
 
-    // Re-claiming an in-flight payment or paying a settled one must not be
-    // offered, which is what keeps the admin's approval meaningful.
     assert.ok(!PAYABLE_STATUSES.includes(INVOICE_STATUS.PAYMENT_SUBMITTED));
     assert.ok(!PAYABLE_STATUSES.includes(INVOICE_STATUS.PAID));
     assert.ok(!PAYABLE_STATUSES.includes(INVOICE_STATUS.CANCELLED));
@@ -102,7 +92,6 @@ test("unpaid and settled invoice status buckets are disjoint", () => {
         );
     }
 
-    // A claimed-but-unconfirmed payment is still money owed.
     assert.ok(
         INVOICE_UNPAID_STATUSES.includes(INVOICE_STATUS.PAYMENT_SUBMITTED)
     );
@@ -120,17 +109,13 @@ test("residents can submit a payment on their own invoice", () => {
     );
 });
 
-// =========================================================
-// QR 1-HOUR WINDOW
-// =========================================================
-
 const visitAt = (isoDate, startTime) => ({
     visitDate: new Date(isoDate),
     visitStartTime: startTime,
 });
 
 test("the QR window opens exactly 1 hour before the visit", () => {
-    // 2026-03-10, 18:00 -> window opens 17:00, i.e. 16:00 UTC in local terms.
+
     const visit = visitAt("2026-03-10T00:00:00.000Z", "18:00");
     const availableFrom = getQrAvailableFrom(visit);
 
@@ -149,7 +134,6 @@ test("the QR window opens exactly 1 hour before the visit", () => {
 test("QR generation is refused before the window and allowed inside it", () => {
     const now = new Date();
 
-    // A visit far in the future: still locked.
     const future = new Date(now.getTime() + 6 * 60 * 60 * 1000);
     const futureTime = `${String(future.getHours()).padStart(2, "0")}:00`;
 
@@ -166,7 +150,6 @@ test("QR generation is refused before the window and allowed inside it", () => {
         }
     );
 
-    // A visit starting in 30 minutes: inside the window.
     const soon = new Date(now.getTime() + 30 * 60 * 1000);
     const soonTime = `${String(soon.getHours()).padStart(2, "0")}:${String(
         soon.getMinutes()
@@ -178,8 +161,7 @@ test("QR generation is refused before the window and allowed inside it", () => {
 });
 
 test("an unscheduled visit is not blocked by the window rule", () => {
-    // Missing schedule data must fail open, otherwise a malformed visit could
-    // never produce a pass at all.
+
     assert.equal(getQrAvailableFrom({}), null);
     assert.equal(getQrAvailableFrom({ visitDate: null, visitStartTime: "18:00" }), null);
     assert.doesNotThrow(() => assertQrWindowOpen({}));

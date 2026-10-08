@@ -1,8 +1,4 @@
-/**
- * Auth normalisation contract: e-mails are always stored (and compared) in
- * trim + lower-case form, in one shared helper used by register, login and
- * the password-reset flow.
- */
+
 const test = require("node:test");
 const assert = require("node:assert/strict");
 

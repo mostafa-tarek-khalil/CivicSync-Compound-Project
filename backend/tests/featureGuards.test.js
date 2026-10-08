@@ -1,8 +1,4 @@
-/**
- * Guards for the backend changes that support the admin / upload / chat-lock
- * features. These are pure-surface assertions (route registration, filter
- * normalisation, state-machine helpers) so they need no database.
- */
+
 const test = require("node:test");
 const assert = require("node:assert/strict");
 
@@ -15,7 +11,6 @@ const {
     TICKET_STATUS,
 } = require("../utils/statusConstants");
 
-/** Recursively collect `METHOD path` pairs from an Express router. */
 const collectRoutes = (router) => {
     const routes = [];
 
@@ -67,12 +62,11 @@ test("admin routes expose the full compound report download", () => {
 });
 
 test("maintenance chat locks once the ticket reaches a final state", () => {
-    // A job in flight keeps the conversation open...
+
     assert.equal(isTicketChatLocked(TICKET_STATUS.OPEN), false);
     assert.equal(isTicketChatLocked(TICKET_STATUS.ASSIGNED), false);
     assert.equal(isTicketChatLocked(TICKET_STATUS.IN_PROGRESS), false);
 
-    // ...but RESOLVED (handed over) and CLOSED (done) both lock it.
     assert.equal(isTicketChatLocked(TICKET_STATUS.RESOLVED), true);
     assert.equal(isTicketChatLocked(TICKET_STATUS.CLOSED), true);
 });

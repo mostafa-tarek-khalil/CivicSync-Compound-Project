@@ -20,9 +20,7 @@ const socket = io(
     }
 );
 
-/*
- * Connected
- */
+
 socket.on("connect", () => {
     console.log(
         "Visitor connected:",
@@ -35,9 +33,7 @@ socket.on("connect", () => {
     );
 });
 
-/*
- * Joined conversation
- */
+
 socket.on(
     "conversation:joined",
     (data) => {
@@ -46,9 +42,7 @@ socket.on(
             data
         );
 
-        /*
-         * Send Visitor message
-         */
+        
         socket.emit(
             "visitor:message:send",
             {
@@ -61,9 +55,7 @@ socket.on(
     }
 );
 
-/*
- * New message
- */
+
 socket.on(
     "message:new",
     (data) => {
@@ -74,9 +66,7 @@ socket.on(
     }
 );
 
-/*
- * Chat error
- */
+
 socket.on(
     "chat:error",
     (error) => {
@@ -87,9 +77,7 @@ socket.on(
     }
 );
 
-/*
- * Connection error
- */
+
 socket.on(
     "connect_error",
     (error) => {
@@ -100,9 +88,7 @@ socket.on(
     }
 );
 
-/*
- * Disconnect
- */
+
 socket.on(
     "disconnect",
     (reason) => {

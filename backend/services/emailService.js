@@ -114,18 +114,7 @@ Smart Compound Management System`,
     });
 };
 
-/**
- * Tell a visitor their visit details.
- *
- * Used by both flows:
- *  - a visitor requesting access to a unit (Flow 1), and
- *  - a resident inviting a visitor directly (resident invite).
- *
- * The optional `intro` / `subject` / `nextSteps` let the caller reword the
- * message for each flow while sharing the same detail table. Sent as soon as
- * the visit is created so the visitor has a record of the date/time and what to
- * expect next, without an account.
- */
+
 const sendVisitorRequestEmail = async ({
     to,
     visitorName,

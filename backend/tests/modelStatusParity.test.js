@@ -1,10 +1,4 @@
-/**
- * STRICT STATUS MATCHING guard.
- *
- * The Mongoose enums are the API contract. If a model enum and the shared
- * status vocabulary in utils/statusConstants.js ever drift apart, this suite
- * fails — which is exactly what keeps the frontend from inventing statuses.
- */
+
 const test = require("node:test");
 const assert = require("node:assert/strict");
 
@@ -130,7 +124,7 @@ test("new visits default to PENDING", () => {
     });
 
     assert.equal(visit.status, VISIT_STATUS.PENDING);
-    // The schema lower-cases visitor e-mails, matching auth normalisation.
+
     assert.equal(visit.visitorEmail, "sara@example.com");
 });
 

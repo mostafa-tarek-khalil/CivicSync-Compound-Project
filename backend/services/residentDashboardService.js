@@ -8,26 +8,11 @@ const {
     INVOICE_UNPAID_STATUSES,
 } = require("../utils/statusConstants");
 
-// Outstanding = anything still owed: unpaid invoices (including a payment the
-// resident has claimed but the admin has not confirmed) plus agreed but
-// un-invoiced maintenance cost.
 const UNPAID_INVOICE_STATUSES = [...INVOICE_UNPAID_STATUSES];
 
-/**
- * Aggregates everything the resident dashboard needs in one call so the
- * maintenance, billing and visitor modules stay in sync on a single screen.
- *
- * Outstanding balance =
- *   unpaid invoices (PENDING / OVERDUE)
- * + agreed maintenance cost (accepted offers) for tickets that were not
- *   invoiced yet — so the resident sees what they owe for repairs as soon
- *   as they accept a technician offer, without double counting once the
- *   admin issues the invoice.
- */
 const getResidentDashboard = async (residentId) => {
     const residentObjectId = new mongoose.Types.ObjectId(String(residentId));
 
-    // Keep visit statuses fresh (expired OTP / QR windows) before counting.
     try {
         await visitService.expireStaleVisits();
     } catch (error) {
@@ -65,7 +50,6 @@ const getResidentDashboard = async (residentId) => {
                 .lean(),
         ]);
 
-    // ---------------- Maintenance ----------------
     const countByStatus = (status) =>
         tickets.filter((ticket) => ticket.status === status).length;
 
@@ -79,7 +63,6 @@ const getResidentDashboard = async (residentId) => {
     };
     ticketStats.completed = ticketStats.resolved + ticketStats.closed;
 
-    // Accepted offers = the agreed price of each maintenance job.
     const ticketIds = tickets.map((ticket) => ticket._id);
     const acceptedOffers = ticketIds.length
         ? await Offer.find({
@@ -113,11 +96,6 @@ const getResidentDashboard = async (residentId) => {
         0
     );
 
-    // A closed job is finished work, so its agreed price is real money the
-    // resident owes the moment the ticket closes — waiting for the admin to
-    // raise the invoice first would hide it. Anything invoiced is already
-    // counted from the invoice, so only uninvoiced closed tickets are added
-    // here and nothing is counted twice.
     const closedUninvoicedTickets = uninvoicedMaintenance.filter(
         (ticket) => ticket.status === "CLOSED"
     );
@@ -127,7 +105,6 @@ const getResidentDashboard = async (residentId) => {
         0
     );
 
-    // ---------------- Billing ----------------
     const unpaidInvoices = invoices.filter((invoice) =>
         UNPAID_INVOICE_STATUSES.includes(invoice.status)
     );
@@ -137,10 +114,6 @@ const getResidentDashboard = async (residentId) => {
         0
     );
 
-    // Everything the resident has actually settled: invoices the admin has
-    // confirmed as PAID. Maintenance the resident paid is settled through an
-    // invoice too, so counting PAID invoices covers both bills and maintenance
-    // without double counting.
     const paidInvoices = invoices.filter((invoice) => invoice.status === "PAID");
 
     const paidBalance = paidInvoices.reduce(
@@ -148,10 +121,6 @@ const getResidentDashboard = async (residentId) => {
         0
     );
 
-    // The same total, split by what the resident is paying for. A maintenance
-    // bill is issued against a ticket, so an invoice with a ticketId is
-    // maintenance work and one without it is a compound bill. Both halves stay
-    // derived from PAID invoices only, so they always add up to paidBalance.
     const hasTicket = (invoice) => Boolean(invoice.ticketId);
 
     const paidMaintenance = paidInvoices
@@ -185,18 +154,16 @@ const getResidentDashboard = async (residentId) => {
             invoicesDue,
             maintenanceDue,
             paidBalance,
-            // How paidBalance breaks down: maintenance jobs vs compound bills.
+
             paidMaintenance,
             paidInvoicesTotal,
             unpaidInvoicesCount: unpaidInvoices.length,
             uninvoicedMaintenanceCount: uninvoicedMaintenance.length,
-            // Closed jobs whose invoice has not been raised yet. Surfaced so the
-            // dashboard can show the price as soon as the ticket closes.
+
             closedMaintenanceValue,
             closedMaintenanceCount: closedUninvoicedTickets.length,
             latestInvoice,
-            // Full billing history for the resident invoices screen, so it
-            // does not need a second round-trip to render.
+
             invoices: invoices.map((invoice) => ({
                 _id: invoice._id,
                 amount: invoice.amount,
@@ -208,8 +175,7 @@ const getResidentDashboard = async (residentId) => {
                 ticketId: invoice.ticketId?._id || null,
                 ticketTitle: invoice.ticketId?.title || null,
                 ticketCategory: invoice.ticketId?.category || null,
-                // Carried so the resident's receipt renders the same unit
-                // block as the admin one, without a second request.
+
                 unitId: invoice.unitId || null
             }))
         },

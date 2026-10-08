@@ -1,6 +1,5 @@
 const { io } = require("socket.io-client");
 
-// JWT of the Resident linked to the Visitor Visit
 const TOKEN =
     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2YTliMDRiYTU4OGNiYWUwOGViMzY1OWYiLCJyb2xlIjoiUkVTSURFTlQiLCJpYXQiOjE3ODk3NDU4NzgsImV4cCI6MTc4OTgzMjI3OH0.-YWZ1cUJct8D65xHP_h22n5YHvE575lSVxcCqVYK3zUذ";
 
@@ -36,7 +35,6 @@ socket.on(
             data
         );
 
-        // Send message from Resident to Visitor
         socket.emit(
             "message:send",
             {

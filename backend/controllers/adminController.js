@@ -423,7 +423,7 @@ const getReports = async (req, res) => {
     }
 };
 
-/** Full compound dataset for the downloadable report. */
+
 const getFullReport = async (req, res) => {
     try {
         const report = await adminService.getFullCompoundReport();

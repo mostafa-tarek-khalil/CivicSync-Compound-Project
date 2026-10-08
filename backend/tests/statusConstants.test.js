@@ -1,7 +1,4 @@
-/**
- * Verifies the documented state machine in utils/statusConstants.js.
- * These are the transitions the API promises, so they are contract tests.
- */
+
 const test = require("node:test");
 const assert = require("node:assert/strict");
 

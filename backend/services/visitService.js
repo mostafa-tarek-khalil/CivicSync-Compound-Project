@@ -14,29 +14,13 @@ const OTP_DURATION = 5 * 60 * 1000;
 const QR_DURATION = 30 * 60 * 1000;
 const MAX_OTP_ATTEMPTS = 5;
 
-// A visitor reaches their own visit two ways: they requested access themselves
-// (VISITOR_REQUEST) or a resident invited them (RESIDENT_INVITE). Every
-// visitor-facing lookup/status/QR endpoint keys on the visitor's email, so both
-// sources must be matched by anything a visitor looks up by email.
+
 const VISITOR_OWNED_SOURCES = ["VISITOR_REQUEST", "RESIDENT_INVITE"];
 
-/**
- * A QR pass may only be minted / shown from this long before the visit starts.
- *
- * The business rule is "QR code will be available 1 hour prior to your visit
- * scheduled time", which stops a pass from being screenshotted days in advance
- * and reused by whoever ends up holding the phone.
- */
+
 const QR_LEAD_TIME_MS = 60 * 60 * 1000;
 
-/**
- * The instant a visit's QR window opens: (visitDate + visitStartTime) minus the
- * lead time. `visitDate` is stored at midnight, so the time-of-day is parsed
- * out of `visitStartTime` ("HH:mm") and applied explicitly.
- *
- * Returns null when the visit has no usable schedule, in which case callers
- * treat the rule as "no restriction" rather than locking the pass forever.
- */
+
 const getQrAvailableFrom = (visit) => {
     if (!visit?.visitDate || !visit?.visitStartTime) {
         return null;
@@ -61,10 +45,7 @@ const getQrAvailableFrom = (visit) => {
     return new Date(scheduled.getTime() - QR_LEAD_TIME_MS);
 };
 
-/**
- * Throw a 400 when the QR is requested too early, with a message the UI shows
- * verbatim. Returns the availability timestamp so callers can include it.
- */
+
 const assertQrWindowOpen = (visit) => {
     const availableFrom = getQrAvailableFrom(visit);
 
@@ -190,17 +171,7 @@ const generateVisitorChatTokenForVisit = async (
     };
 };
 
-/**
- * Return a usable visitor chat token for a visit, minting one only when
- * necessary.
- *
- * Why this exists: generateVisitorChatTokenForVisit always creates a NEW token
- * and overwrites the stored hash, which invalidates any token already handed to
- * the visitor. The visitor status endpoint is polled, so calling the plain
- * generator there would break chat on every poll. This variant reuses the raw
- * token when it is still valid (the model keeps a copy in `qrToken`-style
- * plaintext only for this purpose) and only regenerates otherwise.
- */
+
 const getOrCreateVisitorChatTokenForVisit = async (
     visit
 ) => {
@@ -224,7 +195,7 @@ const getOrCreateVisitorChatTokenForVisit = async (
         throw error;
     }
 
-    // Reload with the raw token + hash, which are select:false by default.
+
     const fresh = await Visit.findById(visit._id).select(
         "+visitorChatTokenHash +visitorChatTokenRaw"
     );
@@ -338,9 +309,7 @@ const createVisit = async (
         visitorPhone:
             visitorPhone || null,
         source: "RESIDENT_INVITE",
-        // The resident is the host and created this invite themselves, so it is
-        // considered pre-approved: no OTP/approval round-trip is needed before
-        // the visitor can be issued a QR pass (subject to the 1-hour window).
+
         status: "APPROVED",
         approvedAt: new Date(),
         visitDate: parsedDate,
@@ -348,9 +317,7 @@ const createVisit = async (
         purpose: purpose || null,
     });
 
-    // Send the visitor the full visit details so they know the date, time and
-    // location in writing, even without a CivicSync account. A mail failure
-    // must never fail the creation of the invite.
+
     try {
         await sendVisitorRequestEmail({
             to: visit.visitorEmail,
@@ -647,9 +614,7 @@ const verifyVisitOtp = async (
             updatedVisit
         );
 
-    // Keep the state machine consistent with check-in:
-    // once the OTP is verified, immediately generate the QR so the
-    // visit reaches the QR_GENERATED state required by check-in.
+
     const qr = await generateVisitQr(
         userId,
         updatedVisit._id
@@ -786,9 +751,7 @@ const createVisitorRequest = async (
         relatedId: visit._id,
     });
 
-    // Acknowledge the request to the VISITOR's own address with the full
-    // details, so someone without a CivicSync account still has the date, time
-    // and location in writing. A mail failure must never fail the request.
+
     const visitorStatusUrl =
         `${process.env.FRONTEND_URL || "http://localhost:4200"}` +
         `/visitor-request-status?id=${visit._id}` +
@@ -860,27 +823,16 @@ const getVisitorRequestStatus = async (visitId, visitorEmail) => {
         throw error;
     }
 
-    // Expose visitor chat only once the visit is actually chat-eligible, and
-    // hand the visitor their own token (the resident gets a copy on approval,
-    // but the visitor has no other way to reach the conversation). The visitor
-    // has already proven ownership of this visit by supplying its email.
-    //
-    // Eligibility is decided by STATUS alone. Requiring an existing, unexpired
-    // visitorChatTokenExpiresAt here would be circular: the token is minted on
-    // demand below, so an APPROVED visit that never had one could never get
-    // one. The chat service re-checks the window at send time.
+
     const chatEligible = isVisitChatAllowed(visit.status);
 
     const result = visit.toObject();
 
-    // Expose when the pass becomes available so the client can render "QR code
-    // will be available 1 hour prior..." without duplicating the rule.
+
     result.qrAvailableFrom = getQrAvailableFrom(visit);
 
     if (chatEligible) {
-        // Reuse the existing token while it is still valid; minting a new one
-        // here would invalidate the token the visitor is already holding,
-        // because this endpoint is polled.
+
         const chatToken = await getOrCreateVisitorChatTokenForVisit(visit);
         result.visitorChatToken = chatToken.token;
         result.visitorChatTokenExpiresAt = chatToken.expiresAt;
@@ -889,11 +841,7 @@ const getVisitorRequestStatus = async (visitId, visitorEmail) => {
     return result;
 };
 
-/**
- * Let a visitor recover their own requests using only their email address.
- * Returns the most recent requests so a visitor can resume tracking a visit
- * even after closing the browser or switching devices.
- */
+
 const lookupVisitorRequests = async (visitorEmail) => {
     if (!visitorEmail || typeof visitorEmail !== "string") {
         const error = new Error("Visitor email is required");
@@ -978,8 +926,7 @@ const generateVisitorRequestQr = async (visitId, visitorEmail) => {
         throw error;
     }
 
-    // Same 1-hour rule as the resident flow, enforced before minting so the
-    // visitor sees the friendly message instead of a pass they cannot use.
+
     assertQrWindowOpen(visit);
 
     return generateVisitQr(
@@ -1225,10 +1172,7 @@ const verifyVisitorRequestOtp = async (
 const getResidentVisitorRequests = async (
     residentId
 ) => {
-    // Both ways a visit can be linked to this resident: a visitor asking for
-    // access (VISITOR_REQUEST) and the resident inviting someone directly
-    // (RESIDENT_INVITE). The resident's visitor list is the single place they
-    // manage all of their visits, so it must show both, not just the requests.
+
     return await Visit.find({
         residentId,
         source: { $in: VISITOR_OWNED_SOURCES },
@@ -1302,15 +1246,13 @@ const approveVisitorRequest = async (
             updatedVisit
         );
 
-    // Once the resident approves, immediately issue the QR pass so the
-    // visitor can display it. This keeps the state machine consistent with
-    // the resident-invite flow (approval -> QR_GENERATED -> CHECKED_IN).
+
     const qr = await generateVisitQr(
         residentId,
         updatedVisit._id
     );
 
-    // Let the security team know a new visitor pass is ready to scan.
+
     await notifyRole("SECURITY", {
         type: "VISITOR_APPROVED",
         title: "New visitor pass",
@@ -1418,20 +1360,10 @@ const generateVisitQr = async (
         throw error;
     }
 
-    // A pass is only minted from 1 hour before the scheduled visit. Checked
-    // BEFORE the idempotency guard so an already-issued token cannot be handed
-    // out early either.
+
     const qrAvailableFrom = assertQrWindowOpen(visit);
 
-    // IDEMPOTENCY GUARD:
-    // If a QR was already issued for this visit and it is still valid
-    // (not expired), re-issue the SAME raw token instead of minting a new
-    // one. Regenerating on every call used to wipe qrScannedAt/qrScannedBy
-    // whenever the visitor simply reloaded/revisited the QR screen, which
-    // silently undid a scan security had already performed and broke
-    // check-in right after. We only mint a fresh token when there isn't a
-    // usable one yet (first time after approval, or the previous one
-    // expired).
+
     const hasUsableExistingToken =
         visit.status === "QR_GENERATED" &&
         visit.qrToken &&
@@ -1539,8 +1471,7 @@ const scanVisitQr = async (
             },
             {
                 $set: {
-                    // Scanning claims the pass and moves it to QR_SCANNED. The
-                    // gate operator then performs CHECK_IN / CHECK_OUT.
+
                     status: "QR_SCANNED",
                     qrScannedAt: new Date(),
                     qrScannedBy: securityId,
@@ -1692,7 +1623,7 @@ const checkInVisit = async (
         relatedId: updatedVisit._id,
     });
 
-    // Keep the security team informed of gate activity.
+
     await notifyRole("SECURITY", {
         type: "VISITOR_CHECKED_IN",
         title: "Visitor checked in",
@@ -1887,14 +1818,7 @@ const getSecurityVisitById = async (
     return visit;
 };
 
-// =========================================================
-// EXPIRY SWEEP
-// =========================================================
-// Marks stale visits as EXPIRED without breaking the main flow:
-//  - PENDING visits whose OTP window has elapsed and was never verified
-//  - QR_GENERATED visits whose QR window has elapsed before check-in
-// It is safe to call repeatedly; it only touches documents that
-// actually crossed their deadline.
+
 const expireStaleVisits = async () => {
     const now = new Date();
 

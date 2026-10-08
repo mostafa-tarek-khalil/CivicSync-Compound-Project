@@ -20,7 +20,7 @@ socket.on("connect", () => {
 socket.on("conversation:joined", (data) => {
     console.log("Resident 2 joined:", data);
 
-    // Mark existing messages as read
+
     socket.emit(
         "conversation:read",
         data.conversationId

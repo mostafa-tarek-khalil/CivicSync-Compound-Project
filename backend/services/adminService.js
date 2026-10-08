@@ -9,14 +9,7 @@ const { syncResidentGroupMemberships } = require("./chatService");
 const { isTicketChatLocked } = require("../utils/statusConstants");
 const Visit = require("../models/visit");
 
-/**
- * Normalise a filter value coming from a query string or dropdown.
- *
- * `ALL`, empty string, and the literal strings "undefined"/"null" all mean
- * "no filter". Before this existed, `?status=ALL` was passed straight into the
- * Mongo query and matched nothing — which is why selecting ALL in an admin
- * dropdown returned an empty table.
- */
+
 const normalizeFilter = (value) => {
     if (value === undefined || value === null) {
         return null;
@@ -35,10 +28,7 @@ const normalizeFilter = (value) => {
     return text;
 };
 
-/**
- * Build a Mongo query from an allow-list of (filter field -> document path)
- * pairs, skipping any value that means "everything".
- */
+
 const buildFilterQuery = (filters, fieldMap) => {
     const query = {};
 
@@ -53,12 +43,7 @@ const buildFilterQuery = (filters, fieldMap) => {
     return query;
 };
 
-/**
- * Best-effort membership sync for the default system groups.
- *
- * A chat-group failure must never reject a successful approval, so the error
- * is logged and swallowed, exactly like notification fan-out.
- */
+
 const syncGroupsSilently = async (user) => {
     try {
         await syncResidentGroupMemberships(user);
@@ -181,8 +166,7 @@ const approveUser = async (userId) => {
             relatedId: user._id,
         });
 
-        // A newly approved resident joins the compound + building groups so
-        // both conversations appear in their chat list immediately.
+
         await syncGroupsSilently(user);
 
         return user;
@@ -251,15 +235,7 @@ const rejectUser = async (userId) => {
     return user;
 };
 
-/**
- * Update the fields an admin is allowed to touch on any account.
- *
- * Deliberately limited to EMAIL and PHONE. A user's display name is their own
- * identity and is owned by the profile page (`PATCH /api/auth/me`), so an
- * admin editing it here would silently rename somebody else's account.
- * Any `name` sent by the client is ignored rather than rejected, so an older
- * client that still posts it does not break.
- */
+
 const updateUser = async (userId, data = {}) => {
     const user = await User.findById(userId);
 
@@ -639,13 +615,7 @@ const getInvoices = async (
     return invoices;
 };
 
-/**
- * A single invoice with everything a receipt needs to render: the resident
- * (with their unit), the originating maintenance ticket, and the unit record.
- *
- * Used by the admin invoice receipt screen and the print action, so the
- * printable view has real data instead of the row already on the client.
- */
+
 const getInvoiceById = async (
     invoiceId
 ) => {
@@ -670,9 +640,7 @@ const getInvoiceById = async (
         throw error;
     }
 
-    // The unit can live on the invoice or, for a ticket invoice, on the
-    // resident. Fall back to the resident's unit so the receipt always shows
-    // a location when one exists.
+
     let unit = invoice.unitId || null;
 
     if (!unit && invoice.residentId?.unitId) {
@@ -735,8 +703,7 @@ const createInvoice = async (
         );
     }
 
-    // Standalone invoice (no maintenance ticket): allowed for any resident /
-    // unit. The admin console uses this to bill residents directly.
+
     if (!ticketId) {
         const invoice = await Invoice.create({
             residentId,
@@ -817,8 +784,7 @@ const createInvoice = async (
         relatedId: invoice._id,
     });
 
-    // Keep the other admins' invoices list and dashboard in step, and let the
-    // technician on the job know the work has been billed.
+
     await notifyRole("ADMIN", {
         type: "INVOICE_CREATED",
         title: "Invoice raised",
@@ -872,8 +838,7 @@ const updateInvoiceStatus = async (
         );
     }
 
-    // Admin transitions. PAYMENT_SUBMITTED is the resident's claim; only the
-    // admin can move it on to PAID (approve) or back to OVERDUE / CANCELLED.
+
     const allowedTransitions = {
         PENDING: [
             "PAID",
@@ -942,9 +907,7 @@ const updateInvoiceStatus = async (
                 });
             }
 
-            // Any other transition (e.g. PENDING -> CANCELLED) still has to reach the
-            // resident, otherwise their invoices page keeps showing a status the admin
-            // has already changed.
+
             if (
                 status !== previousStatus &&
                 status !== "PAID" &&
@@ -961,18 +924,7 @@ const updateInvoiceStatus = async (
                 });
             }
 
-            // ------------------------------------------------------------------
-            // Realtime fan-out to the OTHER parties watching this invoice.
-            //
-            // The calls above only reach the resident. Without this, the admin
-            // invoices list and dashboard stayed stale after a status change (the
-            // admin who made the change never gets told, and a second admin watching
-            // the compound is not a recipient at all), and the assigned technician
-            // never learned that the bill for their job had been settled.
-            //
-            // This notifies: every active ADMIN (drives admin invoices + dashboard)
-            // and the technician on the originating ticket, when there is one.
-            // ------------------------------------------------------------------
+
             if (status !== previousStatus) {
                 await notifyRole("ADMIN", {
                     type: "INVOICE_UPDATED",
@@ -1063,9 +1015,7 @@ const getMaintenanceTicketById = async (
         );
     }
 
-    // The admin console needs the resolution outcome, not just the ticket row:
-    // the resident's review (who rated which technician, and how) plus the
-    // invoice that was raised for this job, if any.
+
     const [review, invoice, location] = await Promise.all([
         Review.findOne({ ticketId: ticket._id })
             .populate("residentId", "name email")
@@ -1084,10 +1034,7 @@ const getMaintenanceTicketById = async (
     };
 };
 
-/**
- * Resolve the building + unit a resident lives in, so the admin can see where
- * a ticket physically is. Mirrors the technician-side helper.
- */
+
 const getTicketLocation = async (resident) => {
     const unitId =
         resident && resident.unitId ? resident.unitId : null;
@@ -1188,8 +1135,7 @@ const updateMaintenanceTicketStatus =
 
         const previousStatus = ticket.status;
         ticket.status = status;
-        // Keep the persisted lock flag in step with the state machine so a
-        // ticket finished from the admin console closes its chat as well.
+
         ticket.chatLocked = isTicketChatLocked(status);
         await ticket.save();
 
@@ -1202,8 +1148,7 @@ const updateMaintenanceTicketStatus =
                 relatedId: ticket._id,
             });
 
-            // The assigned technician tracks the same job and needs to see an
-            // admin-driven change (e.g. force-closing it) without a reload.
+
             if (ticket.assignedTo) {
                 await createNotification({
                     userId: ticket.assignedTo,
@@ -1379,8 +1324,7 @@ const getDashboardOverview =
 
             invoices: {
                 overdue: overdueInvoices,
-                // Financial headline numbers, summed directly from the invoice
-                // collection so they can never drift from the invoices table.
+
                 totalBilled: invoiceTotals.totalBilled,
                 totalCollected: invoiceTotals.totalCollected,
                 totalOutstanding: invoiceTotals.totalOutstanding,
@@ -1393,13 +1337,7 @@ const getDashboardOverview =
         };
     };
 
-/**
- * Compound-wide money totals.
- *
- * `totalBilled` is the sum of every non-cancelled invoice ever generated;
- * `totalCollected` is only what has actually been confirmed as PAID. Cancelled
- * invoices are excluded from billing entirely — they were never owed.
- */
+
 const getInvoiceTotals = async () => {
     const rows = await Invoice.aggregate([
         {
@@ -1529,8 +1467,7 @@ const getReportsAndAnalytics =
                 },
             ]),
 
-            // Visitors per day for the last 30 days, zero-filled on the client
-            // so gaps in the chart read as "no visits", not "no data".
+
             getVisitsOverTime(30),
 
             getRevenueSummary(),
@@ -1570,12 +1507,7 @@ const getReportsAndAnalytics =
         };
     };
 
-/**
- * Visits grouped by calendar day for the trailing `days` window.
- *
- * Uses the visit DATE (not createdAt) so the series matches the operational
- * meaning of "visits on a day".
- */
+
 const getVisitsOverTime = async (days = 30) => {
     const since = new Date();
     since.setHours(0, 0, 0, 0);
@@ -1617,7 +1549,7 @@ const getVisitsOverTime = async (days = 30) => {
     }));
 };
 
-/** Totals the billing console needs for its summary cards. */
+
 const getRevenueSummary = async () => {
     const rows = await Invoice.aggregate([
         {
@@ -1649,12 +1581,7 @@ const getRevenueSummary = async () => {
     };
 };
 
-/**
- * The complete compound dataset behind the "Download full report" button.
- *
- * Returned as structured JSON so the client can render CSV or PDF from one
- * source of truth, instead of the server deciding a file format.
- */
+
 const getFullCompoundReport = async () => {
     const [dashboard, analytics, users, buildings, units, tickets, invoices, visits] =
         await Promise.all([

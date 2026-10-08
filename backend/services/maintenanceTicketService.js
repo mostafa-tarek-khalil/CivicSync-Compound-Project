@@ -96,14 +96,13 @@ const closeTicket = async (ticketId, residentId) => {
         throw error;
     }
 
-    // Shared state machine: only RESOLVED -> CLOSED is legal.
     assertTicketTransition(
         ticket.status,
         TICKET_STATUS.CLOSED
     );
 
     ticket.status = "CLOSED";
-    // Closing is terminal: the maintenance conversation stays locked.
+
     ticket.chatLocked = isTicketChatLocked(TICKET_STATUS.CLOSED);
 
     return await ticket.save();

@@ -24,8 +24,7 @@ const server = http.createServer(app);
 
 const PORT = process.env.PORT || 3000;
 
-// The Angular dev server is the default origin, but deployments set
-// FRONTEND_URL (the same variable the password-reset e-mail already uses).
+
 const FRONTEND_ORIGIN =
     process.env.FRONTEND_URL || "http://localhost:4200";
 
@@ -37,9 +36,7 @@ app.use(
 
 app.use(express.json());
 
-// Uploaded avatars / ticket attachments are served straight off disk. The
-// folder is created on demand by the upload middleware, so a missing folder
-// never crashes the static mount.
+
 app.use(
     "/uploads",
     express.static(path.join(__dirname, "backend", "uploads"))
@@ -84,8 +81,7 @@ const startServer = async () => {
             );
         });
 
-        // Periodically expire stale pending visits (OTP / QR windows).
-        // Runs independently so the main request flow is never blocked.
+
         const EXPIRE_SWEEP_INTERVAL = 60 * 1000;
 
         setInterval(async () => {

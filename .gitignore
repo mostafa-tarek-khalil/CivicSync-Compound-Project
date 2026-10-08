@@ -5,7 +5,3 @@ backend/uploads/
 # Angular build artifacts / cache
 dist/
 .angular/
-
-# Isolated tool dependencies (installed on demand inside tools/pdfgen)
-tools/*/node_modules/
-tools/*/package-lock.json

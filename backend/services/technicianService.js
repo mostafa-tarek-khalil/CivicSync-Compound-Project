@@ -12,11 +12,7 @@ const {
     isTicketChatLocked,
 } = require("../utils/statusConstants");
 
-/**
- * Shared filter for the tickets a technician may see:
- * OPEN, not skipped by them, and matching their specializations
- * (only when the technician has specializations registered).
- */
+
 const getTechnicianFilter = async (technicianId) => {
     const technician = await User.findById(
         technicianId
@@ -42,8 +38,7 @@ const getAvailableTickets = async (technicianId) => {
         technicianId
     );
 
-    // A technician can only send one offer per ticket, so tickets they
-    // already offered on are no longer "available" for them.
+
     const myOffers = await Offer.find({
         technicianId,
     }).select("ticketId");
@@ -63,13 +58,7 @@ const getAvailableTickets = async (technicianId) => {
         .sort({ createdAt: -1 });
 };
 
-/**
- * Resolve the building + unit a resident lives in, so a technician standing on
- * a job sees exactly where to go.
- *
- * Returns null-safe labels: a ticket is always renderable even when the
- * resident has no unit yet or the unit was deleted.
- */
+
 const getTicketLocation = async (residentId) => {
     if (!residentId) {
         return null;
@@ -104,12 +93,7 @@ const getTicketLocation = async (residentId) => {
     };
 };
 
-/**
- * Attach the resident's unit/building to a ticket document.
- *
- * Mutates the plain object form so both the list and the detail endpoints
- * return the same shape the technician screens render.
- */
+
 const withTicketLocation = async (ticket) => {
     if (!ticket) {
         return ticket;
@@ -129,10 +113,7 @@ const withTicketLocation = async (ticket) => {
     return object;
 };
 
-/**
- * Details of an available (OPEN) ticket so a technician can review
- * the request before sending an offer.
- */
+
 const getAvailableTicketDetails = async (
     ticketId,
     technicianId
@@ -202,7 +183,7 @@ const startTicket = async (
         throw error;
     }
 
-    // Shared state machine: only ASSIGNED -> IN_PROGRESS is legal.
+
     assertTicketTransition(
         ticket.status,
         TICKET_STATUS.IN_PROGRESS
@@ -241,8 +222,7 @@ const startTicket = async (
         relatedId: updatedTicket._id,
     });
 
-    // Tell the admin console too: it watches every ticket in the compound and
-    // would otherwise keep showing the old status until a manual reload.
+
     await notifyRole("ADMIN", {
         type: "TICKET_STATUS_CHANGED",
         title: "Maintenance request in progress",
@@ -288,7 +268,7 @@ const resolveTicket = async (
         throw error;
     }
 
-    // Shared state machine: only IN_PROGRESS -> RESOLVED is legal.
+
     assertTicketTransition(
         ticket.status,
         TICKET_STATUS.RESOLVED
@@ -304,7 +284,7 @@ const resolveTicket = async (
             {
                 $set: {
                     status: "RESOLVED",
-                    // Finishing the job closes its conversation too.
+
                     chatLocked: isTicketChatLocked(TICKET_STATUS.RESOLVED),
                 },
             },
@@ -329,7 +309,7 @@ const resolveTicket = async (
         relatedId: updatedTicket._id,
     });
 
-    // Admins oversee every ticket, so keep their console in step as well.
+
     await notifyRole("ADMIN", {
         type: "TICKET_STATUS_CHANGED",
         title: "Maintenance request resolved",
@@ -402,8 +382,7 @@ const getAssignedTickets = async (
         .populate("residentId", "name email phone")
         .sort({ createdAt: -1 });
 
-    // Each job carries its location so the list can show where to go without
-    // a second round-trip per row.
+
     return Promise.all(tickets.map(withTicketLocation));
 };
 
@@ -411,10 +390,7 @@ const getAssignedTicketDetails = async (
     ticketId,
     technicianId
 ) => {
-    // A job stays "assigned to me" for its whole life, not just while it is
-    // ASSIGNED — an IN_PROGRESS or RESOLVED job is still mine to open. Querying
-    // by status here (as an earlier version did) made every Details click on a
-    // started or finished job fail with a 404.
+
     const ticket =
         await MaintenanceTicket.findOne({
             _id: ticketId,
@@ -431,30 +407,21 @@ const getAssignedTicketDetails = async (
         throw error;
     }
 
-    // The technician needs the resident's contact + where the unit actually is,
-    // plus the invoice raised for this job so the SAME receipt the admin and
-    // resident see can be printed straight from the job screen.
+
     const payload = await withTicketLocation(ticket);
 
     const invoice = await Invoice.findOne({ ticketId: ticket._id })
         .select("amount status dueDate paidAt description createdAt residentId unitId")
         .lean();
 
-    // `{ ticket, invoice }` — the same envelope the available-details endpoint
-    // uses, and what `ITicketDetailsResponse` documents. Spreading the ticket
-    // at the top level meant the client had to know that this one endpoint
-    // shaped its response differently, which is precisely how the assigned-job
-    // screen ended up reading `undefined` from a 200.
+
     return {
         ticket: payload,
         invoice: invoice || null,
     };
 };
 
-/**
- * Single aggregated payload for the technician dashboard so the client makes
- * one request instead of four, and every number comes from MongoDB.
- */
+
 const getTechnicianDashboard = async (technicianId) => {
     const [
         availableTickets,

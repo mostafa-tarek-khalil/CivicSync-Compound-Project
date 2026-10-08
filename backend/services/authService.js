@@ -7,10 +7,7 @@ const { sendPasswordResetEmail } = require("./emailService");
 
 const PASSWORD_RESET_TTL = 15 * 60 * 1000;
 
-/**
- * Single place where e-mails are normalised. Keeping this in one helper
- * guarantees register / login / password-reset all agree on the stored form.
- */
+
 const normalizeEmail = (email) =>
     typeof email === "string" ? email.trim().toLowerCase() : "";
 
@@ -218,12 +215,7 @@ const updateCurrentUser = async (userId, updates = {}) => {
     return user;
 };
 
-/**
- * Start the forgot-password flow.
- *
- * Always resolves the same way whether or not the address exists, so the
- * endpoint cannot be used to enumerate registered accounts.
- */
+
 const requestPasswordReset = async (email) => {
     const normalizedEmail = normalizeEmail(email);
 
@@ -249,14 +241,14 @@ const requestPasswordReset = async (email) => {
     try {
         await sendPasswordResetEmail(user.email, rawToken);
     } catch (error) {
-        // Never leak mail-transport failures as a valid/invalid account signal.
+
         console.error("Failed to send password reset email:", error.message);
     }
 
     return { sent: true };
 };
 
-/** Complete the reset flow with the token from the e-mail link. */
+
 const resetPassword = async (token, password) => {
     if (!token || typeof token !== "string") {
         const error = new Error("Reset token is required");
@@ -290,13 +282,7 @@ const resetPassword = async (token, password) => {
     return { email: user.email };
 };
 
-/**
- * Change the password of an already signed-in user.
- *
- * The current password is verified against the stored hash before the new one
- * is written, so a stolen session token alone cannot silently rotate the
- * password.
- */
+
 const changePassword = async (userId, currentPassword, newPassword) => {
     if (!currentPassword || typeof currentPassword !== "string") {
         const error = new Error("Current password is required");

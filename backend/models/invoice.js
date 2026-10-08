@@ -11,8 +11,7 @@ const invoiceSchema = new mongoose.Schema(
         ticketId: {
             type: mongoose.Schema.Types.ObjectId,
             ref: "MaintenanceTicket",
-            // Optional: an admin may raise a standalone invoice for a resident
-            // / unit that is not tied to a maintenance ticket.
+
             required: false,
             default: null,
         },
@@ -49,17 +48,13 @@ const invoiceSchema = new mongoose.Schema(
             default: "PENDING",
         },
 
-        /**
-         * Set when the RESIDENT claims to have paid (Pay button). Acts as the
-         * audit trail for the admin's "Approve paid" decision and prevents a
-         * resident from re-submitting the same invoice.
-         */
+        
         paymentSubmittedAt: {
             type: Date,
             default: null,
         },
 
-        /** Free-text reference the resident may leave with a payment claim. */
+        
         paymentReference: {
             type: String,
             trim: true,
@@ -88,9 +83,7 @@ invoiceSchema.index({
     dueDate: 1,
 });
 
-// A ticket can only be invoiced once, but standalone (ticket-less) invoices
-// are unlimited. `sparse` keeps the unique rule meaningful only for the
-// non-null ticket references.
+
 invoiceSchema.index(
     { ticketId: 1 },
     { unique: true, sparse: true }

@@ -1,10 +1,9 @@
-// Backend API probe: checks the LIVE server on port 3000 with real tokens for
-// every role, then removes the temporary users/tickets it created.
-// Run from the project root:  node backend/tests/manual/api-probe.js
+
+
 require("dotenv").config();
 const mongoose = require("mongoose");
 
-// Relative to this file (backend/tests/manual/), hence the ../../ hop.
+
 const User = require("../../models/user");
 const MaintenanceTicket = require("../../models/maintenanceTicket");
 const Offer = require("../../models/offer");
