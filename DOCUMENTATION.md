@@ -2,10 +2,6 @@
 
 Complete technical reference for developers, maintainers and reviewers.
 
-This document describes **only** behaviour that is implemented in the current
-codebase. Where something could not be confirmed from the source, it is marked
-**"Not clearly defined in the current codebase."**
-
 ---
 
 ## Table of Contents
