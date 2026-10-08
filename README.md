@@ -2,6 +2,15 @@
 
 > **Smarter Communities. Safer Management.**
 
+![Node.js](https://img.shields.io/badge/Node.js-24.x-339933?logo=node.js&logoColor=white)
+![Express](https://img.shields.io/badge/Express-5.x-000000?logo=express&logoColor=white)
+![Angular](https://img.shields.io/badge/Angular-21.x-DD0031?logo=angular&logoColor=white)
+![TypeScript](https://img.shields.io/badge/TypeScript-5.x-3178C6?logo=typescript&logoColor=white)
+![MongoDB](https://img.shields.io/badge/MongoDB-9.x-47A248?logo=mongodb&logoColor=white)
+![Socket.IO](https://img.shields.io/badge/Socket.IO-4.x-010101?logo=socket.io&logoColor=white)
+![JWT](https://img.shields.io/badge/JWT-Authentication-000000?logo=jsonwebtokens&logoColor=white)
+![License](https://img.shields.io/badge/License-MIT-yellow.svg)
+
 CivicSync is a full-stack **Smart Compound Management System** designed to bring the daily operations of a residential compound into one connected platform.
 
 Instead of relying on phone calls, paper records, separate messages and manual tracking, CivicSync provides a single system for **residents, technicians, security staff and administrators** to manage maintenance, visitors, invoices, notifications and communication.
